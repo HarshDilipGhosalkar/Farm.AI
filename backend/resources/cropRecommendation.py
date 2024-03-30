@@ -106,5 +106,17 @@ class CropRecommendation(Resource):
         response = llm.invoke(prompt)
         answer = json.loads(response.content)
 
+        audio_text = f"According to the details provided, you should grow {answer['crop_name']} this year."
+        translated_text = translator.translate(audio_text, src="en", dest=args["language"]).text
+
+        audio = get_tts_audio(translated_text, args["language"])
+
+
+        answer["crop_name"] = translator.translate(answer["crop_name"], src="en", dest=args["language"]).text
+        answer["description"] = translator.translate(answer["description"], src="en", dest=args["language"]).text
+        answer["reason"] = translator.translate(answer["reason"], src="en", dest=args["language"]).text
+        answer["audio"] = audio
+
+
         return {"error": False, "data": answer}
 
