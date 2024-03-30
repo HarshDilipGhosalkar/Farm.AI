@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { ScaleLoader } from "react-spinners";
 
 const images = [
   "assets/images/slide-1.png",
@@ -11,14 +12,18 @@ const images = [
 
 const Market = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
+  const handleSubmit = () => {
+    setLoading(true);
+  };
   return (
     <div className="flex flex-col">
       <div className="carousel w-full h-[160px]">
@@ -33,9 +38,9 @@ const Market = () => {
         ))}
       </div>
       <div className="px-[10px] pt-[15px]">
-        <h1 className="text-center font-bold text-2xl">Market Price Page</h1>
-        <div>
-          <select className="w-[130px] p-[10px] border rounded-sm" name="">
+        <h1 className="text-center font-bold text-2xl">Market Price</h1>
+        <div className="flex px-[10px] justify-between mt-[20px]">
+          <select className="w-[200px] p-[10px] border rounded-sm" name="">
             <option value="0">--Select--</option>
             <option value="451">Absinthe</option>
             <option value="137">Ajwan</option>
@@ -451,6 +456,55 @@ const Market = () => {
             <option value="244">Yam</option>
             <option value="297">Yam (Ratalu)</option>
           </select>
+          {!loading ? (
+            <button
+              className="rounded-[10px] bg-blue-500 px-[20px] text-white"
+              onClick={handleSubmit}
+            >
+              Get Price
+            </button>
+          ) : (
+            <>
+              <ScaleLoader />
+            </>
+          )}
+        </div>
+        <div class="container mx-auto mt-[80px] px-[10px]">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="col">
+              <div class="border border-gray-400 rounded-lg p-[10px]">
+                <div class="font-semibold">Commodity</div>
+                <div class="">Rice</div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="border border-gray-400 rounded-lg p-[10px]">
+                <div class="font-semibold">State</div>
+                <div class="">Maharastra</div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="border border-gray-400 rounded-lg p-[10px]">
+                <div class="font-semibold">District</div>
+                <div class="">Mumbai</div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="border border-gray-400 rounded-lg p-[10px]">
+                <div class="font-semibold">Market</div>
+                <div class="">Thane</div>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 mt-4 gap-4">
+            <div class="col">
+              <div class="border border-gray-400 rounded-lg p-[10px]">
+                <div class="font-semibold">Price</div>
+                <div class="">4000 Rs.</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
