@@ -2,6 +2,7 @@
 
 import { useEffect, useState, React } from "react";
 import { useRouter } from "next/navigation";
+import { Empty } from 'antd';
 
 const crop = () => {
   const router = useRouter();
@@ -195,7 +196,7 @@ const crop = () => {
             <p className="text-lg font-medium text-green-700">{reason}</p>
           </div>
         </div>
-      </>):(<></>)}
+      </>):(<div className="mt-[50%]"><Empty /></div>)}
         
 
         {voiceInput.length > 3 && (

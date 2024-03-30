@@ -1,15 +1,16 @@
 "use client";
-import { useEffect,useState, React } from 'react';
+import { useEffect, useState, React } from 'react';
 import { SmileOutlined } from '@ant-design/icons';
 import { Timeline } from 'antd';
 import { useRouter } from "next/navigation";
+import { Empty } from 'antd';
 
 const timeline = () => {
     const router = useRouter();
     const [tasks, setTasks] = useState([]);
     const [voiceInput, setVoiceInput] = useState("");
     const [listening, setListening] = useState(false);
-    const [lang,setLang]=useState("");
+    const [lang, setLang] = useState("");
 
     const startListening = (language) => {
 
@@ -38,8 +39,9 @@ const timeline = () => {
 
             fetch("https://codeshashtra-allstackers.onrender.com/timeline", requestOptions)
                 .then((response) => response.json())
-                .then((result) => {console.log(result)
-                setTasks(result.data);
+                .then((result) => {
+                    console.log(result)
+                    setTasks(result.data);
                 })
                 .catch((error) => console.error(error));
         };
@@ -55,51 +57,53 @@ const timeline = () => {
     useEffect(() => {
         // Simulated fetch function
         const fetchTasks = async () => {
-          try {
-            const requestOptions = {
-              method: "GET",
-              redirect: "follow"
-            };
-            
-            fetch("https://codeshashtra-allstackers.onrender.com/language?mobile=9137357003", requestOptions)
-              .then((response) => response.json())
-              .then((result) => {console.log(result)
-                if(result.data=="marathi"){
-                  setLang("mr-IN");
-                }
-                if(result.data=="hindi"){
-                  setLang("hi-IN");
-                }
-                if(result.data=="gujarati"){
-                  setLang("gu-IN");
-                }
-              
-              })
-              .catch((error) => console.error(error));
-          } catch (error) {
-            console.error('Failed to fetch tasks:', error);
-          }
+            try {
+                const requestOptions = {
+                    method: "GET",
+                    redirect: "follow"
+                };
+
+                fetch("https://codeshashtra-allstackers.onrender.com/language?mobile=9137357003", requestOptions)
+                    .then((response) => response.json())
+                    .then((result) => {
+                        console.log(result)
+                        if (result.data == "marathi") {
+                            setLang("mr-IN");
+                        }
+                        if (result.data == "hindi") {
+                            setLang("hi-IN");
+                        }
+                        if (result.data == "gujarati") {
+                            setLang("gu-IN");
+                        }
+
+                    })
+                    .catch((error) => console.error(error));
+            } catch (error) {
+                console.error('Failed to fetch tasks:', error);
+            }
         };
-    
+
         fetchTasks();
-      });
+    });
 
     return (
         <>
             <div className='w-full h-[100%] flex flex-col justify-center items-center px-[40px]'>
-                <p className='text-green-600 text-[30px] font-semibold my-[55px]'>CROP PLANNING</p>
-                {tasks.length !=0?(<>
+                {tasks.length != 0 ? (<>
+                    <p className='text-green-600 text-[30px] font-semibold my-[55px]'>CROP PLANNING</p>
+
                     <Timeline>
-                    {tasks.map((task, index) => (
-                        <Timeline.Item key={index} color="green">
-                            <p className="text-[19px] font-semibold">{task.task_title}</p>
-                            <p className="text-[17px]">{task.description}</p>
-                            <p className="text-[15px]">Days Required: {task.days_required}</p>
-                        </Timeline.Item>
-                    ))}
-                </Timeline>
-                </>):<></>}
-                
+                        {tasks.map((task, index) => (
+                            <Timeline.Item key={index} color="green">
+                                <p className="text-[19px] font-semibold">{task.task_title}</p>
+                                <p className="text-[17px]">{task.description}</p>
+                                <p className="text-[15px]">Days Required: {task.days_required}</p>
+                            </Timeline.Item>
+                        ))}
+                    </Timeline>
+                </>) : <div className="mt-[50%]"><Empty /></div>}
+
             </div>
 
             {voiceInput.length > 3 && (

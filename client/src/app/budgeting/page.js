@@ -4,6 +4,7 @@
 // export default ComponentWithDivs;
 import React, { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
+import { Empty } from 'antd';
 
 const FinanceComponent = () => {
   const router = useRouter();
@@ -116,7 +117,7 @@ const FinanceComponent = () => {
       </div>
       
     </div>
-    </>):<></>}
+    </>):<div className="mt-[50%]"><Empty /></div>}
    
     <div className="fixed bottom-0 w-full bg-white border shadow-lg bottom-navbar">
         <div className="flex justify-around gap-x-[5px] px-[30px] py-[10px] text-gray-400">
