@@ -21,36 +21,6 @@ langcodes = {
     # "rajasthani": "6576a2854e7d42484da63538"
 }
 
-class weatherTTS(Resource):
-    def post(self):
-        parser = reqparse.RequestParser()
-
-        parser.add_argument("temp", type=str, required=True, help="temp is required")
-        parser.add_argument("wind", type=str, required=True, help="wind is required")
-        parser.add_argument("humidity", type=str, required=True, help="humidity is required")
-        parser.add_argument("clouds", type=str, required=True, help="clouds is required")
-        parser.add_argument("language", type=str, required=True, help="language is required")
-
-        args = parser.parse_args()
-
-        english_sentence = prepare_weather_text(args["temp"], args["wind"], args["humidity"], args["clouds"])
-
-        translator = Translator()
-        try:
-            translated_text = translator.translate(english_sentence, src='en', dest=langcodes[args["language"]]).text
-        except Exception as e:
-            print(f"Translation Error: {e}")
-            translated_text = "Translation failed."
-
-        audio = get_tts_audio(translated_text, args["language"])
-
-        return {"error": False, "data": audio}
-
-
-def prepare_weather_text(temp, wind, humidity, clouds):
-    return f"Currently, the temperature stands at {temp} degrees Celsius. Winds are blowing at {wind} meter per second. Humidity levels are at {humidity} percent. Cloud cover is {clouds} percent."
-
-
 models_ids = {
     "english": "6576a17e00d64169e2f8f43d",
     "hindi": "6576a1e500d64169e2f8f43e",
@@ -137,5 +107,4 @@ class CropRecommendation(Resource):
         answer = json.loads(response.content)
 
         return {"error": False, "data": answer}
-
 
