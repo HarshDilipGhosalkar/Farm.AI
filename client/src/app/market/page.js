@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { ScaleLoader } from "react-spinners";
+import { useRouter } from "next/navigation";
 
 const images = [
   "assets/images/slide-1.png",
@@ -11,10 +12,13 @@ const images = [
 ];
 
 const Market = () => {
+  const router = useRouter();
+  const selectedLanguage = localStorage.getItem("selectedLanguage");
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [selectedCommodity, setSelectedCommodity] = useState("Rice");
-  const [price, setPrice] = useState("Rs. 4000");
+  const [selectedCommodity, setSelectedCommodity] = useState();
+  const [price, setPrice] = useState();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -23,21 +27,22 @@ const Market = () => {
 
     return () => clearInterval(interval);
   }, []);
+
   const handleSubmit = () => {
     setLoading(true);
-    setPrice("loading...")
+    setPrice("loading...");
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     const raw = JSON.stringify({
-      "crop_name": selectedCommodity,
+      crop_name: selectedCommodity,
     });
 
     const requestOptions = {
       method: "POST",
       headers: myHeaders,
       body: raw,
-      redirect: "follow"
+      redirect: "follow",
     };
 
     fetch("http://localhost:5000/marketPrice", requestOptions)
@@ -51,8 +56,7 @@ const Market = () => {
 
   const onCommodityChange = (e) => {
     setSelectedCommodity(e.target.value);
-  }
-  
+  };
 
   return (
     <div className="flex flex-col">
@@ -68,9 +72,27 @@ const Market = () => {
         ))}
       </div>
       <div className="px-[10px] pt-[15px]">
-        <h1 className="text-center font-bold text-2xl">Market Price</h1>
+        <h1 className="text-center font-bold text-2xl">
+          {selectedLanguage === "english" ? (
+            <>Market Price</>
+          ) : selectedLanguage === "hindi" ? (
+            <>बाजार कीमत</>
+          ) : selectedLanguage === "marathi" ? (
+            <>बाजार किंमत</>
+          ) : selectedLanguage === "gujarati" ? (
+            <>બજાર ભાવ</>
+          ) : selectedLanguage === "tamil" ? (
+            <>சந்தை விலை </>
+          ) : (
+            ""
+          )}
+        </h1>
         <div className="flex px-[10px] justify-between mt-[20px]">
-          <select className="w-[200px] p-[10px] border rounded-sm" name="" onClick={(e) => onCommodityChange(e)}>
+          <select
+            className="w-[200px] p-[10px] border rounded-sm"
+            name=""
+            onClick={(e) => onCommodityChange(e)}
+          >
             <option value="0">--Select--</option>
             <option value="absinthe">Absinthe</option>
             <option value="ajwan">Ajwan</option>
@@ -86,9 +108,15 @@ const Market = () => {
             <option value="antawala">Antawala</option>
             <option value="anthorium">Anthorium</option>
             <option value="apple">Apple</option>
-            <option value="apricot(jardalu/khumani)">Apricot(Jardalu/Khumani)</option>
-            <option value="arecanut(betelnut/supari)">Arecanut(Betelnut/Supari)</option>
-            <option value="arhar (tur/red gram)(whole)">Arhar (Tur/Red Gram)(Whole)</option>
+            <option value="apricot(jardalu/khumani)">
+              Apricot(Jardalu/Khumani)
+            </option>
+            <option value="arecanut(betelnut/supari)">
+              Arecanut(Betelnut/Supari)
+            </option>
+            <option value="arhar (tur/red gram)(whole)">
+              Arhar (Tur/Red Gram)(Whole)
+            </option>
             <option value="arhar dal(tur dal)">Arhar Dal(Tur Dal)</option>
             <option value="asalia">Asalia</option>
             <option value="ashgourd">Ashgourd</option>
@@ -97,7 +125,9 @@ const Market = () => {
             <option value="astera">Astera</option>
             <option value="avare dal">Avare Dal</option>
             <option value="bael">Bael</option>
-            <option value="bajra(pearl millet/cumbu)">Bajra(Pearl Millet/Cumbu)</option>
+            <option value="bajra(pearl millet/cumbu)">
+              Bajra(Pearl Millet/Cumbu)
+            </option>
             <option value="balekai">Balekai</option>
             <option value="balsam">balsam</option>
             <option value="bamboo">Bamboo</option>
@@ -109,9 +139,15 @@ const Market = () => {
             <option value="beans">Beans</option>
             <option value="beaten rice">Beaten Rice</option>
             <option value="beetroot">Beetroot</option>
-            <option value="bengal gram dal (chana dal)">Bengal Gram Dal (Chana Dal)</option>
-            <option value="bengal gram(gram)(whole)">Bengal Gram(Gram)(Whole)</option>
-            <option value="ber(zizyphus/borehannu)">Ber(Zizyphus/Borehannu)</option>
+            <option value="bengal gram dal (chana dal)">
+              Bengal Gram Dal (Chana Dal)
+            </option>
+            <option value="bengal gram(gram)(whole)">
+              Bengal Gram(Gram)(Whole)
+            </option>
+            <option value="ber(zizyphus/borehannu)">
+              Ber(Zizyphus/Borehannu)
+            </option>
             <option value="betal leaves">Betal Leaves</option>
             <option value="betelnuts">Betelnuts</option>
             <option value="bhindi(ladies finger)">Bhindi(Ladies Finger)</option>
@@ -119,8 +155,12 @@ const Market = () => {
             <option value="big gram">Big Gram</option>
             <option value="binoula">Binoula</option>
             <option value="bitter gourd">Bitter gourd</option>
-            <option value="black gram (urd beans)(whole)">Black Gram (Urd Beans)(Whole)</option>
-            <option value="black gram dal (urd dal)">Black Gram Dal (Urd Dal)</option>
+            <option value="black gram (urd beans)(whole)">
+              Black Gram (Urd Beans)(Whole)
+            </option>
+            <option value="black gram dal (urd dal)">
+              Black Gram Dal (Urd Dal)
+            </option>
             <option value="black pepper">Black pepper</option>
             <option value="bop">BOP</option>
             <option value="borehannu">Borehannu</option>
@@ -129,7 +169,9 @@ const Market = () => {
             <option value="bran">Bran</option>
             <option value="brinjal">Brinjal</option>
             <option value="broken rice">Broken Rice</option>
-            <option value="broomstick(flower broom)">Broomstick(Flower Broom)</option>
+            <option value="broomstick(flower broom)">
+              Broomstick(Flower Broom)
+            </option>
             <option value="bull">Bull</option>
             <option value="bullar">Bullar</option>
             <option value="bunch beans">Bunch Beans</option>
@@ -181,11 +223,15 @@ const Market = () => {
             <option value="cotton">Cotton</option>
             <option value="cotton seed">Cotton Seed</option>
             <option value="cow">Cow</option>
-            <option value="cowpea (lobia/karamani)">Cowpea (Lobia/Karamani)</option>
+            <option value="cowpea (lobia/karamani)">
+              Cowpea (Lobia/Karamani)
+            </option>
             <option value="cowpea(veg)">Cowpea(Veg)</option>
             <option value="cucumbar(kheera)">Cucumbar(Kheera)</option>
             <option value="cummin seed(jeera)">Cummin Seed(Jeera)</option>
-            <option value="custard apple (sharifa)">Custard Apple (Sharifa)</option>
+            <option value="custard apple (sharifa)">
+              Custard Apple (Sharifa)
+            </option>
             <option value="daila(chandni)">Daila(Chandni)</option>
             <option value="dal (avare)">Dal (Avare)</option>
             <option value="dalda">Dalda</option>
@@ -201,15 +247,21 @@ const Market = () => {
             <option value="duck">Duck</option>
             <option value="duster beans">Duster Beans</option>
             <option value="egg">Egg</option>
-            <option value="egypian clover(barseem)">Egypian Clover(Barseem)</option>
+            <option value="egypian clover(barseem)">
+              Egypian Clover(Barseem)
+            </option>
             <option value="elephant yam (suran)">Elephant Yam (Suran)</option>
             <option value="field pea">Field Pea</option>
             <option value="fig(anjura/anjeer)">Fig(Anjura/Anjeer)</option>
             <option value="firewood">Firewood</option>
             <option value="fish">Fish</option>
             <option value="flower broom">Flower Broom</option>
-            <option value="foxtail millet(navane)">Foxtail Millet(Navane)</option>
-            <option value="french beans (frasbean)">French Beans (Frasbean)</option>
+            <option value="foxtail millet(navane)">
+              Foxtail Millet(Navane)
+            </option>
+            <option value="french beans (frasbean)">
+              French Beans (Frasbean)
+            </option>
             <option value="galgal(lemon)">Galgal(Lemon)</option>
             <option value="gamphrena">Gamphrena</option>
             <option value="garlic">Garlic</option>
@@ -230,8 +282,12 @@ const Market = () => {
             <option value="green avare (w)">Green Avare (W)</option>
             <option value="green chilli">Green Chilli</option>
             <option value="green fodder">Green Fodder</option>
-            <option value="green gram (moong)(whole)">Green Gram (Moong)(Whole)</option>
-            <option value="green gram dal (moong dal)">Green Gram Dal (Moong Dal)</option>
+            <option value="green gram (moong)(whole)">
+              Green Gram (Moong)(Whole)
+            </option>
+            <option value="green gram dal (moong dal)">
+              Green Gram Dal (Moong Dal)
+            </option>
             <option value="green peas">Green Peas</option>
             <option value="ground nut oil">Ground Nut Oil</option>
             <option value="ground nut seed">Ground Nut Seed</option>
@@ -239,7 +295,9 @@ const Market = () => {
             <option value="groundnut (split)">Groundnut (Split)</option>
             <option value="groundnut pods (raw)">Groundnut pods (raw)</option>
             <option value="guar">Guar</option>
-            <option value="guar seed(cluster beans seed)">Guar Seed(Cluster Beans Seed)</option>
+            <option value="guar seed(cluster beans seed)">
+              Guar Seed(Cluster Beans Seed)
+            </option>
             <option value="guava">Guava</option>
             <option value="gudmar">Gudmar</option>
             <option value="guggal">Guggal</option>
@@ -271,7 +329,9 @@ const Market = () => {
             <option value="jowar(sorghum)">Jowar(Sorghum)</option>
             <option value="jute">Jute</option>
             <option value="jute seed">Jute Seed</option>
-            <option value="kabuli chana(chickpeas-white)">Kabuli Chana(Chickpeas-White)</option>
+            <option value="kabuli chana(chickpeas-white)">
+              Kabuli Chana(Chickpeas-White)
+            </option>
             <option value="kacholam">Kacholam</option>
             <option value="kakada">Kakada</option>
             <option value="kalihari">Kalihari</option>
@@ -315,7 +375,9 @@ const Market = () => {
             <option value="macoy">Macoy</option>
             <option value="mahedi">Mahedi</option>
             <option value="mahua">Mahua</option>
-            <option value="mahua seed(hippe seed)">Mahua Seed(Hippe Seed)</option>
+            <option value="mahua seed(hippe seed)">
+              Mahua Seed(Hippe Seed)
+            </option>
             <option value="maida atta">Maida Atta</option>
             <option value="maize">Maize</option>
             <option value="mango">Mango</option>
@@ -354,7 +416,9 @@ const Market = () => {
             <option value="onion green">Onion Green</option>
             <option value="orange">Orange</option>
             <option value="orchid">Orchid</option>
-            <option value="other green and fresh vegetables">Other Green and Fresh Vegetables</option>
+            <option value="other green and fresh vegetables">
+              Other Green and Fresh Vegetables
+            </option>
             <option value="other pulses">Other Pulses</option>
             <option value="ox">Ox</option>
             <option value="paddy(dhan)(basmati)">Paddy(Dhan)(Basmati)</option>
@@ -368,7 +432,9 @@ const Market = () => {
             <option value="peas cod">Peas Cod</option>
             <option value="peas wet">Peas Wet</option>
             <option value="peas(dry)">Peas(Dry)</option>
-            <option value="pegeon pea (arhar fali)">Pegeon Pea (Arhar Fali)</option>
+            <option value="pegeon pea (arhar fali)">
+              Pegeon Pea (Arhar Fali)
+            </option>
             <option value="pepper garbled">Pepper Garbled</option>
             <option value="pepper ungarbled">Pepper Ungarbled</option>
             <option value="persimon(japani fal)">Persimon(Japani Fal)</option>
@@ -376,7 +442,9 @@ const Market = () => {
             <option value="pineapple">Pineapple</option>
             <option value="pippali">Pippali</option>
             <option value="plum">Plum</option>
-            <option value="pointed gourd (parval)">Pointed Gourd (Parval)</option>
+            <option value="pointed gourd (parval)">
+              Pointed Gourd (Parval)
+            </option>
             <option value="polherb">Polherb</option>
             <option value="pomegranate">Pomegranate</option>
             <option value="poppy capsules">Poppy Capsules</option>
@@ -391,7 +459,9 @@ const Market = () => {
             <option value="raibel">Raibel</option>
             <option value="rajgir">Rajgir</option>
             <option value="ram">Ram</option>
-            <option value="rat tail radish (mogari)">Rat Tail Radish (Mogari)</option>
+            <option value="rat tail radish (mogari)">
+              Rat Tail Radish (Mogari)
+            </option>
             <option value="ratanjot">Ratanjot</option>
             <option value="raya">Raya</option>
             <option value="red gram">Red Gram</option>
@@ -417,7 +487,9 @@ const Market = () => {
             <option value="seegu">Seegu</option>
             <option value="seemebadnekai">Seemebadnekai</option>
             <option value="seetapal">Seetapal</option>
-            <option value="sesamum(sesame,gingelly,til)">Sesamum(Sesame,Gingelly,Til)</option>
+            <option value="sesamum(sesame,gingelly,til)">
+              Sesamum(Sesame,Gingelly,Til)
+            </option>
             <option value="sevanti">Sevanti</option>
             <option value="she buffalo">She Buffalo</option>
             <option value="she goat">She Goat</option>
@@ -426,7 +498,9 @@ const Market = () => {
             <option value="skin and hide">Skin And Hide</option>
             <option value="snakeguard">Snakeguard</option>
             <option value="soanf">Soanf</option>
-            <option value="soapnut(antawala/retha)">Soapnut(Antawala/Retha)</option>
+            <option value="soapnut(antawala/retha)">
+              Soapnut(Antawala/Retha)
+            </option>
             <option value="soji">Soji</option>
             <option value="sompu">Sompu</option>
             <option value="soyabean">Soyabean</option>
@@ -456,7 +530,9 @@ const Market = () => {
             <option value="taramira">Taramira</option>
             <option value="tea">Tea</option>
             <option value="tender coconut">Tender Coconut</option>
-            <option value="thinai (italian millet)">Thinai (Italian Millet)</option>
+            <option value="thinai (italian millet)">
+              Thinai (Italian Millet)
+            </option>
             <option value="thogrikai">Thogrikai</option>
             <option value="thondekai">Thondekai</option>
             <option value="tinda">Tinda</option>
@@ -491,7 +567,19 @@ const Market = () => {
               className="rounded-[10px] bg-blue-500 px-[20px] text-white"
               onClick={handleSubmit}
             >
-              Get Price
+              {selectedLanguage === "english" ? (
+                <>Get Price</>
+              ) : selectedLanguage === "hindi" ? (
+                <>मूल्य प्राप्त करें</>
+              ) : selectedLanguage === "marathi" ? (
+                <>दर मिळवा</>
+              ) : selectedLanguage === "gujarati" ? (
+                <>મૂલ્ય મેળવો</>
+              ) : selectedLanguage === "tamil" ? (
+                <>விலையை பெறுங்கள்</>
+              ) : (
+                ""
+              )}
             </button>
           ) : (
             <>
@@ -499,43 +587,157 @@ const Market = () => {
             </>
           )}
         </div>
-        <div class="container mx-auto mt-[80px] px-[10px]">
-          <div class="grid grid-cols-2 gap-4">
-            <div class="col">
-              <div class="border border-gray-400 rounded-lg p-[10px]">
-                <div class="font-semibold">Commodity</div>
-                <div class="">{selectedCommodity}</div>
+        {price && (
+          <div class="container mx-auto mt-[80px] px-[10px]">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="col">
+                <div class="border border-gray-400 rounded-lg p-[10px]">
+                  <div class="font-semibold">
+                    {selectedLanguage === "english" ? (
+                      <>Commodity</>
+                    ) : selectedLanguage === "hindi" ? (
+                      <>वस्त्र</>
+                    ) : selectedLanguage === "marathi" ? (
+                      <>खाद्य पदार्थ</>
+                    ) : selectedLanguage === "gujarati" ? (
+                      <>ખેતીના આઇટમ્સ</>
+                    ) : selectedLanguage === "tamil" ? (
+                      <>உணவு பொருட்கள்</>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div class="">{selectedCommodity}</div>
+                </div>
               </div>
-            </div>
-            <div class="col">
-              <div class="border border-gray-400 rounded-lg p-[10px]">
-                <div class="font-semibold">State</div>
-                <div class="">Maharastra</div>
+              <div class="col">
+                <div class="border border-gray-400 rounded-lg p-[10px]">
+                  <div class="font-semibold">
+                    {selectedLanguage === "english" ? (
+                      <>State</>
+                    ) : selectedLanguage === "hindi" ? (
+                      <>राज्य</>
+                    ) : selectedLanguage === "marathi" ? (
+                      <>राज्य</>
+                    ) : selectedLanguage === "gujarati" ? (
+                      <>રાજ્ય</>
+                    ) : selectedLanguage === "tamil" ? (
+                      <>மாநிலம்</>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div class="">
+                    {selectedLanguage === "english" ? (
+                      <>Maharastra</>
+                    ) : selectedLanguage === "hindi" ? (
+                      <>महाराष्ट्र</>
+                    ) : selectedLanguage === "marathi" ? (
+                      <>महाराष्ट्र</>
+                    ) : selectedLanguage === "gujarati" ? (
+                      <>મહારાષ્ટ્ર</>
+                    ) : selectedLanguage === "tamil" ? (
+                      <>மஹாராஷ்டிரா</>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <div class="col">
-              <div class="border border-gray-400 rounded-lg p-[10px]">
-                <div class="font-semibold">District</div>
-                <div class="">Mumbai</div>
+              <div class="col">
+                <div class="border border-gray-400 rounded-lg p-[10px]">
+                  <div class="font-semibold">
+                    {selectedLanguage === "english" ? (
+                      <>District</>
+                    ) : selectedLanguage === "hindi" ? (
+                      <>जिला</>
+                    ) : selectedLanguage === "marathi" ? (
+                      <>जिल्हा</>
+                    ) : selectedLanguage === "gujarati" ? (
+                      <>જિલ્લો</>
+                    ) : selectedLanguage === "tamil" ? (
+                      <>மாவட்டம்</>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div class="">
+                    {selectedLanguage === "english" ? (
+                      <>Mumbai</>
+                    ) : selectedLanguage === "hindi" ? (
+                      <>मुंबई</>
+                    ) : selectedLanguage === "marathi" ? (
+                      <>मुंबई</>
+                    ) : selectedLanguage === "gujarati" ? (
+                      <>મુંબઈ</>
+                    ) : selectedLanguage === "tamil" ? (
+                      <>மும்பை</>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="border border-gray-400 rounded-lg p-[10px]">
+                  <div class="font-semibold">
+                    {selectedLanguage === "english" ? (
+                      <>Market</>
+                    ) : selectedLanguage === "hindi" ? (
+                      <>बाजार</>
+                    ) : selectedLanguage === "marathi" ? (
+                      <>बाजार</>
+                    ) : selectedLanguage === "gujarati" ? (
+                      <>બજાર</>
+                    ) : selectedLanguage === "tamil" ? (
+                      <>சந்தை</>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div class="">
+                    {selectedLanguage === "english" ? (
+                      <>Thane</>
+                    ) : selectedLanguage === "hindi" ? (
+                      <>ठाणे</>
+                    ) : selectedLanguage === "marathi" ? (
+                      <>ठाणे</>
+                    ) : selectedLanguage === "gujarati" ? (
+                      <>ઠાણે</>
+                    ) : selectedLanguage === "tamil" ? (
+                      <>தானே</>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="col">
-              <div class="border border-gray-400 rounded-lg p-[10px]">
-                <div class="font-semibold">Market</div>
-                <div class="">Thane</div>
+            <div class="grid grid-cols-1 mt-4 gap-4">
+              <div class="col">
+                <div class="border border-gray-400 rounded-lg p-[10px]">
+                  <div class="font-semibold">
+                    {selectedLanguage === "english" ? (
+                      <>Price</>
+                    ) : selectedLanguage === "hindi" ? (
+                      <>कीमत</>
+                    ) : selectedLanguage === "marathi" ? (
+                      <>किंमत</>
+                    ) : selectedLanguage === "gujarati" ? (
+                      <>કિંમત</>
+                    ) : selectedLanguage === "tamil" ? (
+                      <>விலை</>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div class="">{price}</div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="grid grid-cols-1 mt-4 gap-4">
-            <div class="col">
-              <div class="border border-gray-400 rounded-lg p-[10px]">
-                <div class="font-semibold">Price</div>
-                <div class="">{price}</div>
-              </div>
-            </div>
-          </div>
-        </div>
+        )}
       </div>
       <>
         <div className="fixed bottom-0 w-full bg-white border shadow-lg bottom-navbar">

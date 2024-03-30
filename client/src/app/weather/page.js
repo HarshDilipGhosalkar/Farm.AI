@@ -5,9 +5,11 @@ import AudioPlayer from "../../components/audioPlayer";
 import { fetchWeatherData } from "@/utils/ApiService";
 import { useRouter } from "next/navigation";
 import { ScaleLoader } from "react-spinners";
+import translate from "@/utils/translate";
 
 const Weather = () => {
   const router = useRouter();
+  const selectedLanguage = localStorage.getItem("selectedLanguage");
   const weekdays = [
     "Sunday",
     "Monday",
@@ -24,8 +26,16 @@ const Weather = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [audioData, setAudioData] = useState(null);
   const [audioBlob, setAudioBlob] = useState(null);
+  const [time, setTime] = useState(null);
+  const [weatherClouds, setWeatherClouds] = useState(null);
 
   useEffect(() => {
+    // get current time
+    const date = new Date();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    setTime(`${hours}:${minutes}`);
+
     fetchWeatherBasedOnLocation();
   }, []);
 
@@ -65,6 +75,7 @@ const Weather = () => {
           await fetchWeatherData(latitude, longitude);
         console.log(weatherForecastResponse);
         setWeatherData(todayWeatherResponse);
+        setWeatherClouds(translate(todayWeatherResponse.weather[0].main));
 
         var simplifiedWeatherData = weatherForecastResponse.list.map((item) => {
           if (item.dt_txt.includes("12:00")) {
@@ -137,7 +148,20 @@ const Weather = () => {
       {isLoading ? (
         <div className="flex flex-col h-[500px] w-full justify-center items-center">
           <ScaleLoader color="#2563eb" />
-          Hold on!
+
+          {selectedLanguage === "english" ? (
+            <>Hold on!</>
+          ) : selectedLanguage === "hindi" ? (
+            <>रुको!</>
+          ) : selectedLanguage === "marathi" ? (
+            <>थांबा!</>
+          ) : selectedLanguage === "gujarati" ? (
+            <>થામો!</>
+          ) : selectedLanguage === "tamil" ? (
+            <>நிறுத்தவும்!</>
+          ) : (
+            ""
+          )}
         </div>
       ) : (
         <>
@@ -162,9 +186,45 @@ const Weather = () => {
                 </span>
                 <div className="flex flex-col w-full justify-center items-center gap-y-[5px]">
                   <h1 className="text-[#1F2E4B] text-[20px]">
-                    <b>Mumbai,</b> India
+                    {selectedLanguage === "english" ? (
+                      <>
+                        <b>Mumbai,</b> India
+                      </>
+                    ) : selectedLanguage === "hindi" ? (
+                      <>
+                        <b>मुंबई,</b> भारत
+                      </>
+                    ) : selectedLanguage === "marathi" ? (
+                      <>
+                        <b>मुंबई,</b> भारत
+                      </>
+                    ) : selectedLanguage === "gujarati" ? (
+                      <>
+                        <b>મુંબઈ,</b> ભારત
+                      </>
+                    ) : selectedLanguage === "tamil" ? (
+                      <>
+                        <b>மும்பை,</b> இந்தியா
+                      </>
+                    ) : (
+                      ""
+                    )}
                   </h1>
-                  <p className="text-gray-400">Today, 20:06</p>
+                  <p className="text-gray-400">
+                    {selectedLanguage === "english" ? (
+                      <>Today, {time}</>
+                    ) : selectedLanguage === "hindi" ? (
+                      <>आज, {time}</>
+                    ) : selectedLanguage === "marathi" ? (
+                      <>आज, {time}</>
+                    ) : selectedLanguage === "gujarati" ? (
+                      <>આજ, {time}</>
+                    ) : selectedLanguage === "tamil" ? (
+                      <>இன்று, {time}</>
+                    ) : (
+                      ""
+                    )}
+                  </p>
                 </div>
                 <div className="flex pb-[60px] flex-col w-full justify-center items-center gap-y-[5px]">
                   <img
@@ -177,10 +237,7 @@ const Weather = () => {
                   >
                     {Math.round(weatherData.main.temp)} °
                   </h1>
-                  <p className="text-gray-600">
-                    {" "}
-                    {weatherData.weather[0].main}
-                  </p>
+                  <p className="text-gray-600"> {weatherClouds}</p>
                 </div>
               </div>
               <div className="px-[25px] mt-[-50px]">
@@ -209,8 +266,26 @@ const Weather = () => {
                       </g>
                     </svg>
                     <div>
-                      <p>Wind</p>
-                      <h1> {Math.round(weatherData.wind.speed)} km/h</h1>
+                      <p>
+                        {selectedLanguage === "english" ? (
+                          <>Wind</>
+                        ) : selectedLanguage === "hindi" ? (
+                          <>हवा</>
+                        ) : selectedLanguage === "marathi" ? (
+                          <>वारा</>
+                        ) : selectedLanguage === "gujarati" ? (
+                          <>પવન</>
+                        ) : selectedLanguage === "tamil" ? (
+                          <>காற்று</>
+                        ) : (
+                          ""
+                        )}
+                      </p>
+                      <h1>
+                        {" "}
+                        {Math.round(weatherData.wind.speed)}
+                        <>km/h</>
+                      </h1>
                     </div>
                   </div>
 
@@ -239,7 +314,21 @@ const Weather = () => {
                       </g>
                     </svg>
                     <div>
-                      <p>Feels like</p>
+                      <p>
+                        {selectedLanguage === "english" ? (
+                          <>Feels like</>
+                        ) : selectedLanguage === "hindi" ? (
+                          <>महसूस होता है</>
+                        ) : selectedLanguage === "marathi" ? (
+                          <>वाटतं</>
+                        ) : selectedLanguage === "gujarati" ? (
+                          <>વાતવ્યવહાર</>
+                        ) : selectedLanguage === "tamil" ? (
+                          <>போன்றது</>
+                        ) : (
+                          ""
+                        )}
+                      </p>
                       <h1>{Math.round(weatherData.main.feels_like)}° C</h1>
                     </div>
                   </div>
@@ -281,7 +370,21 @@ const Weather = () => {
                       </g>
                     </svg>
                     <div>
-                      <p>Humidity</p>
+                      <p>
+                        {selectedLanguage === "english" ? (
+                          <>Humidity</>
+                        ) : selectedLanguage === "hindi" ? (
+                          <>नमी</>
+                        ) : selectedLanguage === "marathi" ? (
+                          <>आर्द्रता</>
+                        ) : selectedLanguage === "gujarati" ? (
+                          <>હવામાં ભીગાડું</>
+                        ) : selectedLanguage === "tamil" ? (
+                          <>ஈர்ப்பு</>
+                        ) : (
+                          ""
+                        )}
+                      </p>
                       <h1>{weatherData.main.humidity}%</h1>
                     </div>
                   </div>
@@ -310,14 +413,42 @@ const Weather = () => {
                       </g>
                     </svg>
                     <div>
-                      <p>Cloud</p>
+                      <p>
+                        {selectedLanguage === "english" ? (
+                          <>Cloud</>
+                        ) : selectedLanguage === "hindi" ? (
+                          <>बादल</>
+                        ) : selectedLanguage === "marathi" ? (
+                          <>ढग</>
+                        ) : selectedLanguage === "gujarati" ? (
+                          <>બાદલ</>
+                        ) : selectedLanguage === "tamil" ? (
+                          <>மேகம்</>
+                        ) : (
+                          ""
+                        )}
+                      </p>
                       <h1>{weatherData.clouds.all}%</h1>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="px-[25px] mt-[30px] py-[20px]">
-                <h2 className="font-bold text-gray-600">Coming 5 days</h2>
+                <h2 className="font-bold text-gray-600">
+                  {selectedLanguage === "english" ? (
+                    <>Coming 5 days</>
+                  ) : selectedLanguage === "hindi" ? (
+                    <>आने वाले 5 दिन</>
+                  ) : selectedLanguage === "marathi" ? (
+                    <>आगामी 5 दिवस</>
+                  ) : selectedLanguage === "gujarati" ? (
+                    <>આવતા 5 દિવસ</>
+                  ) : selectedLanguage === "tamil" ? (
+                    <>வருகின்ற 5 நாட்கள்</>
+                  ) : (
+                    ""
+                  )}
+                </h2>
                 {weekForecastResponse.map((item, index) => (
                   <div
                     key={index}
