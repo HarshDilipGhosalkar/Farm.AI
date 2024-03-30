@@ -54,7 +54,7 @@ const crop = () => {
             </div>
             <div
               className="flex items-center justify-center bg-blue-400 mt-[-30px] h-[80px] w-[80px] rounded-[50%] text-white"
-              onClick={l}
+              onClick={listening}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
