@@ -7,6 +7,11 @@ const crop = () => {
   const router = useRouter();
   const [voiceInput, setVoiceInput] = useState("");
   const [listening, setListening] = useState(false);
+  const [cropName, setCropName] = useState("Tomatoes");
+  const [description, setDescription] = useState("Fresh and juicy tomatoes grown organically.");
+  const [price, setPrice] = useState("$2.50/kg");
+  const [reason, setReason] = useState("High demand due to excellent quality.");
+
 
   const startListening = (language) => {
     const recognition = new window.webkitSpeechRecognition();
@@ -26,11 +31,31 @@ const crop = () => {
 
   return (
     <>
-      <div className="w-[100%] h-full">
+      <div className="w-[100%] h-full flex flex-col justify-center items-center">
+      <div className="bg-green-100 w-[90%] mt-[20px] border border-green-300 rounded-lg p-6 shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+      <h2 className="text-[30px] align-middle font-bold mb-4 text-green-900">Crop Details</h2>
+      <div className="mb-4">
+        <p className="text-lg font-semibold mb-1 text-green-800">Crop Name:</p>
+        <p className="text-lg font-medium text-green-700">{cropName}</p>
+      </div>
+      <div className="mb-4">
+        <p className="text-lg font-semibold mb-1 text-green-800">Description:</p>
+        <p className="text-lg font-medium text-green-700">{description}</p>
+      </div>
+      <div className="mb-4">
+        <p className="text-lg font-semibold mb-1 text-green-800">Price:</p>
+        <p className="text-lg font-medium text-green-700">{price}</p>
+      </div>
+      <div className="mb-4">
+        <p className="text-lg font-semibold mb-1 text-green-800">Reason:</p>
+        <p className="text-lg font-medium text-green-700">{reason}</p>
+      </div>
+    </div>
+  
         {voiceInput.length > 3 && (
           <div className="fixed bottom-[80px] w-full px-[20px] py-[10px] pb-[25px]">
             <div className="px-[20px] py-[10px] border w-full bg-gray-100 rounded-[10px] text-black">
-              voiceInput
+              {voiceInput}
             </div>
           </div>
         )}
@@ -54,7 +79,7 @@ const crop = () => {
             </div>
             <div
               className="flex items-center justify-center bg-blue-400 mt-[-30px] h-[80px] w-[80px] rounded-[50%] text-white"
-              onClick={listening}
+              onClick={() => startListening('mr-IN')}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
