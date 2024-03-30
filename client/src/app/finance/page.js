@@ -1,39 +1,51 @@
 "use client";
-import React from "react";
+
+
+// export default ComponentWithDivs;
+import React, { useState } from 'react';
 import { useRouter } from "next/navigation";
 
-const Finance = () => {
+const FinanceComponent = () => {
   const router = useRouter();
+  // Dummy data stored in a hook
+  const [financeData, setFinanceData] = useState({
+    seeds: 5000,
+    fertilizers: 3000,
+    equipment: 8000,
+    laborCost: 2000,
+    totalCost: 18000,
+  });
+
   return (
+    
     <>
-      <div className="p-[20px] flex flex-col justify-center">
-        <h1 className="mt-[60px] text-2xl text-center w-full font-bold mb-[20px]">
-          Select Option
-        </h1>
-        <div
-          className="mx-auto bg-cover flex flex-col justify-end bg-center w-[250px] h-[200px] mb-[40px] rounded-[20px] bg-red-100"
-          onClick={() => {
-            router.push("/finance/budget");
-          }}
-          style={{ backgroundImage: 'url("assets/images/budget.png")' }}
-        >
-          <p className="mt-[10px] h-[60px] flex justify-center rounded-b-[20px] bg-[#ffffff80] font-bold text-xl flex justify-center items-center">
-            Budget
-          </p>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-semibold text-center mb-8 text-[#35b535]">BUDGET</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="bg-[#f1f0f0] shadow-md rounded-md p-6">
+          <h2 className="text-xl font-semibold mb-4">Seeds</h2>
+          <p className="text-gray-600">Cost: ${financeData.seeds}</p>
         </div>
-        <div
-          className="mx-auto bg-cover flex flex-col justify-end bg-center w-[250px] h-[200px] mb-[40px] rounded-[20px] bg-red-100"
-          style={{ backgroundImage: 'url("assets/images/loan.png")' }}
-          onClick={() => {
-            router.push("/finance/loan");
-          }}
-        >
-          <p className="mt-[10px] h-[60px] flex text-center px-[15px] rounded-b-[20px] bg-[#ffffff80] font-bold text-xl flex justify-center items-center">
-            Loans
-          </p>
+        <div className="bg-[#f1f0f0] shadow-md rounded-md p-6">
+          <h2 className="text-xl font-semibold mb-4">Fertilizers</h2>
+          <p className="text-gray-600">Cost: ${financeData.fertilizers}</p>
+        </div>
+        <div className="bg-[#f1f0f0] shadow-md rounded-md p-6">
+          <h2 className="text-xl font-semibold mb-4">Equipment</h2>
+          <p className="text-gray-600">Cost: ${financeData.equipment}</p>
+        </div>
+        <div className="bg-[#f1f0f0] shadow-md rounded-md p-6">
+          <h2 className="text-xl font-semibold mb-4">Labour Cost</h2>
+          <p className="text-gray-600">Cost: ${financeData.laborCost}</p>
         </div>
       </div>
-      <div className="fixed bottom-0 w-full bg-white border shadow-lg bottom-navbar">
+      <div className="mt-8 bg-[#f1f0f0] shadow-md rounded-md p-6">
+        <h2 className="text-xl font-semibold mb-4">Total Cost</h2>
+        <p className="text-gray-600">Total: ${financeData.totalCost}</p>
+      </div>
+      
+    </div>
+    <div className="fixed bottom-0 w-full bg-white border shadow-lg bottom-navbar">
         <div className="flex justify-around gap-x-[5px] px-[30px] py-[10px] text-gray-400">
           <div
             className={`flex flex-col items-center hover:text-green-400 `}
@@ -52,7 +64,7 @@ const Finance = () => {
           </div>
           <div
             className="flex items-center justify-center bg-blue-400 mt-[-30px] h-[80px] w-[80px] rounded-[50%] text-white"
-            onClick={null}
+            onClick={() => router.push("/disease")}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -90,4 +102,4 @@ const Finance = () => {
   );
 };
 
-export default Finance;
+export default FinanceComponent;
