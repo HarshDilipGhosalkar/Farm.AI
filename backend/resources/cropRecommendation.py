@@ -67,7 +67,7 @@ class WhatGrownLastYear(Resource):
 
         translator = Translator()
         try:
-            translated_text = translator.translate(sentence, dest=langcodes["marathi"]).text
+            translated_text = translator.translate(sentence, dest=langcodes[args["language"]]).text
             print(translated_text)
         except Exception as e:
             print(f"Translation Error: {e}")

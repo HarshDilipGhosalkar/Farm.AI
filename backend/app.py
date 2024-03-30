@@ -1,12 +1,13 @@
 from dotenv import load_dotenv
 load_dotenv()
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_restful import Api
 from mongo_engine import db
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail
+
 from resources.user import (User, Signup, Login, Language)
 from resources.instagram import (Hashtags, Caption, Post)
 from resources.weatherTTS import (weatherTTS)
@@ -59,6 +60,9 @@ api.add_resource(Caption, "/caption")
 api.add_resource(Hashtags, "/hashtags")
 api.add_resource(Post, "/post")
 
+@app.route('/ping', methods=['GET'])
+def ping():
+    return jsonify({"message": "Pong!"})
 
 
 if __name__ == "__main__":
