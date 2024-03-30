@@ -133,7 +133,7 @@ const Weather = () => {
           redirect: "follow",
         };
 
-        fetch("http://localhost:5000/weatherTTS", requestOptions)
+        fetch("https://codeshashtra-allstackers.onrender.com/weatherTTS", requestOptions)
           .then((response) => response.json())
           .then((result) => setAudioData(result.data))
           .catch((error) => console.error(error));

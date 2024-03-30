@@ -17,7 +17,7 @@ const translate = async (text) => {
 
   try {
     const response = await fetch(
-      "http://localhost:5000/translate",
+      "https://codeshashtra-allstackers.onrender.com/translate",
       requestOptions
     );
     const result = await response.text();

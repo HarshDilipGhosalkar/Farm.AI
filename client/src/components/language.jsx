@@ -11,10 +11,11 @@ const LanguageSideBar = () => {
       redirect: "follow",
     };
 
-    fetch("http://127.0.0.1:5000/language?mobile=9137357003", requestOptions)
+    fetch("https://codeshashtra-allstackers.onrender.com/language?mobile=9137357003", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         if (!result.error) {
+          console
           setSelectedLanguage(result.data);
           localStorage.setItem("selectedLanguage", result.data); // Save to localStorage
         } else {
@@ -39,7 +40,7 @@ const LanguageSideBar = () => {
       redirect: "follow",
     };
 
-    fetch("http://localhost:5000/language", requestOptions)
+    fetch("https://codeshashtra-allstackers.onrender.com/language", requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.error(error));
