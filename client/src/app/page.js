@@ -12,6 +12,35 @@ export default function Home() {
   const [error, setError] = useState(false);
   const [weatherData, setWeatherData] = useState(null);
 
+  const [voiceInput, setVoiceInput] = useState("");
+  const [listening, setListening] = useState(false);
+
+  const startListening = (language) => {
+
+      const recognition = new window.webkitSpeechRecognition();
+      recognition.lang = language;
+      recognition.onstart = () => {
+          setListening(true);
+      };
+      recognition.onresult = (event) => {
+          const transcript = event.results[0][0].transcript;
+          setVoiceInput(transcript);
+          console.log(transcript);
+          const myHeaders = new Headers();
+          myHeaders.append("Content-Type", "application/json");
+
+          
+      };
+      recognition.onend = () => {
+          setListening(false);
+
+      };
+      recognition.start();
+
+
+  };
+
+
   useEffect(() => {
     fetchWeatherBasedOnLocation();
   }, []);
@@ -389,7 +418,7 @@ export default function Home() {
             </div>
             <div
               className="flex items-center justify-center bg-blue-400 mt-[-30px] h-[80px] w-[80px] rounded-[50%] text-white"
-              onClick={() => router.push("/disease")}
+              onClick={() => startListening('en-US')}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
