@@ -15,7 +15,7 @@ class MarketPrice(Resource):
 
         data = parser.parse_args()
 
-        prompt = f"""Get the market price of {data['crop_name']} in India and give. I want the price not code.
+        prompt = f"""Get the market price of {data['crop_name']} in India and give. I want the price not code. Don't give blank, if you don't know, give estimated price.
         Output should be in the json format like below:
         {{
             "market_price": ""
