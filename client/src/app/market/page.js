@@ -13,6 +13,8 @@ const images = [
 const Market = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [selectedCommodity, setSelectedCommodity] = useState("Rice");
+  const [price, setPrice] = useState("Rs. 4000");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -24,6 +26,34 @@ const Market = () => {
   const handleSubmit = () => {
     setLoading(true);
   };
+
+  const onCommodityChange = (e) => {
+    setSelectedCommodity(e.target.value);
+    setPrice("loading...")
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({
+      "crop_name": "soya bean"
+    });
+
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    };
+
+    fetch("http://localhost:5000/marketPrice", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setSelectedCommodity(e.target.value);
+        setPrice(result.price);
+      })
+      .catch((error) => console.error(error));
+      }
+  
+
   return (
     <div className="flex flex-col">
       <div className="carousel w-full h-[160px]">
@@ -40,137 +70,137 @@ const Market = () => {
       <div className="px-[10px] pt-[15px]">
         <h1 className="text-center font-bold text-2xl">Market Price</h1>
         <div className="flex px-[10px] justify-between mt-[20px]">
-          <select className="w-[200px] p-[10px] border rounded-sm" name="">
+          <select className="w-[200px] p-[10px] border rounded-sm" name="" onClick={(e) => onCommodityChange(e)}>
             <option value="0">--Select--</option>
-            <option value="451">Absinthe</option>
-            <option value="137">Ajwan</option>
-            <option value="281">Alasande Gram</option>
-            <option value="325">Almond(Badam)</option>
-            <option value="166">Alsandikai</option>
-            <option value="86">Amaranthus</option>
-            <option value="130">Ambada Seed</option>
-            <option value="417">Ambady/Mesta</option>
-            <option value="355">Amla(Nelli Kai)</option>
-            <option value="102">Amphophalus</option>
-            <option value="419">Amranthas Red</option>
-            <option value="209">Antawala</option>
-            <option value="379">Anthorium</option>
-            <option value="17">Apple</option>
-            <option value="326">Apricot(Jardalu/Khumani)</option>
-            <option value="140">Arecanut(Betelnut/Supari)</option>
-            <option value="49">Arhar (Tur/Red Gram)(Whole)</option>
-            <option value="260">Arhar Dal(Tur Dal)</option>
-            <option value="444">Asalia</option>
-            <option value="83">Ashgourd</option>
-            <option value="443">Ashwagandha</option>
-            <option value="434">Asparagus</option>
-            <option value="232">Astera</option>
-            <option value="269">Avare Dal</option>
-            <option value="418">Bael</option>
-            <option value="28">Bajra(Pearl Millet/Cumbu)</option>
-            <option value="274">Balekai</option>
-            <option value="482">balsam</option>
-            <option value="204">Bamboo</option>
-            <option value="19">Banana</option>
-            <option value="90">Banana - Green</option>
-            <option value="29">Barley (Jau)</option>
-            <option value="435">basil</option>
-            <option value="321">Bay leaf (Tejpatta)</option>
-            <option value="94">Beans</option>
-            <option value="262">Beaten Rice</option>
-            <option value="157">Beetroot</option>
-            <option value="263">Bengal Gram Dal (Chana Dal)</option>
-            <option value="6">Bengal Gram(Gram)(Whole)</option>
-            <option value="357">Ber(Zizyphus/Borehannu)</option>
-            <option value="143">Betal Leaves</option>
-            <option value="41">Betelnuts</option>
-            <option value="85">Bhindi(Ladies Finger)</option>
-            <option value="448">Bhui Amlaya</option>
-            <option value="113">Big Gram</option>
-            <option value="51">Binoula</option>
-            <option value="81">Bitter gourd</option>
-            <option value="8">Black Gram (Urd Beans)(Whole)</option>
-            <option value="264">Black Gram Dal (Urd Dal)</option>
-            <option value="38">Black pepper</option>
-            <option value="380">BOP</option>
-            <option value="189">Borehannu</option>
-            <option value="82">Bottle gourd</option>
-            <option value="449">Brahmi</option>
-            <option value="290">Bran</option>
-            <option value="35">Brinjal</option>
-            <option value="293">Broken Rice</option>
-            <option value="320">Broomstick(Flower Broom)</option>
-            <option value="214">Bull</option>
-            <option value="284">Bullar</option>
-            <option value="224">Bunch Beans</option>
-            <option value="272">Butter</option>
-            <option value="416">buttery</option>
-            <option value="154">Cabbage</option>
-            <option value="480">Calendula</option>
-            <option value="215">Calf</option>
-            <option value="354">Camel Hair</option>
-            <option value="205">Cane</option>
-            <option value="164">Capsicum</option>
-            <option value="40">Cardamoms</option>
-            <option value="375">Carnation</option>
-            <option value="153">Carrot</option>
-            <option value="238">Cashew Kernnel</option>
-            <option value="36">Cashewnuts</option>
-            <option value="270">Castor Oil</option>
-            <option value="123">Castor Seed</option>
-            <option value="34">Cauliflower</option>
-            <option value="188">Chakotha</option>
-            <option value="438">Chandrashoor</option>
-            <option value="169">Chapparad Avare</option>
-            <option value="241">Chennangi (Whole)</option>
-            <option value="295">Chennangi Dal</option>
-            <option value="328">Cherry</option>
-            <option value="71">Chikoos(Sapota)</option>
-            <option value="26">Chili Red</option>
-            <option value="88">Chilly Capsicum</option>
-            <option value="167">Chow Chow</option>
-            <option value="402">Chrysanthemum</option>
-            <option value="231">Chrysanthemum(Loose)</option>
-            <option value="316">Cinamon(Dalchini)</option>
-            <option value="467">cineraria</option>
-            <option value="478">Clarkia</option>
-            <option value="105">Cloves</option>
-            <option value="80">Cluster beans</option>
-            <option value="315">Coca</option>
-            <option value="368">Cock</option>
-            <option value="104">Cocoa</option>
-            <option value="138">Coconut</option>
-            <option value="266">Coconut Oil</option>
-            <option value="112">Coconut Seed</option>
-            <option value="45">Coffee</option>
-            <option value="318">Colacasia</option>
-            <option value="129">Copra</option>
-            <option value="43">Coriander(Leaves)</option>
-            <option value="108">Corriander seed</option>
-            <option value="472">Cossandra</option>
-            <option value="15">Cotton</option>
-            <option value="99">Cotton Seed</option>
-            <option value="212">Cow</option>
-            <option value="92">Cowpea (Lobia/Karamani)</option>
-            <option value="89">Cowpea(Veg)</option>
-            <option value="159">Cucumbar(Kheera)</option>
-            <option value="42">Cummin Seed(Jeera)</option>
-            <option value="352">Custard Apple (Sharifa)</option>
-            <option value="382">Daila(Chandni)</option>
-            <option value="91">Dal (Avare)</option>
-            <option value="273">Dalda</option>
-            <option value="410">Delha</option>
-            <option value="69">Dhaincha</option>
-            <option value="442">dhawai flowers</option>
-            <option value="476">dianthus</option>
-            <option value="423">dried mango</option>
-            <option value="168">Drumstick</option>
-            <option value="132">Dry Chillies</option>
-            <option value="345">Dry Fodder</option>
-            <option value="278">Dry Grapes</option>
-            <option value="370">Duck</option>
-            <option value="163">Duster Beans</option>
-            <option value="367">Egg</option>
+            <option value="absinthe">Absinthe</option>
+            <option value="ajwan">Ajwan</option>
+            <option value="alasande gram">Alasande Gram</option>
+            <option value="almond(badam)">Almond(Badam)</option>
+            <option value="alsandikai">Alsandikai</option>
+            <option value="amaranthus">Amaranthus</option>
+            <option value="ambada seed">Ambada Seed</option>
+            <option value="ambady/mesta">Ambady/Mesta</option>
+            <option value="amla(nelli kai)">Amla(Nelli Kai)</option>
+            <option value="amphophalus">Amphophalus</option>
+            <option value="amranthas red">Amranthas Red</option>
+            <option value="antawala">Antawala</option>
+            <option value="anthorium">Anthorium</option>
+            <option value="apple">Apple</option>
+            <option value="apricot(jardalu/khumani)">Apricot(Jardalu/Khumani)</option>
+            <option value="arecanut(betelnut/supari)">Arecanut(Betelnut/Supari)</option>
+            <option value="arhar (tur/red gram)(whole)">Arhar (Tur/Red Gram)(Whole)</option>
+            <option value="arhar dal(tur dal)">Arhar Dal(Tur Dal)</option>
+            <option value="asalia">Asalia</option>
+            <option value="ashgourd">Ashgourd</option>
+            <option value="ashwagandha">Ashwagandha</option>
+            <option value="asparagus">Asparagus</option>
+            <option value="astera">Astera</option>
+            <option value="avare dal">Avare Dal</option>
+            <option value="bael">Bael</option>
+            <option value="bajra(pearl millet/cumbu)">Bajra(Pearl Millet/Cumbu)</option>
+            <option value="balekai">Balekai</option>
+            <option value="balsam">balsam</option>
+            <option value="bamboo">Bamboo</option>
+            <option value="banana">Banana</option>
+            <option value="banana - green">Banana - Green</option>
+            <option value="barley (jau)">Barley (Jau)</option>
+            <option value="basil">basil</option>
+            <option value="bay leaf (tejpatta)">Bay leaf (Tejpatta)</option>
+            <option value="beans">Beans</option>
+            <option value="beaten rice">Beaten Rice</option>
+            <option value="beetroot">Beetroot</option>
+            <option value="bengal gram dal (chana dal)">Bengal Gram Dal (Chana Dal)</option>
+            <option value="bengal gram(gram)(whole)">Bengal Gram(Gram)(Whole)</option>
+            <option value="ber(zizyphus/borehannu)">Ber(Zizyphus/Borehannu)</option>
+            <option value="betal leaves">Betal Leaves</option>
+            <option value="betelnuts">Betelnuts</option>
+            <option value="bhindi(ladies finger)">Bhindi(Ladies Finger)</option>
+            <option value="bhui amlaya">Bhui Amlaya</option>
+            <option value="big gram">Big Gram</option>
+            <option value="binoula">Binoula</option>
+            <option value="bitter gourd">Bitter gourd</option>
+            <option value="black gram (urd beans)(whole)">Black Gram (Urd Beans)(Whole)</option>
+            <option value="black gram dal (urd dal)">Black Gram Dal (Urd Dal)</option>
+            <option value="black pepper">Black pepper</option>
+            <option value="bop">BOP</option>
+            <option value="borehannu">Borehannu</option>
+            <option value="bottle gourd">Bottle gourd</option>
+            <option value="brahmi">Brahmi</option>
+            <option value="bran">Bran</option>
+            <option value="brinjal">Brinjal</option>
+            <option value="broken rice">Broken Rice</option>
+            <option value="broomstick(flower broom)">Broomstick(Flower Broom)</option>
+            <option value="bull">Bull</option>
+            <option value="bullar">Bullar</option>
+            <option value="bunch beans">Bunch Beans</option>
+            <option value="butter">Butter</option>
+            <option value="buttery">buttery</option>
+            <option value="cabbage">Cabbage</option>
+            <option value="calendula">Calendula</option>
+            <option value="calf">Calf</option>
+            <option value="camel hair">Camel Hair</option>
+            <option value="cane">Cane</option>
+            <option value="capsicum">Capsicum</option>
+            <option value="cardamoms">Cardamoms</option>
+            <option value="carnation">Carnation</option>
+            <option value="carrot">Carrot</option>
+            <option value="cashew kernnel">Cashew Kernnel</option>
+            <option value="cashewnuts">Cashewnuts</option>
+            <option value="castor oil">Castor Oil</option>
+            <option value="castor seed">Castor Seed</option>
+            <option value="cauliflower">Cauliflower</option>
+            <option value="chakotha">Chakotha</option>
+            <option value="chandrashoor">Chandrashoor</option>
+            <option value="chapparad avare">Chapparad Avare</option>
+            <option value="chennangi (whole)">Chennangi (Whole)</option>
+            <option value="chennangi dal">Chennangi Dal</option>
+            <option value="cherry">Cherry</option>
+            <option value="chikoos(sapota)">Chikoos(Sapota)</option>
+            <option value="chili red">Chili Red</option>
+            <option value="chilly capsicum">Chilly Capsicum</option>
+            <option value="chow chow">Chow Chow</option>
+            <option value="chrysanthemum">Chrysanthemum</option>
+            <option value="chrysanthemum(loose)">Chrysanthemum(Loose)</option>
+            <option value="cinamon(dalchini)">Cinamon(Dalchini)</option>
+            <option value="cineraria">cineraria</option>
+            <option value="clarkia">Clarkia</option>
+            <option value="cloves">Cloves</option>
+            <option value="cluster beans">Cluster beans</option>
+            <option value="coca">Coca</option>
+            <option value="cock">Cock</option>
+            <option value="cocoa">Cocoa</option>
+            <option value="coconut">Coconut</option>
+            <option value="coconut oil">Coconut Oil</option>
+            <option value="coconut seed">Coconut Seed</option>
+            <option value="coffee">Coffee</option>
+            <option value="colacasia">Colacasia</option>
+            <option value="copra">Copra</option>
+            <option value="coriander(leaves)">Coriander(Leaves)</option>
+            <option value="corriander seed">Corriander seed</option>
+            <option value="cossandra">Cossandra</option>
+            <option value="cotton">Cotton</option>
+            <option value="cotton seed">Cotton Seed</option>
+            <option value="cow">Cow</option>
+            <option value="cowpea (lobia/karamani)">Cowpea (Lobia/Karamani)</option>
+            <option value="cowpea(veg)">Cowpea(Veg)</option>
+            <option value="cucumbar(kheera)">Cucumbar(Kheera)</option>
+            <option value="cummin seed(jeera)">Cummin Seed(Jeera)</option>
+            <option value="custard apple (sharifa)">Custard Apple (Sharifa)</option>
+            <option value="daila(chandni)">Daila(Chandni)</option>
+            <option value="dal (avare)">Dal (Avare)</option>
+            <option value="dalda">Dalda</option>
+            <option value="delha">Delha</option>
+            <option value="dhaincha">Dhaincha</option>
+            <option value="dhawai flowers">dhawai flowers</option>
+            <option value="dianthus">dianthus</option>
+            <option value="dried mango">dried mango</option>
+            <option value="drumstick">Drumstick</option>
+            <option value="dry chillies">Dry Chillies</option>
+            <option value="dry fodder">Dry Fodder</option>
+            <option value="dry grapes">Dry Grapes</option>
+            <option value="duck">Duck</option>
+            <option value="duster beans">Duster Beans</option>
+            <option value="egg">Egg</option>
             <option value="361">Egypian Clover(Barseem)</option>
             <option value="296">Elephant Yam (Suran)</option>
             <option value="64">Field Pea</option>
@@ -474,7 +504,7 @@ const Market = () => {
             <div class="col">
               <div class="border border-gray-400 rounded-lg p-[10px]">
                 <div class="font-semibold">Commodity</div>
-                <div class="">Rice</div>
+                <div class="">{selectedCommodity}</div>
               </div>
             </div>
             <div class="col">
@@ -501,7 +531,7 @@ const Market = () => {
             <div class="col">
               <div class="border border-gray-400 rounded-lg p-[10px]">
                 <div class="font-semibold">Price</div>
-                <div class="">4000 Rs.</div>
+                <div class="">{price}</div>
               </div>
             </div>
           </div>
