@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { getCity } from "@/utils/ApiService";
+import AudioPlayer from "../../components/audioPlayer";
 import { fetchWeatherData } from "@/utils/ApiService";
 import { useRouter } from "next/navigation";
 import { ScaleLoader } from "react-spinners";
@@ -21,10 +22,40 @@ const Weather = () => {
   const [error, setError] = useState(false);
   const [weekForecastResponse, setWeekForecastResponse] = useState(null);
   const [weatherData, setWeatherData] = useState(null);
+  const [audioData, setAudioData] = useState(null);
+  const [audioBlob, setAudioBlob] = useState(null);
 
   useEffect(() => {
     fetchWeatherBasedOnLocation();
   }, []);
+
+  useEffect(() => {
+    const handleScreenTap = () => {
+      if (audioData) {
+        const byteString = atob(audioData);
+        const mimeType = 'audio/mpeg';
+        const buffer = new ArrayBuffer(byteString.length);
+        const intArray = new Uint8Array(buffer);
+        for (let i = 0; i < byteString.length; i++) {
+          intArray[i] = byteString.charCodeAt(i);
+        }
+        const blob = new Blob([buffer], { type: mimeType });
+        setAudioBlob(blob);
+      }
+    };
+  }, [audioData]);
+
+
+  const play = () => {
+    console.log(audioBlob);
+    if (audioBlob) {
+      console.log('Playing audio...');
+
+      const audio = new Audio(URL.createObjectURL(audioBlob));
+      audio.play();
+    }
+  };
+
 
   const fetchWeatherBasedOnLocation = async () => {
     setIsLoading(true);
@@ -77,12 +108,39 @@ const Weather = () => {
         setWeekForecastResponse(simplifiedWeatherData);
 
         setIsLoading(false);
+
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+          "temp": simplifiedWeatherData[0].temp,
+          "wind": simplifiedWeatherData[0].wind_speed,
+          "humidity": simplifiedWeatherData[0].humidity,
+          "clouds": todayWeatherResponse.clouds.all,
+          "language": "marathi"
+        });
+
+        const requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow"
+        };
+
+        fetch("http://localhost:5000/weatherTTS", requestOptions)
+        .then((response) => response.json())
+        .then((result) => setAudioData(result.data))
+        .catch((error) => console.error(error));
+
+
       });
     } catch (error) {
       setError(true);
       setIsLoading(false);
     }
   };
+
+  console.log(audioData)
   return (
     <>
       {isLoading ? (
@@ -122,7 +180,7 @@ const Weather = () => {
                     className="w-[120px]"
                     src="/assets/images/partly-cloudy.png"
                   />
-                  <h1 className="text-[#1F2E4B] font-black text-7xl">
+                  <h1 className="text-[#1F2E4B] font-black text-7xl"  onClick={play}>
                     {Math.round(weatherData.main.temp)} °
                   </h1>
                   <p className="text-gray-600">
@@ -365,6 +423,7 @@ const Weather = () => {
                   </div>
                 ))}
               </div>
+              {/* {audioData && <AudioPlayer audioData={audioData} setAudioData={setAudioData}/>} */}
             </div>
           )}
         </>
