@@ -13,6 +13,7 @@ from resources.instagram import (Hashtags, Caption, Post)
 from resources.weatherTTS import (weatherTTS)
 from resources.cropRecommendation import (WhatGrownLastYear, CropRecommendation)
 from resources.marketPrice import (MarketPrice)
+from resources.translate import Translate
 
 import os
 
@@ -53,6 +54,8 @@ api.add_resource(weatherTTS, "/weatherTTS")
 api.add_resource(WhatGrownLastYear, "/previousYearCrop")
 api.add_resource(CropRecommendation, "/cropRecommendation")
 api.add_resource(MarketPrice, "/marketPrice")
+
+api.add_resource(Translate, "/translate")
 
 
 # Instagram API endpoints
