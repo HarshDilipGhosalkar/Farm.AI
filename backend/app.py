@@ -16,6 +16,7 @@ from resources.marketPrice import (MarketPrice)
 from resources.translate import Translate
 from resources.timeline import Timeline
 from resources.budgeting import Budgeting
+from resources.routing import Routing
 
 import os
 
@@ -59,6 +60,7 @@ api.add_resource(MarketPrice, "/marketPrice")
 api.add_resource(Timeline, '/timeline')
 api.add_resource(Translate, "/translate")
 api.add_resource(Budgeting, '/budgeting')
+api.add_resource(Routing, '/routing')
 
 
 # Instagram API endpoints

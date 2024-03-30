@@ -1,48 +1,34 @@
-from flask import Flask, request, jsonify
-from googletrans import Translator
-
-app = Flask(__name__)
-
-@app.route('/translate', methods=['GET'])
-def translate():
-    # Get sentence from form data
-    sentence = request.form.get('sentence')
-    print(sentence)
-
-    # Translate the sentence
-    translations = translate_sentence(sentence)
-
-    return jsonify(translations)
-
-def translate_sentence(sentence):
-    translator = Translator()
-
-    # Translate to English
-    english_translation = translator.translate(sentence, dest='en').text
-
-    # Translate to Hindi
-    hindi_translation = translator.translate(sentence, dest='hi').text
-
-    # Translate to Tamil
-    tamil_translation = translator.translate(sentence, dest='ta').text
-
-    # Translate to Telugu
-    telugu_translation = translator.translate(sentence, dest='te').text
-
-    # Translate to Punjabi
-    punjabi_translation = translator.translate(sentence, dest='pa').text
-
-    # Translate to Bengali
-    bengali_translation = translator.translate(sentence, dest='bn').text
-
-    return {
-        'English': english_translation,
-        'Hindi': hindi_translation,
-        'Tamil': tamil_translation,
-        'Telugu': telugu_translation,
-        'Punjabi': punjabi_translation,
-        'Bengali': bengali_translation
-    }
-
-if __name__ == '__main__':
-    app.run(debug=True)
+# [
+#     {
+#         "route": "/weather"
+#         "when": "any request for weather data"
+#     },
+#     {
+#         "route": "/timeline",
+#         "when": "any request for timeline or time required to grow a crop or crop planing or procedure to grow a crop"
+#     },
+#     {
+#         "route": "/market",
+#         "when": "any request for market price of a crop"
+#     },
+#     {
+#         "route": "/learning",
+#         "when": "any request for learning about agriculture, crops, farming, etc."
+#     },
+#     {
+#         "route": "/finance",
+#         "when": "any request for knowing the budget required for a crop or farming"
+#     },
+#     {
+#         "route": "/loan",
+#         "when": "any request for loan for farming or knowing government schemes for farmers"
+#     },
+#     {
+#         "route": "/disease",
+#         "when": "any request for knowing about diseases in crops and their remedies"
+#     },
+#     {
+#         "route": "/crop",
+#         "when": "any request for knowing recommendations for crops to grow in a field"
+#     }
+# ]
