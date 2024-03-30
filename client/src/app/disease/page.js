@@ -13,7 +13,7 @@ const Disease = () => {
   const [responseInfo, setResponseInfo] = useState(null);
   const [showModal, setShowModal] = useState(false); // State to manage modal visibility
   const [modalText, setModalText] = useState(""); // State to hold modal text content
-  const [level, setLevel] = useState(1);
+  const [level, setLevel] = useState("1");
   const [fertilizer, setFertilizer] = useState([]);
   const [treatment, setTreatment] = useState([]);
 
@@ -38,6 +38,7 @@ const Disease = () => {
         .then((result) => {
           console.log(result.data);
           setResponseInfo(result.data);
+          setLevel(result.data.lossRating);
         })
         .catch((error) => console.log("error", error))
         .finally(() => setLoading(false));
@@ -122,12 +123,15 @@ const Disease = () => {
               {responseInfo.health_status === "yes" ? (
                 <></>
               ) : (
+                <>{level =="2" ?(<>
                 <div
                   className={` cursor-pointer px-3 text-[15px] font-semibold rounded-md mb-7 w-fit bg-[#e2f5ef] text-[#0d9e6b]`}
                   onClick={openModal}
                 >
                   Get remedies
                 </div>
+                </>):<></>}</>
+                
               )}
             </div>
             <div className="text-[#0d9e6b] text-[35px] font-bold mb-6">
@@ -153,22 +157,40 @@ const Disease = () => {
               <p className="text-[#0d9e6b]">{responseInfo.plant_description}</p>
             </div>
           </div>
-          <div className="flex flex-col w-[90%] mx-auto rounded-[10px] px-[5px] py-[10px] bg-red-100">
+          <div className={`flex flex-col w-[90%] mx-auto rounded-[10px] border ${
+                      level == "1" && "border-[#0d9e6b]"
+                    } ${level == "2" && "border-[#ffb466]"} ${
+                      level == "3" && " border-red-500"
+                    }px-[5px] py-[10px] bg-[white]`}>
             <div className="flex flex-row items-center justify-center">
               <div className="font-semibold text-[16px]">Level of Damage</div>
             </div>
 
             <div className="flex flex-col w-[90%] self-center justify-between">
-              <div className="bg-red-200 h-[2px] mt-[25px] mb-[15px] relative rounded-sm">
+            {/* className={` px-3 text-[15px] font-semibold rounded-md  mb-7 w-fit ${
+                  responseInfo.health_status === "yes"
+                    ? "bg-[#e2f5ef] text-[#0d9e6b]"
+                    : "bg-red-100 border-[1px] text-red-800"
+                }`} */}
+              <div className={`${
+                    level == "1" && "bg-[#b3fae1]"
+                  } ${level == "2" && "bg-[#ffe7cd]"} ${
+                    level == "3" && "bg-red-200"
+                  } h-[2px] mt-[25px] mb-[15px] relative rounded-sm`}>
                 <div
-                  className={`absolute bg-red-500 h-[4px] ${
-                    level == 1 && "w-[20px]"
-                  } ${level == 2 && "w-[50%]"} ${
-                    level == 3 && "w-[100%]"
+                  className={`absolute  h-[4px] ${
+                    level == "1" && "w-[20px] bg-[#0d9e6b]"
+                  } ${level == "2" && "w-[50%] bg-[#ffb466]"} ${
+                    level == "3" && "w-[100%] bg-red-500"
                   } mt-[-1px] flex flex-row items-center rounded-sm`}
                 >
                   <div
-                    className={`rounded-full w-[10px] h-[10px] ml-auto bg-red-500`}
+                    className={`rounded-full w-[10px] h-[10px] ml-auto
+                    ${
+                      level == "1" && "bg-[#0d9e6b]"
+                    } ${level == "2" && "bg-[#ffb466]"} ${
+                      level == "3" && " bg-red-500"
+                    }`}
                   ></div>
                 </div>
               </div>
