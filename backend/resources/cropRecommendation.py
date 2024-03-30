@@ -87,7 +87,8 @@ class CropRecommendation(Resource):
 
         translator = Translator()
         try:
-            crop = translator.translate(args["crop"], src=args["language"], dest="en").text
+            crop = translator.translate(args["crop"], src=langcodes[args["language"]], dest="en").text
+            print(crop)
         except Exception as e:
             print(f"Translation Error: {e}")
             crop = "Translation failed."
@@ -107,14 +108,14 @@ class CropRecommendation(Resource):
         answer = json.loads(response.content)
 
         audio_text = f"According to the details provided, you should grow {answer['crop_name']} this year."
-        translated_text = translator.translate(audio_text, src="en", dest=args["language"]).text
+        translated_text = translator.translate(audio_text, src="en", dest=langcodes[args["language"]]).text
 
         audio = get_tts_audio(translated_text, args["language"])
 
 
-        answer["crop_name"] = translator.translate(answer["crop_name"], src="en", dest=args["language"]).text
-        answer["description"] = translator.translate(answer["description"], src="en", dest=args["language"]).text
-        answer["reason"] = translator.translate(answer["reason"], src="en", dest=args["language"]).text
+        answer["crop_name"] = translator.translate(answer["crop_name"], src="en", dest=langcodes[args["language"]]).text
+        answer["description"] = translator.translate(answer["description"], src="en", dest=langcodes[args["language"]]).text
+        answer["reason"] = translator.translate(answer["reason"], src="en", dest=langcodes[args["language"]]).text
         answer["audio"] = audio
 
 
