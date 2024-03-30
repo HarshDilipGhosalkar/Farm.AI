@@ -17,6 +17,7 @@ class Translate(Resource):
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument("text", type=str, help="text is required", required=True)
+        print("Text:", parser.parse_args()["text"])
         args = parser.parse_args()
 
         user = UserModel.get_user("9137357003")

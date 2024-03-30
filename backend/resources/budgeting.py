@@ -20,7 +20,7 @@ langcodes = {
     # "rajasthani": "6576a2854e7d42484da63538"
 }
 
-class Timeline(Resource):
+class Budgeting(Resource):
     def post(self):
         parser = reqparse.RequestParser()
 
@@ -33,7 +33,7 @@ class Timeline(Resource):
         if not user:
             return {"error": True, "message": "User not found"}
         
-        args["language"] = user.language        
+        args["language"] = user.language
 
         translate = Translator()
         try:
@@ -43,34 +43,23 @@ class Timeline(Resource):
             print(f"Translation Error: {e}")
             translated_text = "Translation failed."
 
-        prompt = f"""Create a crop cultivation timeline for the crop {translated_text}. Mention down the tasks to be done, with the description and days required for each task. Give only 3-4 tasks.
-        Output should be strictly in the format like below and No intro or outro text should be there in the output, Each value should be in double quotes:
+        prompt = f"""Create a budgeting plan for the crop {translated_text} in India.
+        Output should be strictly in this format:
         {{
-            "timeline": [
-            {{
-                "task_title": "",
-                "description": "",
-                "days_required": ""
-            }},
-            ...,
-            {{
-                "task_title": "",
-                "description": "",
-                "days_required": ""
-            }}
-        ]}}
+            "seeds": "",
+            "fertilizer": "",
+            "equipment": "",
+            "labor": "",
+            "total": ""
+        }}
         """
 
         response = llm.invoke(prompt)
         answer = json.loads(response.content)
-        print(answer["timeline"])
-        timeline = answer["timeline"]
+        
+        translated_answer = {}
+        for key, value in answer.items():
+            translated_answer[key] = translate.translate(text=value, src='en', dest=langcodes[args["language"]]).text
 
-        # translate each object value
-        for i in range(len(timeline)):
-            answer["timeline"][i]["task_title"] = translate.translate(text=answer["timeline"][i]["task_title"], src="en", dest=langcodes[args["language"]]).text
-            answer["timeline"][i]["description"] = translate.translate(text=answer["timeline"][i]["description"], src="en", dest=langcodes[args["language"]]).text
-            answer["timeline"][i]["days_required"] = translate.translate(text=answer["timeline"][i]["days_required"], src="en", dest=langcodes[args["language"]]).text
-
-        return {"error": False, "data": answer["timeline"]}
+        return {"error": False, "data": translated_answer}
         

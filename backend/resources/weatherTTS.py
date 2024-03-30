@@ -6,6 +6,7 @@ from langchain_core.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 import os
 import json
+from models.user import User as UserModel
 
 os.environ["GOOGLE_API_KEY"] = os.getenv("FLASK_GEMINI_API_KEY")
 llm = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.7)
@@ -29,9 +30,14 @@ class weatherTTS(Resource):
         parser.add_argument("wind", type=str, required=True, help="wind is required")
         parser.add_argument("humidity", type=str, required=True, help="humidity is required")
         parser.add_argument("clouds", type=str, required=True, help="clouds is required")
-        parser.add_argument("language", type=str, required=True, help="language is required")
+        # parser.add_argument("language", type=str, required=True, help="language is required")
+
+        user = UserModel.get_user("9137357003")
+        if not user:
+            return {"error": True, "message": "User not found"}
 
         args = parser.parse_args()
+        args["language"] = user.language
 
         english_sentence = prepare_weather_text(args["temp"], args["wind"], args["humidity"], args["clouds"])
 
@@ -89,21 +95,27 @@ def get_tts_audio(text, langauge, gender="female"):
 
 class WhatGrownLastYear(Resource):
     def post(self):
-        parser = reqparse.RequestParser()
-        parser.add_argument("language", type=str, required=True, help="language is required")
-        args = parser.parse_args()
+        # parser = reqparse.RequestParser()
+        # parser.add_argument("language", type=str, required=True, help="language is required")
+        # args = parser.parse_args()
+
+        user = UserModel.get_user("9137357003")
+        if not user:
+            return {"error": True, "message": "User not found"}
+        
+        language = user.language
 
         sentence = "What crop was grown last year in this field"
 
         translator = Translator()
         try:
-            translated_text = translator.translate(sentence, dest=langcodes["marathi"]).text
+            translated_text = translator.translate(sentence, dest=langcodes[language]).text
             print(translated_text)
         except Exception as e:
             print(f"Translation Error: {e}")
             translated_text = "Translation failed."
 
-        audio = get_tts_audio(translated_text, args["language"])
+        audio = get_tts_audio(translated_text, language)
 
         return {"error": False, "data": audio}
 
@@ -112,8 +124,14 @@ class CropRecommendation(Resource):
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument("crop", type=str, required=True, help="crop is required")
-        parser.add_argument("language", type=str, required=True, help="language is required")
+        # parser.add_argument("language", type=str, required=True, help="language is required")
         args = parser.parse_args()
+
+        user = UserModel.get_user("9137357003")
+        if not user:
+            return {"error": True, "message": "User not found"}
+        
+        args["language"] = user.language
 
         translator = Translator()
         try:

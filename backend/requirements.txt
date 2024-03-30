@@ -10,5 +10,6 @@ werkzeug==2.2.3
 gunicorn>=20.0
 cloudinary==1.38.0
 langchain_google_genai
-googletrans>=3.0.0
+googletrans==4.0.0rc1
 Flask-Mail>=0.9.1
+httpx>=0.13.3

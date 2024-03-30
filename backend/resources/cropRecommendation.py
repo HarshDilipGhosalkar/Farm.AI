@@ -6,6 +6,7 @@ from langchain_core.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 import os
 import json
+from models.user import User as UserModel
 
 os.environ["GOOGLE_API_KEY"] = os.getenv("FLASK_GEMINI_API_KEY")
 llm = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.7)
@@ -60,8 +61,14 @@ def get_tts_audio(text, langauge, gender="female"):
 class WhatGrownLastYear(Resource):
     def post(self):
         parser = reqparse.RequestParser()
-        parser.add_argument("language", type=str, required=True, help="language is required")
+        # parser.add_argument("language", type=str, required=True, help="language is required")
         args = parser.parse_args()
+
+        user = UserModel.get_user("9137357003")
+        if not user:
+            return {"error": True, "message": "User not found"}
+        
+        args["language"] = user.language
 
         sentence = "What crop was grown last year in this field"
 
@@ -82,8 +89,14 @@ class CropRecommendation(Resource):
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument("crop", type=str, required=True, help="crop is required")
-        parser.add_argument("language", type=str, required=True, help="language is required")
+        # parser.add_argument("language", type=str, required=True, help="language is required")
         args = parser.parse_args()
+
+        user = UserModel.get_user("9137357003")
+        if not user:
+            return {"error": True, "message": "User not found"}
+        
+        args["language"] = user.language
 
         translator = Translator()
         try:
