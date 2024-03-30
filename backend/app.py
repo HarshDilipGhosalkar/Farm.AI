@@ -1,17 +1,19 @@
 from dotenv import load_dotenv
 load_dotenv()
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_restful import Api
 from mongo_engine import db
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail
+
 from resources.user import (User, Signup, Login, Language)
 from resources.instagram import (Hashtags, Caption, Post)
 from resources.weatherTTS import (weatherTTS)
 from resources.cropRecommendation import (WhatGrownLastYear, CropRecommendation)
 from resources.marketPrice import (MarketPrice)
+from resources.translate import Translate
 
 import os
 
@@ -53,12 +55,17 @@ api.add_resource(WhatGrownLastYear, "/previousYearCrop")
 api.add_resource(CropRecommendation, "/cropRecommendation")
 api.add_resource(MarketPrice, "/marketPrice")
 
+api.add_resource(Translate, "/translate")
+
 
 # Instagram API endpoints
 api.add_resource(Caption, "/caption")
 api.add_resource(Hashtags, "/hashtags")
 api.add_resource(Post, "/post")
 
+@app.route('/ping', methods=['GET'])
+def ping():
+    return jsonify({"message": "Pong!"})
 
 
 if __name__ == "__main__":
