@@ -7,7 +7,7 @@ from mongo_engine import db
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail
-from resources.user import (User, Signup, Login)
+from resources.user import (User, Signup, Login, Language)
 from resources.instagram import (Hashtags, Caption, Post)
 
 import os
@@ -44,10 +44,13 @@ api.add_resource(User, "/user")
 api.add_resource(Signup, "/signup")
 api.add_resource(Login, "/login")
 
+api.add_resource(Language, "/language")
+
 # Instagram API endpoints
 api.add_resource(Caption, "/caption")
 api.add_resource(Hashtags, "/hashtags")
 api.add_resource(Post, "/post")
+
 
 
 if __name__ == "__main__":

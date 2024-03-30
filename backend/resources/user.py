@@ -9,11 +9,10 @@ import random
 import datetime
 
 class User(Resource):
-    @jwt_required()
     def get(self):
-        user_email = get_jwt_identity()
-        print(user_email)
-        user = UserModel.get_user(user_email)
+        parser = reqparse.RequestParser()
+        parser.add_argument("mobile", type=str, required=True, help="mobile is required")
+        user = UserModel.get_user(request.args.get("mobile"))
         if user:
             return {"error": False, "data": json.loads(user.to_json())}
         else:
@@ -23,7 +22,7 @@ class User(Resource):
 class Signup(Resource):
     def post(self):
         parser = reqparse.RequestParser()
-        parser.add_argument("email", type=str, required=True, help="email is required")
+        parser.add_argument("mobile", type=str, required=True, help="mobile is required")
         parser.add_argument("password", type=str, required=True, help="password is required")
         parser.add_argument("name", type=str, required=True, help="name is required")
         args = parser.parse_args()
@@ -33,10 +32,15 @@ class Signup(Resource):
 
         user = UserModel.create_user(args)
         if user:
-            access_token = create_access_token(identity=args["email"], expires_delta=datetime.timedelta(days=1))
-            return {"error": False, "data": json.loads(user.to_json()), "access_token": access_token}
+            return {'error': False, 'data': json.loads(user.to_json())}
         else:
-            return {"error": True, "message": "Already registered."}
+            return {'error': True, 'message': 'Already registered.'}
+
+        # if user:
+        #     access_token = create_access_token(identity=args["email"], expires_delta=datetime.timedelta(days=1))
+        #     return {"error": False, "data": json.loads(user.to_json()), "access_token": access_token}
+        # else:
+        #     return {"error": True, "message": "Already registered."}
 
 
 class Login(Resource):
@@ -55,5 +59,29 @@ class Login(Resource):
                 return {"error": True, "message": "Invalid email or password"}
         else:
             return {"error": True, "message": "User not found."}
+
+
+class Language(Resource):
+    def get(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument("mobile", type=str, required=True, help="mobile is required")
+
+        user = UserModel.get_user(request.args.get("mobile"))
+        if user:
+            language = user.language
+            return {"error": False, "data": language}
+        else:
+            return {"error": True, "message": "User not found"}
         
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument("mobile", type=str, required=True, help="mobile is required")
+        parser.add_argument("language", type=str, required=True, help="language is required")
+
+        args = parser.parse_args()
+        user = UserModel.update_user_language(args["mobile"], args["language"])
+        if user:
+            return {"error": False, "data": json.loads(user.to_json())}
+        else:
+            return {"error": True, "message": "User not found"}
                   
