@@ -1,57 +1,170 @@
 "use client";
 
-import { useState, React } from "react";
+import { useEffect, useState, React } from "react";
 import { useRouter } from "next/navigation";
 
 const crop = () => {
   const router = useRouter();
   const [voiceInput, setVoiceInput] = useState("");
   const [listening, setListening] = useState(false);
-  const [cropName, setCropName] = useState("Tomatoes");
-  const [description, setDescription] = useState("Fresh and juicy tomatoes grown organically.");
-  const [price, setPrice] = useState("$2.50/kg");
-  const [reason, setReason] = useState("High demand due to excellent quality.");
+  const [cropName, setCropName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [reason, setReason] = useState("");
+  const [audioData, setAudioData] = useState(null);
+  const [audioBlob, setAudioBlob] = useState(null);
+  const [level, setLevel] = useState(1);
+
+
+  useEffect(() => {
+    if (audioData) {
+      const byteString = atob(audioData);
+      const mimeType = "audio/mpeg";
+      const buffer = new ArrayBuffer(byteString.length);
+      const intArray = new Uint8Array(buffer);
+      for (let i = 0; i < byteString.length; i++) {
+        intArray[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([buffer], { type: mimeType });
+      setAudioBlob(blob);
+      // setIsLoading(false);
+    }
+  }, [audioData]);
+
+  const play = () => {
+    console.log(audioBlob);
+    if (audioBlob) {
+      console.log("Playing audio...");
+
+      const audio = new Audio(URL.createObjectURL(audioBlob));
+      audio.play();
+    }
+  };
 
 
   const startListening = (language) => {
-    const recognition = new window.webkitSpeechRecognition();
-    recognition.lang = language;
-    recognition.onstart = () => {
-      setListening(true);
-    };
-    recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      setVoiceInput(transcript);
-    };
-    recognition.onend = () => {
-      setListening(false);
-    };
-    recognition.start();
+    if (level == 1) {
+      const recognition = new window.webkitSpeechRecognition();
+      recognition.lang = language;
+      recognition.onstart = () => {
+        setListening(true);
+      };
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        setVoiceInput(transcript);
+      };
+      recognition.onend = () => {
+        setListening(false);
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+          "language": "marathi"
+        });
+
+        const requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow"
+        };
+
+        fetch("https://codeshashtra-allstackers.onrender.com/previousYearCrop", requestOptions)
+          .then((response) => response.json())
+          .then((result) => {
+
+            const byteString = atob(result.data);
+            const mimeType = "audio/mpeg";
+            const buffer = new ArrayBuffer(byteString.length);
+            const intArray = new Uint8Array(buffer);
+            for (let i = 0; i < byteString.length; i++) {
+              intArray[i] = byteString.charCodeAt(i);
+            }
+            const blob = new Blob([buffer], { type: mimeType });
+            setLevel(2);
+            const audio = new Audio(URL.createObjectURL(blob));
+            audio.play()
+            // setIsLoading(false);
+
+          })
+          .catch((error) => console.error(error));
+      };
+      recognition.start();
+      play();
+    } else {
+      const recognition = new window.webkitSpeechRecognition();
+      recognition.lang = language;
+      recognition.onstart = () => {
+        setListening(true);
+      };
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        setVoiceInput(transcript);
+      };
+      recognition.onend = () => {
+        setListening(false);
+
+
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+          "crop": voiceInput,
+          "language": "marathi"
+        });
+
+        const requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow"
+        };
+
+        fetch("https://codeshashtra-allstackers.onrender.com/cropRecommendation", requestOptions)
+          .then((response) => response.json())
+          .then((result) => {console.log(result)
+          setCropName(result.data.crop_name);
+          setDescription(result.data.description);
+          setPrice(result.data.current_market_price);
+          setReason(result.data.reason);
+          setLevel(1);
+          
+          })
+          .catch((error) => console.error(error));
+
+
+      };
+      recognition.start();
+
+    }
   };
 
   return (
     <>
       <div className="w-[100%] h-full flex flex-col justify-center items-center">
-      <div className="bg-green-100 w-[90%] mt-[20px] border border-green-300 rounded-lg p-6 shadow-md hover:shadow-lg transition duration-300 ease-in-out">
-      <h2 className="text-[30px] align-middle font-bold mb-4 text-green-900">Crop Details</h2>
-      <div className="mb-4">
-        <p className="text-lg font-semibold mb-1 text-green-800">Crop Name:</p>
-        <p className="text-lg font-medium text-green-700">{cropName}</p>
-      </div>
-      <div className="mb-4">
-        <p className="text-lg font-semibold mb-1 text-green-800">Description:</p>
-        <p className="text-lg font-medium text-green-700">{description}</p>
-      </div>
-      <div className="mb-4">
-        <p className="text-lg font-semibold mb-1 text-green-800">Price:</p>
-        <p className="text-lg font-medium text-green-700">{price}</p>
-      </div>
-      <div className="mb-4">
-        <p className="text-lg font-semibold mb-1 text-green-800">Reason:</p>
-        <p className="text-lg font-medium text-green-700">{reason}</p>
-      </div>
-    </div>
-  
+      {cropName!=""?(<>
+        <div className="bg-green-100 w-[90%] mt-[20px] border border-green-300 rounded-lg p-6 shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+          <h2 className="text-[30px] align-middle font-bold mb-4 text-green-900">Crop Details</h2>
+          <div className="mb-4">
+            <p className="text-lg font-semibold mb-1 text-green-800">Crop Name:</p>
+            <p className="text-lg font-medium text-green-700">{cropName}</p>
+          </div>
+          <div className="mb-4">
+            <p className="text-lg font-semibold mb-1 text-green-800">Description:</p>
+            <p className="text-lg font-medium text-green-700">{description}</p>
+          </div>
+          <div className="mb-4">
+            <p className="text-lg font-semibold mb-1 text-green-800">Price:</p>
+            <p className="text-lg font-medium text-green-700">{price}</p>
+          </div>
+          <div className="mb-4">
+            <p className="text-lg font-semibold mb-1 text-green-800">Reason:</p>
+            <p className="text-lg font-medium text-green-700">{reason}</p>
+          </div>
+        </div>
+      </>):(<></>)}
+        
+
         {voiceInput.length > 3 && (
           <div className="fixed bottom-[80px] w-full px-[20px] py-[10px] pb-[25px]">
             <div className="px-[20px] py-[10px] border w-full bg-gray-100 rounded-[10px] text-black">
