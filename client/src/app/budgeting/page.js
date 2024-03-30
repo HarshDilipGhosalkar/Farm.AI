@@ -2,49 +2,123 @@
 
 
 // export default ComponentWithDivs;
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
+import { Empty } from 'antd';
 
 const FinanceComponent = () => {
   const router = useRouter();
   // Dummy data stored in a hook
-  const [financeData, setFinanceData] = useState({
-    seeds: 5000,
-    fertilizers: 3000,
-    equipment: 8000,
-    laborCost: 2000,
-    totalCost: 18000,
+  const [financeData, setFinanceData] = useState(null);
+  const [voiceInput, setVoiceInput] = useState("");
+  const [listening, setListening] = useState(false);
+  const [lang,setLang]=useState("");
+  const startListening = (language) => {
+
+      const recognition = new window.webkitSpeechRecognition();
+      recognition.lang = language;
+      recognition.onstart = () => {
+          setListening(true);
+      };
+      recognition.onresult = (event) => {
+          const transcript = event.results[0][0].transcript;
+          setVoiceInput(transcript);
+
+          const myHeaders = new Headers();
+          myHeaders.append("Content-Type", "application/json");
+
+          const raw = JSON.stringify({
+              "text": transcript,
+          });
+
+          const requestOptions = {
+              method: "POST",
+              headers: myHeaders,
+              body: raw,
+              redirect: "follow"
+          };
+
+          fetch("https://codeshashtra-allstackers.onrender.com/budgeting", requestOptions)
+              .then((response) => response.json())
+              .then((result) => {console.log(result)
+                setFinanceData(result.data);
+              })
+              .catch((error) => console.error(error));
+      };
+      recognition.onend = () => {
+          setListening(false);
+
+      };
+      recognition.start();
+
+
+  };
+  
+
+  useEffect(() => {
+    // Simulated fetch function
+    const fetchTasks = async () => {
+      try {
+        const requestOptions = {
+          method: "GET",
+          redirect: "follow"
+        };
+        
+        fetch("https://codeshashtra-allstackers.onrender.com/language?mobile=9137357003", requestOptions)
+          .then((response) => response.json())
+          .then((result) => {console.log(result)
+            if(result.data=="marathi"){
+              setLang("mr-IN");
+            }
+            if(result.data=="hindi"){
+              setLang("hi-IN");
+            }
+            if(result.data=="gujarati"){
+              setLang("gu-IN");
+            }
+          
+          })
+          .catch((error) => console.error(error));
+      } catch (error) {
+        console.error('Failed to fetch tasks:', error);
+      }
+    };
+
+    fetchTasks();
   });
 
   return (
     
     <>
-    <div className="container mx-auto px-4 py-8">
+    {financeData!= null?(<>
+      <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-semibold text-center mb-8 text-[#35b535]">BUDGET</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-[#f1f0f0] shadow-md rounded-md p-6">
           <h2 className="text-xl font-semibold mb-4">Seeds</h2>
-          <p className="text-gray-600">Cost: ${financeData.seeds}</p>
+          <p className="text-gray-600">Cost:₹{financeData.seeds}</p>
         </div>
         <div className="bg-[#f1f0f0] shadow-md rounded-md p-6">
           <h2 className="text-xl font-semibold mb-4">Fertilizers</h2>
-          <p className="text-gray-600">Cost: ${financeData.fertilizers}</p>
+          <p className="text-gray-600">Cost: ₹{financeData.fertilizer}</p>
         </div>
         <div className="bg-[#f1f0f0] shadow-md rounded-md p-6">
           <h2 className="text-xl font-semibold mb-4">Equipment</h2>
-          <p className="text-gray-600">Cost: ${financeData.equipment}</p>
+          <p className="text-gray-600">Cost: ₹{financeData.equipment}</p>
         </div>
         <div className="bg-[#f1f0f0] shadow-md rounded-md p-6">
           <h2 className="text-xl font-semibold mb-4">Labour Cost</h2>
-          <p className="text-gray-600">Cost: ${financeData.laborCost}</p>
+          <p className="text-gray-600">Cost: ₹{financeData.labor}</p>
         </div>
       </div>
       <div className="mt-8 bg-[#f1f0f0] shadow-md rounded-md p-6">
         <h2 className="text-xl font-semibold mb-4">Total Cost</h2>
-        <p className="text-gray-600">Total: ${financeData.totalCost}</p>
+        <p className="text-gray-600">Total: ₹{financeData.total}</p>
       </div>
       
     </div>
+    </>):<div className="mt-[50%]"><Empty /></div>}
+   
     <div className="fixed bottom-0 w-full bg-white border shadow-lg bottom-navbar">
         <div className="flex justify-around gap-x-[5px] px-[30px] py-[10px] text-gray-400">
           <div
@@ -64,7 +138,7 @@ const FinanceComponent = () => {
           </div>
           <div
             className="flex items-center justify-center bg-blue-400 mt-[-30px] h-[80px] w-[80px] rounded-[50%] text-white"
-            onClick={() => router.push("/disease")}
+            onClick={() => startListening(lang)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
