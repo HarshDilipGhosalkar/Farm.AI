@@ -9,6 +9,7 @@ from flask_jwt_extended import JWTManager
 from flask_mail import Mail
 from resources.user import (User, Signup, Login, Language)
 from resources.instagram import (Hashtags, Caption, Post)
+from resources.weatherTTS import weatherTTS
 
 import os
 
@@ -45,6 +46,7 @@ api.add_resource(Signup, "/signup")
 api.add_resource(Login, "/login")
 
 api.add_resource(Language, "/language")
+api.add_resource(weatherTTS, "/weatherTTS")
 
 # Instagram API endpoints
 api.add_resource(Caption, "/caption")
