@@ -3,10 +3,10 @@ from pymongo.errors import DuplicateKeyError
 from mongoengine import NotUniqueError
 
 class User(db.Document):
-    email = db.StringField(required=True, unique=True)
-    # number = db.StringField(required=True, unique=True)
+    mobile = db.StringField(required=True, unique=True)
     password = db.StringField(required=True)
     name = db.StringField(required=True)
+    language = db.StringField(required=True, default='en')
 
 
     @classmethod
@@ -19,9 +19,19 @@ class User(db.Document):
             return None
         
     @classmethod
-    def get_user(cls, email):
+    def get_user(cls, mobile):
         try:
-            user = cls.objects.get(email=email)
+            user = cls.objects.get(mobile=mobile)
+            return user
+        except:
+            return None
+        
+    @classmethod
+    def update_user_language(cls, mobile, language):
+        try:
+            user = cls.objects.get(mobile=mobile)
+            user.language = language
+            user.save()
             return user
         except:
             return None
