@@ -14,6 +14,7 @@ from resources.weatherTTS import (weatherTTS)
 from resources.cropRecommendation import (WhatGrownLastYear, CropRecommendation)
 from resources.marketPrice import (MarketPrice)
 from resources.translate import Translate
+from resources.timeline import Timeline
 
 import os
 
@@ -54,7 +55,7 @@ api.add_resource(weatherTTS, "/weatherTTS")
 api.add_resource(WhatGrownLastYear, "/previousYearCrop")
 api.add_resource(CropRecommendation, "/cropRecommendation")
 api.add_resource(MarketPrice, "/marketPrice")
-
+api.add_resource(Timeline, '/timeline')
 api.add_resource(Translate, "/translate")
 
 

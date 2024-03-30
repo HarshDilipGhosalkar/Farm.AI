@@ -30,27 +30,40 @@ class Timeline(Resource):
 
         translate = Translator()
         try:
-            translated_text = translate.translate(args["text"], dest=langcodes[args["language"]]).text
+            translated_text = translate.translate(text=args["text"], src=langcodes[args["language"]], dest="en").text
             print(translated_text)
         except Exception as e:
             print(f"Translation Error: {e}")
             translated_text = "Translation failed."
 
-        prompt = f"""Create a crop cultivation timeline for the crop {translated_text}
-        Key should be in the english and value should be in the {args["language"]} language.
-        Output should be in the json format like below:
-        [
+        prompt = f"""Create a crop cultivation timeline for the crop {translated_text}. Mention down the tasks to be done, with the description and days required for each task. Give only 3-4 tasks.
+        Output should be strictly in the format like below and No intro or outro text should be there in the output, Each value should be in double quotes:
         {{
-            "title": "",
-            "description": "",
-            "date": ""
-        }},
-        ...
-        ]
+            "timeline": [
+            {{
+                "task_title": "",
+                "description": "",
+                "days_required": ""
+            }},
+            ...,
+            {{
+                "task_title": "",
+                "description": "",
+                "days_required": ""
+            }}
+        ]}}
         """
 
         response = llm.invoke(prompt)
         answer = json.loads(response.content)
+        print(answer["timeline"])
+        timeline = answer["timeline"]
 
-        return {"error": False, "data": answer}
+        # translate each object value
+        for i in range(len(timeline)):
+            answer["timeline"][i]["task_title"] = translate.translate(text=answer["timeline"][i]["task_title"], src="en", dest=langcodes[args["language"]]).text
+            answer["timeline"][i]["description"] = translate.translate(text=answer["timeline"][i]["description"], src="en", dest=langcodes[args["language"]]).text
+            answer["timeline"][i]["days_required"] = translate.translate(text=answer["timeline"][i]["days_required"], src="en", dest=langcodes[args["language"]]).text
+
+        return {"error": False, "data": answer["timeline"]}
         
