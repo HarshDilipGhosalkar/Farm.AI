@@ -14,6 +14,7 @@ const crop = () => {
   const [audioData, setAudioData] = useState(null);
   const [audioBlob, setAudioBlob] = useState(null);
   const [level, setLevel] = useState(1);
+  const [lang,setLang]=useState("");
 
 
   useEffect(() => {
@@ -139,6 +140,38 @@ const crop = () => {
     }
   };
 
+  useEffect(() => {
+    // Simulated fetch function
+    const fetchTasks = async () => {
+      try {
+        const requestOptions = {
+          method: "GET",
+          redirect: "follow"
+        };
+        
+        fetch("https://codeshashtra-allstackers.onrender.com/language?mobile=9137357003", requestOptions)
+          .then((response) => response.json())
+          .then((result) => {console.log(result)
+            if(result.data=="marathi"){
+              setLang("mr-IN");
+            }
+            if(result.data=="hindi"){
+              setLang("hi-IN");
+            }
+            if(result.data=="gujarati"){
+              setLang("gu-IN");
+            }
+          
+          })
+          .catch((error) => console.error(error));
+      } catch (error) {
+        console.error('Failed to fetch tasks:', error);
+      }
+    };
+
+    fetchTasks();
+  });
+
   return (
     <>
       <div className="w-[100%] h-full flex flex-col justify-center items-center">
@@ -192,7 +225,7 @@ const crop = () => {
             </div>
             <div
               className="flex items-center justify-center bg-blue-400 mt-[-30px] h-[80px] w-[80px] rounded-[50%] text-white"
-              onClick={() => startListening('mr-IN')}
+              onClick={() => startListening(lang)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

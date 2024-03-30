@@ -1,6 +1,6 @@
 "use client";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect,useState } from "react";
+
 import { getCity } from "@/utils/ApiService";
 import { fetchWeatherData } from "@/utils/ApiService";
 import { useRouter } from "next/navigation";
@@ -11,6 +11,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [weatherData, setWeatherData] = useState(null);
+  const [lang,setLang]=useState("");
 
   const [voiceInput, setVoiceInput] = useState("");
   const [listening, setListening] = useState(false);
@@ -64,6 +65,38 @@ export default function Home() {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    // Simulated fetch function
+    const fetchTasks = async () => {
+      try {
+        const requestOptions = {
+          method: "GET",
+          redirect: "follow"
+        };
+        
+        fetch("https://codeshashtra-allstackers.onrender.com/language?mobile=9137357003", requestOptions)
+          .then((response) => response.json())
+          .then((result) => {console.log(result)
+            if(result.data=="marathi"){
+              setLang("mr-IN");
+            }
+            if(result.data=="hindi"){
+              setLang("hi-IN");
+            }
+            if(result.data=="gujarati"){
+              setLang("gu-IN");
+            }
+          
+          })
+          .catch((error) => console.error(error));
+      } catch (error) {
+        console.error('Failed to fetch tasks:', error);
+      }
+    };
+
+    fetchTasks();
+  });
 
   return (
     <>
@@ -293,7 +326,7 @@ export default function Home() {
             <div className="flex my-[30px] gap-x-[20px]">
               <div
                 className="flex flex-col items-center gap-y-[10px] w-full h-fit border rounded-[5px] p-[10px] shadow-lg"
-                onClick={() => router.push("/disease")}
+                onClick={() => startListening(lang)}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

@@ -1,36 +1,15 @@
 "use client";
-import { useState, React } from 'react';
+import { useEffect,useState, React } from 'react';
 import { SmileOutlined } from '@ant-design/icons';
 import { Timeline } from 'antd';
 import { useRouter } from "next/navigation";
 
 const timeline = () => {
     const router = useRouter();
-    const [tasks, setTasks] = useState([
-
-        // {
-        //     task_title: "जमीन तयारी",
-        //     description: "योग्य बियाणे तयार करण्यासाठी नांगरणी, त्रास देणे आणि समतल करून माती तयार करणे.",
-        //     days_required: "7-14"
-        // },
-        // {
-        //     task_title: "पेरणी",
-        //     description: "योग्य उगवण आणि वाढ सुनिश्चित करण्यासाठी इष्टतम खोली आणि अंतरावर गहू बियाणे लागवड करणे.",
-        //     days_required: "1-2"
-        // },
-        // {
-        //     task_title: "फर्टिलायझेशन",
-        //     description: "विशिष्ट वाढीच्या टप्प्यावर विकसनशील गव्हाच्या वनस्पतींसाठी आवश्यक पोषक पुरवठा करण्यासाठी खते लागू करणे.",
-        //     days_required: "7-10"
-        // },
-        // {
-        //     task_title: "कापणी",
-        //     description: "धान्य मिळविण्यासाठी शारीरिक परिपक्वता गाठताना परिपक्व गहू पीक कापून आणि गोळा करणे.",
-        //     days_required: "7-10"
-        // }
-    ]);
+    const [tasks, setTasks] = useState([]);
     const [voiceInput, setVoiceInput] = useState("");
     const [listening, setListening] = useState(false);
+    const [lang,setLang]=useState("");
 
     const startListening = (language) => {
 
@@ -48,7 +27,6 @@ const timeline = () => {
 
             const raw = JSON.stringify({
                 "text": transcript,
-                "language": "marathi"
             });
 
             const requestOptions = {
@@ -73,6 +51,38 @@ const timeline = () => {
 
 
     };
+
+    useEffect(() => {
+        // Simulated fetch function
+        const fetchTasks = async () => {
+          try {
+            const requestOptions = {
+              method: "GET",
+              redirect: "follow"
+            };
+            
+            fetch("https://codeshashtra-allstackers.onrender.com/language?mobile=9137357003", requestOptions)
+              .then((response) => response.json())
+              .then((result) => {console.log(result)
+                if(result.data=="marathi"){
+                  setLang("mr-IN");
+                }
+                if(result.data=="hindi"){
+                  setLang("hi-IN");
+                }
+                if(result.data=="gujarati"){
+                  setLang("gu-IN");
+                }
+              
+              })
+              .catch((error) => console.error(error));
+          } catch (error) {
+            console.error('Failed to fetch tasks:', error);
+          }
+        };
+    
+        fetchTasks();
+      });
 
     return (
         <>
@@ -118,7 +128,7 @@ const timeline = () => {
                     </div>
                     <div
                         className="flex items-center justify-center bg-blue-400 mt-[-30px] h-[80px] w-[80px] rounded-[50%] text-white"
-                        onClick={() => startListening('mr-IN')}
+                        onClick={() => startListening(lang)}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

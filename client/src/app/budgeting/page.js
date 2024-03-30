@@ -2,7 +2,7 @@
 
 
 // export default ComponentWithDivs;
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 
 const FinanceComponent = () => {
@@ -11,7 +11,7 @@ const FinanceComponent = () => {
   const [financeData, setFinanceData] = useState(null);
   const [voiceInput, setVoiceInput] = useState("");
   const [listening, setListening] = useState(false);
-
+  const [lang,setLang]=useState("");
   const startListening = (language) => {
 
       const recognition = new window.webkitSpeechRecognition();
@@ -52,6 +52,40 @@ const FinanceComponent = () => {
 
 
   };
+  
+
+  useEffect(() => {
+    // Simulated fetch function
+    const fetchTasks = async () => {
+      try {
+        const requestOptions = {
+          method: "GET",
+          redirect: "follow"
+        };
+        
+        fetch("https://codeshashtra-allstackers.onrender.com/language?mobile=9137357003", requestOptions)
+          .then((response) => response.json())
+          .then((result) => {console.log(result)
+            if(result.data=="marathi"){
+              setLang("mr-IN");
+            }
+            if(result.data=="hindi"){
+              setLang("hi-IN");
+            }
+            if(result.data=="gujarati"){
+              setLang("gu-IN");
+            }
+          
+          })
+          .catch((error) => console.error(error));
+      } catch (error) {
+        console.error('Failed to fetch tasks:', error);
+      }
+    };
+
+    fetchTasks();
+  });
+
   return (
     
     <>
@@ -61,24 +95,24 @@ const FinanceComponent = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-[#f1f0f0] shadow-md rounded-md p-6">
           <h2 className="text-xl font-semibold mb-4">Seeds</h2>
-          <p className="text-gray-600">Cost: ${financeData.seeds}</p>
+          <p className="text-gray-600">Cost:₹{financeData.seeds}</p>
         </div>
         <div className="bg-[#f1f0f0] shadow-md rounded-md p-6">
           <h2 className="text-xl font-semibold mb-4">Fertilizers</h2>
-          <p className="text-gray-600">Cost: ${financeData.fertilizers}</p>
+          <p className="text-gray-600">Cost: ₹{financeData.fertilizer}</p>
         </div>
         <div className="bg-[#f1f0f0] shadow-md rounded-md p-6">
           <h2 className="text-xl font-semibold mb-4">Equipment</h2>
-          <p className="text-gray-600">Cost: ${financeData.equipment}</p>
+          <p className="text-gray-600">Cost: ₹{financeData.equipment}</p>
         </div>
         <div className="bg-[#f1f0f0] shadow-md rounded-md p-6">
           <h2 className="text-xl font-semibold mb-4">Labour Cost</h2>
-          <p className="text-gray-600">Cost: ${financeData.labor}</p>
+          <p className="text-gray-600">Cost: ₹{financeData.labor}</p>
         </div>
       </div>
       <div className="mt-8 bg-[#f1f0f0] shadow-md rounded-md p-6">
         <h2 className="text-xl font-semibold mb-4">Total Cost</h2>
-        <p className="text-gray-600">Total: ${financeData.total}</p>
+        <p className="text-gray-600">Total: ₹{financeData.total}</p>
       </div>
       
     </div>
@@ -103,7 +137,7 @@ const FinanceComponent = () => {
           </div>
           <div
             className="flex items-center justify-center bg-blue-400 mt-[-30px] h-[80px] w-[80px] rounded-[50%] text-white"
-            onClick={() => startListening('mr-IN')}
+            onClick={() => startListening(lang)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
