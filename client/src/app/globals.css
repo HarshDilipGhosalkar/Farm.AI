@@ -10,3 +10,24 @@
 .weather-div {
   background: radial-gradient(#fdeccf, #ffffff);
 }
+
+.carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+  background-size: cover; /* Cover the entire container */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-position: center; /* Center the background image */
+
+}
+
+.slide.active {
+  opacity: 1;
+}
