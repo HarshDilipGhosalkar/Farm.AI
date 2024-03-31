@@ -592,7 +592,7 @@ export default function Home() {
         </div>
       )}
       <>
-        {voiceInput.length > 3 && (
+        {listening && (
           <div className="fixed bottom-[80px] w-full px-[20px] py-[10px] pb-[25px]">
             <div className="px-[20px] py-[10px] border w-full bg-gray-100 rounded-[10px] text-black">
               {voiceInput}
