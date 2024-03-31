@@ -20,7 +20,7 @@ const MyPage = () => {
       };
 
       const response = await fetch(
-        "http://localhost:5000/search",
+        "https://ipd-670g.onrender.com/search",
         requestOptions
       );
       const result = await response.json();
