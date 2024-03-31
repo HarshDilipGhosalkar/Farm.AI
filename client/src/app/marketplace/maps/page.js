@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactDOMServer from "react-dom/server";
 import { ScaleLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
