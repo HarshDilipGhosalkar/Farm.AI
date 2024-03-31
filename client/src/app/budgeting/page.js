@@ -5,9 +5,15 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Empty } from "antd";
 import { ScaleLoader } from "react-spinners";
+import getLanguage from "@/utils/language";
 
 const FinanceComponent = () => {
-  const selectedLanguage = localStorage.getItem("selectedLanguage");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  useEffect(() => {
+    getLanguage().then((language) => {
+      setSelectedLanguage(language);
+    });
+  }, []);
 
   const router = useRouter();
   // Dummy data stored in a hook

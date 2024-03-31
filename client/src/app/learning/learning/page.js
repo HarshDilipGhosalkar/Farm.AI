@@ -5,11 +5,17 @@ import Navbar from "@/components/learning/Navbar";
 import healthModules from "@/utils/healthModule";
 import HealthCard from "@/components/learning/HealthCard";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ScaleLoader } from "react-spinners";
+import getLanguage from "@/utils/language";
 
 const HealthCare = () => {
-  const selectedLanguage = localStorage.getItem("selectedLanguage");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  useEffect(() => {
+    getLanguage().then((language) => {
+      setSelectedLanguage(language);
+    });
+  }, []);
   const router = useRouter();
   const [voiceInput, setVoiceInput] = useState("");
   const [listening, setListening] = useState(false);

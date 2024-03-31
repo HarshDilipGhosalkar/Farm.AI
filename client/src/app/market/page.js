@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { ScaleLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
+import getLanguage from "@/utils/language";
 
 const images = [
   "assets/images/slide-1.png",
@@ -13,7 +14,12 @@ const images = [
 
 const Market = () => {
   const router = useRouter();
-  const selectedLanguage = localStorage.getItem("selectedLanguage");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  useEffect(() => {
+    getLanguage().then((language) => {
+      setSelectedLanguage(language);
+    });
+  }, []);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(false);

@@ -5,9 +5,15 @@ import { Timeline } from "antd";
 import { useRouter } from "next/navigation";
 import { Empty } from "antd";
 import { ScaleLoader } from "react-spinners";
+import getLanguage from "@/utils/language";
 
 const timeline = () => {
-  const selectedLanguage = localStorage.getItem("selectedLanguage");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  useEffect(() => {
+    getLanguage().then((language) => {
+      setSelectedLanguage(language);
+    });
+  }, []);
 
   const router = useRouter();
   const [tasks, setTasks] = useState([]);

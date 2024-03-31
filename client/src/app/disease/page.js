@@ -4,9 +4,15 @@ import { ScaleLoader } from "react-spinners";
 import translate from "translate";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import getLanguage from "@/utils/language";
 
 const Disease = () => {
-  const selectedLanguage = localStorage.getItem("selectedLanguage");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  useEffect(() => {
+    getLanguage().then((language) => {
+      setSelectedLanguage(language);
+    });
+  }, []);
   const [language, setLanguage] = useState("en");
   const [prevLanguage, setPrevLanguage] = useState("en");
   const [engArr, setEngArr] = useState([]);

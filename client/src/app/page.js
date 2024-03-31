@@ -5,9 +5,9 @@ import { getCity } from "@/utils/ApiService";
 import { fetchWeatherData } from "@/utils/ApiService";
 import { useRouter } from "next/navigation";
 import { ScaleLoader } from "react-spinners";
+import getLanguage from "@/utils/language";
 
 export default function Home() {
-  const selectedLanguage = localStorage.getItem("selectedLanguage");
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -16,6 +16,13 @@ export default function Home() {
 
   const [voiceInput, setVoiceInput] = useState("");
   const [listening, setListening] = useState(false);
+
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  useEffect(() => {
+    getLanguage().then((language) => {
+      setSelectedLanguage(language);
+    });
+  }, []);
 
   const getRoute = (text) => {
     const myHeaders = new Headers();

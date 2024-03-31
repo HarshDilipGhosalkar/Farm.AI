@@ -3,11 +3,17 @@ import React from "react";
 import Navbar from "@/components/learning/Navbar";
 import { useRouter } from "next/navigation";
 import healthModules from "@/utils/healthModule";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ScaleLoader } from "react-spinners";
+import getLanguage from "@/utils/language";
 
 const Module = ({ params }) => {
-  const selectedLanguage = localStorage.getItem("selectedLanguage");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  useEffect(() => {
+    getLanguage().then((language) => {
+      setSelectedLanguage(language);
+    });
+  }, []);
   const router = useRouter();
   const id = parseInt(params.id);
   const module = healthModules[id - 1];

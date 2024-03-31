@@ -1,14 +1,20 @@
 "use client";
 
 import Navbar from "@/components/learning/Navbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import { useRouter } from "next/navigation";
 import VideoCard from "@/components/learning/VideoCard"; // Import your VideoCard component
 import { ScaleLoader } from "react-spinners";
+import getLanguage from "@/utils/language";
 
 const MyPage = () => {
-  const selectedLanguage = localStorage.getItem("selectedLanguage");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  useEffect(() => {
+    getLanguage().then((language) => {
+      setSelectedLanguage(language);
+    });
+  }, []);
   const [topic, setTopic] = useState("");
   const [videos, setVideos] = useState([]);
   const router = useRouter();

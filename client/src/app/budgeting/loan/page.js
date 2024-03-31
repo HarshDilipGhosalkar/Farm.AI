@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { useRouter } from "next/navigation";
 import { ScaleLoader } from "react-spinners";
+import getLanguage from "@/utils/language";
 
 const loans = [
   {
@@ -64,7 +65,12 @@ const loans = [
 ];
 
 const Loan = () => {
-  const selectedLanguage = localStorage.getItem("selectedLanguage");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  useEffect(() => {
+    getLanguage().then((language) => {
+      setSelectedLanguage(language);
+    });
+  }, []);
   const router = useRouter();
   const [voiceInput, setVoiceInput] = useState("");
   const [listening, setListening] = useState(false);
