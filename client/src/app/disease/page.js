@@ -31,7 +31,7 @@ const Disease = () => {
       formData.append("image", selectedImage);
       setLoading(true);
 
-      fetch("https://ipd-670g.onrender.com/diseasePrediction", {
+      fetch("https://codeshashtra-allstackers.onrender.com/diseasePrediction", {
         method: "POST",
         body: formData,
         mode: "cors",
