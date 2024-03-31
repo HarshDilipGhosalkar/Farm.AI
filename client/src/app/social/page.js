@@ -5,8 +5,18 @@ import usePosts from "./usePosts";
 import Post from "./Post";
 import { Button, Modal } from "antd";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import getLanguage from "@/utils/language";
+import { ScaleLoader } from "react-spinners";
+
 
 const PostsPage = () => {
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  useEffect(() => {
+    getLanguage().then((language) => {
+      setSelectedLanguage(language);
+    });
+  }, []);
   const { posts, addPost } = usePosts();
   const [text, setText] = useState("");
   const [imageFile, setImageFile] = useState(null);

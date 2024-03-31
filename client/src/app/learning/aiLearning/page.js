@@ -1,13 +1,20 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Navbar from "@/components/learning/Navbar";
 import videos from "@/utils/workoutVideos";
 import VideoCard from "@/components/learning/VideoCard";
 import { ScaleLoader } from "react-spinners";
 import axios from "axios";
+import getLanguage from "@/utils/language";
 
 const AILearning = () => {
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  useEffect(() => {
+    getLanguage().then((language) => {
+      setSelectedLanguage(language);
+    });
+  }, []);
   const [aiResponse, setAiResponse] = useState("");
   const [askAi, setAskAi] = useState(false);
   const [loadingAI, setLoadingAI] = useState(false);

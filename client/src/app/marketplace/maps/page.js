@@ -1,6 +1,9 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useEffect } from "react";
 import ReactDOMServer from "react-dom/server";
+import { ScaleLoader } from "react-spinners";
+import { useRouter } from "next/navigation";
+import getLanguage from "@/utils/language";
 
 const InfoWindowContent = ({ placeDetails }) => {
   return (
@@ -19,6 +22,12 @@ const InfoWindowContent = ({ placeDetails }) => {
 };
 
 const Map = ({ productType }) => {
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  useEffect(() => {
+    getLanguage().then((language) => {
+      setSelectedLanguage(language);
+    });
+  }, []);
   const mapRef = useRef(null);
   const [infoWindow, setInfoWindow] = useState(null);
 

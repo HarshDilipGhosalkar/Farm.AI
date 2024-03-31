@@ -1,10 +1,18 @@
 "use client";
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ScaleLoader } from "react-spinners";
+import getLanguage from "@/utils/language";
+
 
 const IndexPage = () => {
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  useEffect(() => {
+    getLanguage().then((language) => {
+      setSelectedLanguage(language);
+    });
+  }, []);
     const [voiceInput, setVoiceInput] = useState("");
   const [listening, setListening] = useState(false);
   
