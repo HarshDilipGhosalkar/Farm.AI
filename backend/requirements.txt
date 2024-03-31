@@ -13,3 +13,4 @@ langchain_google_genai
 googletrans==4.0.0rc1
 Flask-Mail>=0.9.1
 httpx>=0.13.3
+twilio>=6.64.0
