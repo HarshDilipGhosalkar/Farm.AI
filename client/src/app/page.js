@@ -518,7 +518,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div class="col" onClick={() => router.push("/marketplace")}>
+              <div class="col" onClick={() => router.push("/marketplace/maps")}>
                 <div class="flex flex-col gap-y-[10px] items-center rounded-lg p-[10px] bg-white">
                   <img
                     className="w-[50px] rounded-lg"
