@@ -53,7 +53,7 @@ class Routing(Resource):
                 "when": "any request asking to know the market price of a crop should only route on this route"
             }},
             {{
-                "route": "/learning",
+                "route": "/learning/learning",
                 "when": "any request for learning about agriculture, crops, farming, etc."
             }},
             {{
@@ -61,7 +61,7 @@ class Routing(Resource):
                 "when": "any request for knowing the budget required for a growing that crop in his field should only route on this route"
             }},
             {{
-                "route": "/loan",
+                "route": "budgeting/loan",
                 "when": "any request for loan for farming or knowing government schemes for farmers"
             }},
             {{
@@ -71,6 +71,10 @@ class Routing(Resource):
             {{
                 "route": "/crop",
                 "when": "any request asking for recommendations for crops should only route on this route"
+            }},
+            {{
+                "route": "/marketplace/maps",
+                "when": "any request for knowing the reatiler/shops near me, or shops selling seeds, fertilizers, etc."
             }}
         ]
 
