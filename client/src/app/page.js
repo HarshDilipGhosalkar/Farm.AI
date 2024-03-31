@@ -112,7 +112,7 @@ export default function Home() {
             if (result.data == "hindi") {
               setLang("hi-IN");
             }
-            if (result.data == "gujarati") {
+            if (result.data == "gujrati") {
               setLang("gu-IN");
             }
           })
@@ -136,7 +136,7 @@ export default function Home() {
             <>रुको!</>
           ) : selectedLanguage === "marathi" ? (
             <>थांबा!</>
-          ) : selectedLanguage === "gujarati" ? (
+          ) : selectedLanguage === "gujrati" ? (
             <>થામો!</>
           ) : selectedLanguage === "tamil" ? (
             <>நிறுத்தவும்!</>
@@ -204,7 +204,7 @@ export default function Home() {
                         <>
                           <b>मुंबई,</b> भारत
                         </>
-                      ) : selectedLanguage === "gujarati" ? (
+                      ) : selectedLanguage === "gujrati" ? (
                         <>
                           <b>મુંબઈ,</b> ભારત
                         </>
@@ -375,7 +375,7 @@ export default function Home() {
                   <>अपनी खेती का प्रबंधन करें</>
                 ) : selectedLanguage === "marathi" ? (
                   <>आपले शेत कायम करा</>
-                ) : selectedLanguage === "gujarati" ? (
+                ) : selectedLanguage === "gujrati" ? (
                   <>તમારું ક્ષેત્ર સંચાલિત કરો</>
                 ) : selectedLanguage === "tamil" ? (
                   <>உங்கள் பண்டிகையை நிர்வகிக்கவும்</>
@@ -395,7 +395,7 @@ export default function Home() {
                       <>रोग</>
                     ) : selectedLanguage === "marathi" ? (
                       <>रोग</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>રોગ</>
                     ) : selectedLanguage === "tamil" ? (
                       <>நோய்</>
@@ -418,7 +418,7 @@ export default function Home() {
                       <>फसल</>
                     ) : selectedLanguage === "marathi" ? (
                       <>शेती</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>બિયાન</>
                     ) : selectedLanguage === "tamil" ? (
                       <>விவசாயம்</>
@@ -441,7 +441,7 @@ export default function Home() {
                       <>रूटीन</>
                     ) : selectedLanguage === "marathi" ? (
                       <>दिवसनियम</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>દરરોજનું કાર્યક્રમ</>
                     ) : selectedLanguage === "tamil" ? (
                       <>தினசரி</>
@@ -464,7 +464,7 @@ export default function Home() {
                       <>वित्त</>
                     ) : selectedLanguage === "marathi" ? (
                       <>वित्त</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>વિત્ત</>
                     ) : selectedLanguage === "tamil" ? (
                       <>நிதி</>
@@ -487,7 +487,7 @@ export default function Home() {
                       <>बाजार</>
                     ) : selectedLanguage === "marathi" ? (
                       <>बाजार</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>બજાર</>
                     ) : selectedLanguage === "tamil" ? (
                       <>சந்தை</>
@@ -513,7 +513,7 @@ export default function Home() {
                       <>सीखना</>
                     ) : selectedLanguage === "marathi" ? (
                       <>शिकणे</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>શીખવાનું</>
                     ) : selectedLanguage === "tamil" ? (
                       <>கற்றுக்கொள்ளுதல்</>
@@ -531,15 +531,15 @@ export default function Home() {
                   />
                   <p className="font-semibold text-[#321F03]">
                     {selectedLanguage === "english" ? (
-                      <>Marketplace</>
+                      <>Retailer</>
                     ) : selectedLanguage === "hindi" ? (
-                      <>बाजार</>
+                      <>विपणनकर्ता</>
                     ) : selectedLanguage === "marathi" ? (
-                      <>बाजार</>
-                    ) : selectedLanguage === "gujarati" ? (
-                      <>બજારમાં</>
+                      <>खरेदीदार</>
+                    ) : selectedLanguage === "gujrati" ? (
+                      <>વેચાણકર્તા</>
                     ) : selectedLanguage === "tamil" ? (
-                      <>சந்தையில்</>
+                      <>விற்பனையாளர்</>
                     ) : (
                       ""
                     )}
@@ -559,7 +559,7 @@ export default function Home() {
                       <>समुदाय</>
                     ) : selectedLanguage === "marathi" ? (
                       <>समुदाय</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>સમુદાય</>
                     ) : selectedLanguage === "tamil" ? (
                       <>சமூகம்</>
@@ -582,7 +582,7 @@ export default function Home() {
                       <>आपूर्ति श्रृंखला</>
                     ) : selectedLanguage === "marathi" ? (
                       <>पुरवठा श्रेणी</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>સપ્લાય ચેન</>
                     ) : selectedLanguage === "tamil" ? (
                       <>சப்ளை சேன்</>
@@ -626,7 +626,7 @@ export default function Home() {
                 <>होम</>
               ) : selectedLanguage === "marathi" ? (
                 <>होम</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>હોમ</>
               ) : selectedLanguage === "tamil" ? (
                 <>ஹோம்</>
@@ -678,7 +678,7 @@ export default function Home() {
                 <>प्रोफाइल</>
               ) : selectedLanguage === "marathi" ? (
                 <>प्रोफाईल</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>પ્રોફાઈલ</>
               ) : selectedLanguage === "tamil" ? (
                 <>ப்ரோஃபைல்</>

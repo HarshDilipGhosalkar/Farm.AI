@@ -119,7 +119,7 @@ const Loan = () => {
             <>ऋण और सब्सिडी की सूची</>
           ) : selectedLanguage === "marathi" ? (
             <>कर्ज आणि सब्सिडीची यादी</>
-          ) : selectedLanguage === "gujarati" ? (
+          ) : selectedLanguage === "gujrati" ? (
             <>ઋણ અને સબસિડીની યાદી</>
           ) : selectedLanguage === "tamil" ? (
             <>கடன்கள் மற்றும் உதவிகளின் பட்டியல்</>
@@ -185,7 +185,7 @@ const Loan = () => {
                 <>होम</>
               ) : selectedLanguage === "marathi" ? (
                 <>होम</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>હોમ</>
               ) : selectedLanguage === "tamil" ? (
                 <>ஹோம்</>
@@ -237,7 +237,7 @@ const Loan = () => {
                 <>प्रोफाइल</>
               ) : selectedLanguage === "marathi" ? (
                 <>प्रोफाईल</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>પ્રોફાઈલ</>
               ) : selectedLanguage === "tamil" ? (
                 <>ப்ரோஃபைல்</>

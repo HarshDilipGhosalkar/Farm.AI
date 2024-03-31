@@ -92,7 +92,7 @@ const Module = ({ params }) => {
                 <>होम</>
               ) : selectedLanguage === "marathi" ? (
                 <>होम</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>હોમ</>
               ) : selectedLanguage === "tamil" ? (
                 <>ஹோம்</>
@@ -144,7 +144,7 @@ const Module = ({ params }) => {
                 <>प्रोफाइल</>
               ) : selectedLanguage === "marathi" ? (
                 <>प्रोफाईल</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>પ્રોફાઈલ</>
               ) : selectedLanguage === "tamil" ? (
                 <>ப்ரோஃபைல்</>
@@ -186,7 +186,7 @@ const Module = ({ params }) => {
                 <>होम</>
               ) : selectedLanguage === "marathi" ? (
                 <>होम</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>હોમ</>
               ) : selectedLanguage === "tamil" ? (
                 <>ஹோம்</>
@@ -238,7 +238,7 @@ const Module = ({ params }) => {
                 <>प्रोफाइल</>
               ) : selectedLanguage === "marathi" ? (
                 <>प्रोफाईल</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>પ્રોફાઈલ</>
               ) : selectedLanguage === "tamil" ? (
                 <>ப்ரோஃபைல்</>

@@ -100,7 +100,7 @@ const Weather = () => {
           await fetchWeatherData(latitude, longitude);
         console.log(weatherForecastResponse);
         setWeatherData(todayWeatherResponse);
-        setWeatherClouds(translate(todayWeatherResponse.weather[0].main));
+        setWeatherClouds(todayWeatherResponse.weather[0].main);
 
         var simplifiedWeatherData = weatherForecastResponse.list.map((item) => {
           if (item.dt_txt.includes("12:00")) {
@@ -183,7 +183,7 @@ const Weather = () => {
             <>रुको!</>
           ) : selectedLanguage === "marathi" ? (
             <>थांबा!</>
-          ) : selectedLanguage === "gujarati" ? (
+          ) : selectedLanguage === "gujrati" ? (
             <>થામો!</>
           ) : selectedLanguage === "tamil" ? (
             <>நிறுத்தவும்!</>
@@ -226,7 +226,7 @@ const Weather = () => {
                       <>
                         <b>मुंबई,</b> भारत
                       </>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>
                         <b>મુંબઈ,</b> ભારત
                       </>
@@ -245,7 +245,7 @@ const Weather = () => {
                       <>आज, {time}</>
                     ) : selectedLanguage === "marathi" ? (
                       <>आज, {time}</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>આજ, {time}</>
                     ) : selectedLanguage === "tamil" ? (
                       <>இன்று, {time}</>
@@ -301,7 +301,7 @@ const Weather = () => {
                           <>हवा</>
                         ) : selectedLanguage === "marathi" ? (
                           <>वारा</>
-                        ) : selectedLanguage === "gujarati" ? (
+                        ) : selectedLanguage === "gujrati" ? (
                           <>પવન</>
                         ) : selectedLanguage === "tamil" ? (
                           <>காற்று</>
@@ -349,7 +349,7 @@ const Weather = () => {
                           <>महसूस होता है</>
                         ) : selectedLanguage === "marathi" ? (
                           <>वाटतं</>
-                        ) : selectedLanguage === "gujarati" ? (
+                        ) : selectedLanguage === "gujrati" ? (
                           <>વાતવ્યવહાર</>
                         ) : selectedLanguage === "tamil" ? (
                           <>போன்றது</>
@@ -405,7 +405,7 @@ const Weather = () => {
                           <>नमी</>
                         ) : selectedLanguage === "marathi" ? (
                           <>आर्द्रता</>
-                        ) : selectedLanguage === "gujarati" ? (
+                        ) : selectedLanguage === "gujrati" ? (
                           <>હવામાં ભીગાડું</>
                         ) : selectedLanguage === "tamil" ? (
                           <>ஈர்ப்பு</>
@@ -448,7 +448,7 @@ const Weather = () => {
                           <>बादल</>
                         ) : selectedLanguage === "marathi" ? (
                           <>ढग</>
-                        ) : selectedLanguage === "gujarati" ? (
+                        ) : selectedLanguage === "gujrati" ? (
                           <>બાદલ</>
                         ) : selectedLanguage === "tamil" ? (
                           <>மேகம்</>
@@ -469,7 +469,7 @@ const Weather = () => {
                     <>आने वाले 5 दिन</>
                   ) : selectedLanguage === "marathi" ? (
                     <>आगामी 5 दिवस</>
-                  ) : selectedLanguage === "gujarati" ? (
+                  ) : selectedLanguage === "gujrati" ? (
                     <>આવતા 5 દિવસ</>
                   ) : selectedLanguage === "tamil" ? (
                     <>வருகின்ற 5 நாட்கள்</>
@@ -611,7 +611,7 @@ const Weather = () => {
                 <>होम</>
               ) : selectedLanguage === "marathi" ? (
                 <>होम</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>હોમ</>
               ) : selectedLanguage === "tamil" ? (
                 <>ஹோம்</>
@@ -663,7 +663,7 @@ const Weather = () => {
                 <>प्रोफाइल</>
               ) : selectedLanguage === "marathi" ? (
                 <>प्रोफाईल</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>પ્રોફાઈલ</>
               ) : selectedLanguage === "tamil" ? (
                 <>ப்ரோஃபைல்</>

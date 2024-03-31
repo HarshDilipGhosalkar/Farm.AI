@@ -151,7 +151,7 @@ const Map = ({ productType }) => {
                 <>होम</>
               ) : selectedLanguage === "marathi" ? (
                 <>होम</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>હોમ</>
               ) : selectedLanguage === "tamil" ? (
                 <>ஹோம்</>
@@ -203,7 +203,7 @@ const Map = ({ productType }) => {
                 <>प्रोफाइल</>
               ) : selectedLanguage === "marathi" ? (
                 <>प्रोफाईल</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>પ્રોફાઈલ</>
               ) : selectedLanguage === "tamil" ? (
                 <>ப்ரோஃபைல்</>

@@ -59,7 +59,7 @@ const LanguageSideBar = () => {
               <option value="english">English</option>
               <option value="hindi">Hindi</option>
               <option value="marathi">Marathi</option>
-              <option value="gujarati">Gujarati</option>
+              <option value="gujrati">Gujarati</option>
               <option value="tamil">Tamil</option>
             </select>
             <svg

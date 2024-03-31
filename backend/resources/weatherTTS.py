@@ -19,6 +19,7 @@ langcodes = {
     "odia": "or",
     "telgu": "te",
     "gujrati": "gu",
+    "tamil": "ta",
     # "rajasthani": "6576a2854e7d42484da63538"
 }
 
@@ -65,7 +66,8 @@ models_ids = {
     "odia": "6576a26b00d64169e2f8f43f",
     "telgu": "6576a2a34e7d42484da63539",
     "gujrati": "6576a18d4e7d42484da63533",
-    "rajasthani": "6576a2854e7d42484da63538"
+    "rajasthani": "6576a2854e7d42484da63538",
+    "tamil": "6576a29700d64169e2f8f441"
 }
 
 

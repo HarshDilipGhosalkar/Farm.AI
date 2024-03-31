@@ -170,7 +170,7 @@ const crop = () => {
             if (result.data == "hindi") {
               setLang("hi-IN");
             }
-            if (result.data == "gujarati") {
+            if (result.data == "gujrati") {
               setLang("gu-IN");
             }
           })
@@ -210,7 +210,7 @@ const crop = () => {
               <>फसल की सिफारिश</>
             ) : selectedLanguage === "marathi" ? (
               <>शेतीसाठी सल्ला</>
-            ) : selectedLanguage === "gujarati" ? (
+            ) : selectedLanguage === "gujrati" ? (
               <>ફસલની સૂચના</>
             ) : selectedLanguage === "tamil" ? (
               <>பயிர் பரிந்துரை</>
@@ -230,7 +230,7 @@ const crop = () => {
                   <>फसल का विवरण</>
                 ) : selectedLanguage === "marathi" ? (
                   <>शेतीचा तपशील</>
-                ) : selectedLanguage === "gujarati" ? (
+                ) : selectedLanguage === "gujrati" ? (
                   <>ફસલની વિગતો</>
                 ) : selectedLanguage === "tamil" ? (
                   <>பயிரின் விவரங்கள்</>
@@ -246,7 +246,7 @@ const crop = () => {
                     <>फसल का नाम:</>
                   ) : selectedLanguage === "marathi" ? (
                     <>शेतीचं नाव:</>
-                  ) : selectedLanguage === "gujarati" ? (
+                  ) : selectedLanguage === "gujrati" ? (
                     <>ફસલનું નામ:</>
                   ) : selectedLanguage === "tamil" ? (
                     <>பயிரின் பெயர்:</>
@@ -264,7 +264,7 @@ const crop = () => {
                     <>विवरण:</>
                   ) : selectedLanguage === "marathi" ? (
                     <>वर्णन:</>
-                  ) : selectedLanguage === "gujarati" ? (
+                  ) : selectedLanguage === "gujrati" ? (
                     <>વર્ણન:</>
                   ) : selectedLanguage === "tamil" ? (
                     <>விளக்கம்:</>
@@ -284,7 +284,7 @@ const crop = () => {
                     <>मूल्य:</>
                   ) : selectedLanguage === "marathi" ? (
                     <>किंमत:</>
-                  ) : selectedLanguage === "gujarati" ? (
+                  ) : selectedLanguage === "gujrati" ? (
                     <>કિંમત:</>
                   ) : selectedLanguage === "tamil" ? (
                     <>விலை:</>
@@ -302,7 +302,7 @@ const crop = () => {
                     <>कारण:</>
                   ) : selectedLanguage === "marathi" ? (
                     <>कारण:</>
-                  ) : selectedLanguage === "gujarati" ? (
+                  ) : selectedLanguage === "gujrati" ? (
                     <>કારણ:</>
                   ) : selectedLanguage === "tamil" ? (
                     <>காரணம்:</>
@@ -350,7 +350,7 @@ const crop = () => {
                   <>होम</>
                 ) : selectedLanguage === "marathi" ? (
                   <>होम</>
-                ) : selectedLanguage === "gujarati" ? (
+                ) : selectedLanguage === "gujrati" ? (
                   <>હોમ</>
                 ) : selectedLanguage === "tamil" ? (
                   <>ஹோம்</>
@@ -402,7 +402,7 @@ const crop = () => {
                   <>प्रोफाइल</>
                 ) : selectedLanguage === "marathi" ? (
                   <>प्रोफाईल</>
-                ) : selectedLanguage === "gujarati" ? (
+                ) : selectedLanguage === "gujrati" ? (
                   <>પ્રોફાઈલ</>
                 ) : selectedLanguage === "tamil" ? (
                   <>ப்ரோஃபைல்</>

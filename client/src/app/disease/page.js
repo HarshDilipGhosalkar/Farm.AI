@@ -155,7 +155,7 @@ const Disease = () => {
                         <>स्वस्थ</>
                       ) : selectedLanguage === "marathi" ? (
                         <>आरोग्यदायी</>
-                      ) : selectedLanguage === "gujarati" ? (
+                      ) : selectedLanguage === "gujrati" ? (
                         <>આરોગ્યકર</>
                       ) : selectedLanguage === "tamil" ? (
                         <>ஆரோக்கியமான</>
@@ -171,7 +171,7 @@ const Disease = () => {
                         <>अस्वस्थ</>
                       ) : selectedLanguage === "marathi" ? (
                         <>आरोग्यकर नाही</>
-                      ) : selectedLanguage === "gujarati" ? (
+                      ) : selectedLanguage === "gujrati" ? (
                         <>અન્ય નહીં</>
                       ) : selectedLanguage === "tamil" ? (
                         <>ஆரோக்கியமான இல்லை</>
@@ -198,7 +198,7 @@ const Disease = () => {
                               <>उपाय प्राप्त करें</>
                             ) : selectedLanguage === "marathi" ? (
                               <>उपचार मिळवा</>
-                            ) : selectedLanguage === "gujarati" ? (
+                            ) : selectedLanguage === "gujrati" ? (
                               <>ઉપાયો મેળવો</>
                             ) : selectedLanguage === "tamil" ? (
                               <>தீர்வுகளைப் பெறவும்</>
@@ -230,7 +230,7 @@ const Disease = () => {
                       <>रोग</>
                     ) : selectedLanguage === "marathi" ? (
                       <>रोग</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>રોગ</>
                     ) : selectedLanguage === "tamil" ? (
                       <>நோய்</>
@@ -252,7 +252,7 @@ const Disease = () => {
                     <>विवरण</>
                   ) : selectedLanguage === "marathi" ? (
                     <>वर्णन</>
-                  ) : selectedLanguage === "gujarati" ? (
+                  ) : selectedLanguage === "gujrati" ? (
                     <>વર્ણન</>
                   ) : selectedLanguage === "tamil" ? (
                     <>விளக்கம்</>
@@ -278,7 +278,7 @@ const Disease = () => {
                     <>नुकसान का स्तर</>
                   ) : selectedLanguage === "marathi" ? (
                     <>क्षतिप्रमाण</>
-                  ) : selectedLanguage === "gujarati" ? (
+                  ) : selectedLanguage === "gujrati" ? (
                     <>ક્ષતિનો સ્તર</>
                   ) : selectedLanguage === "tamil" ? (
                     <>சேதம் அளவு</>
@@ -325,7 +325,7 @@ const Disease = () => {
                       <>कम</>
                     ) : selectedLanguage === "marathi" ? (
                       <>कमी</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>નીચું</>
                     ) : selectedLanguage === "tamil" ? (
                       <>குறைந்த</>
@@ -340,7 +340,7 @@ const Disease = () => {
                       <>मध्यम</>
                     ) : selectedLanguage === "marathi" ? (
                       <>मध्यम</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>મધ્યમ</>
                     ) : selectedLanguage === "tamil" ? (
                       <>நடுத்தர</>
@@ -355,7 +355,7 @@ const Disease = () => {
                       <>उच्च</>
                     ) : selectedLanguage === "marathi" ? (
                       <>उच्च</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>ઉચ્ચ</>
                     ) : selectedLanguage === "tamil" ? (
                       <>உயர்</>
@@ -377,7 +377,7 @@ const Disease = () => {
                   <>अपने फसल या पौधे की एक तस्वीर अपलोड करें</>
                 ) : selectedLanguage === "marathi" ? (
                   <>आपल्या शेती किंवा झाडाची फोटो अपलोड करा</>
-                ) : selectedLanguage === "gujarati" ? (
+                ) : selectedLanguage === "gujrati" ? (
                   <>તમારી ફસલ અથવા વનસ્પતિની ફોટો અપલોડ કરો</>
                 ) : selectedLanguage === "tamil" ? (
                   <>
@@ -404,7 +404,7 @@ const Disease = () => {
                     फसलाची सुरक्षा करण्यासाठी आणि उत्पादनाची जास्तीची सुरक्षा
                     करण्यासाठी पूर्वदृष्टीतून कृती करा
                   </>
-                ) : selectedLanguage === "gujarati" ? (
+                ) : selectedLanguage === "gujrati" ? (
                   <>
                     સંભાવિત ધરાવતો વિષે જાણકારી મેળવો અને તમારી ફસલને સંરક્ષિત
                     કરવા અને ઉત્પાદન વધારવા માટે પ્રોએક્ટીવ ઉપાયો અપનાવો
@@ -448,7 +448,7 @@ const Disease = () => {
                         <>एक छवि चुनें या फोटो क्लिक करें</>
                       ) : selectedLanguage === "marathi" ? (
                         <>एक छवि निवडा किंवा फोटो क्लिक करा</>
-                      ) : selectedLanguage === "gujarati" ? (
+                      ) : selectedLanguage === "gujrati" ? (
                         <>એક ચિત્ર પસંદ કરો અથવા ફોટો ક્લિક કરો</>
                       ) : selectedLanguage === "tamil" ? (
                         <>
@@ -478,7 +478,7 @@ const Disease = () => {
                   <>रुको!</>
                 ) : selectedLanguage === "marathi" ? (
                   <>थांबा!</>
-                ) : selectedLanguage === "gujarati" ? (
+                ) : selectedLanguage === "gujrati" ? (
                   <>ધોરણ પર રહો!</>
                 ) : selectedLanguage === "tamil" ? (
                   <>நிலையில் இருங்கள்!</>
@@ -497,7 +497,7 @@ const Disease = () => {
                   <>छवि सबमिट करें</>
                 ) : selectedLanguage === "marathi" ? (
                   <>फोटो सबमिट करा</>
-                ) : selectedLanguage === "gujarati" ? (
+                ) : selectedLanguage === "gujrati" ? (
                   <>ચિત્ર સબમિટ કરો</>
                 ) : selectedLanguage === "tamil" ? (
                   <>புகைப்படத்தை சமர்பிக்கவும்</>
@@ -521,7 +521,7 @@ const Disease = () => {
                   <>उर्वरक</>
                 ) : selectedLanguage === "marathi" ? (
                   <>खत</>
-                ) : selectedLanguage === "gujarati" ? (
+                ) : selectedLanguage === "gujrati" ? (
                   <>ખતું</>
                 ) : selectedLanguage === "tamil" ? (
                   <>உரவகம்</>
@@ -542,7 +542,7 @@ const Disease = () => {
                   <>उपचार</>
                 ) : selectedLanguage === "marathi" ? (
                   <>उपचार</>
-                ) : selectedLanguage === "gujarati" ? (
+                ) : selectedLanguage === "gujrati" ? (
                   <>ઉપચાર</>
                 ) : selectedLanguage === "tamil" ? (
                   <>சிகிச்சை</>
@@ -568,7 +568,7 @@ const Disease = () => {
                   <>बंद करें</>
                 ) : selectedLanguage === "marathi" ? (
                   <>बंद</>
-                ) : selectedLanguage === "gujarati" ? (
+                ) : selectedLanguage === "gujrati" ? (
                   <>બંધ કરો</>
                 ) : selectedLanguage === "tamil" ? (
                   <>மூடு</>
@@ -610,7 +610,7 @@ const Disease = () => {
                 <>होम</>
               ) : selectedLanguage === "marathi" ? (
                 <>होम</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>હોમ</>
               ) : selectedLanguage === "tamil" ? (
                 <>ஹோம்</>
@@ -662,7 +662,7 @@ const Disease = () => {
                 <>प्रोफाइल</>
               ) : selectedLanguage === "marathi" ? (
                 <>प्रोफाईल</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>પ્રોફાઈલ</>
               ) : selectedLanguage === "tamil" ? (
                 <>ப்ரோஃபைல்</>
