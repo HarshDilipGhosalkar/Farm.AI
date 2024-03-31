@@ -121,7 +121,7 @@ const Market = () => {
           <select
             className="w-[200px] p-[10px] border rounded-sm"
             name=""
-            onClick={(e) => onCommodityChange(e)}
+            onChange={(e) => onCommodityChange(e)}
           >
             <option value="0">--Select--</option>
             <option value="absinthe">Absinthe</option>
