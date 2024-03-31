@@ -7,7 +7,7 @@ const Navbar = ({ link }) => {
   return (
     <>
       <div className="flex flex-row min-h-[60px] items-center justify-center relative">
-        <div className=" absolute left-[20px]" onClick={null}>
+        <div className=" absolute left-[20px]" onClick={() => router.back()}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -38,11 +38,9 @@ const Navbar = ({ link }) => {
             </div>
             <div onClick={() => router.push("/learning/videos")}>
               {link == "videos" ? (
-                <p className="text-blue-500"
-                
-                >Videos</p>
+                <p className="text-blue-500">Videos</p>
               ) : (
-                <p className="" >Videos</p>
+                <p className="">Videos</p>
               )}
             </div>
             <div onClick={() => router.push("/learning/aiLearning")}>

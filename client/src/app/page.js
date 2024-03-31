@@ -58,8 +58,6 @@ export default function Home() {
     };
     recognition.start();
   };
-  console.log(voiceInput);
-  console.log(listening);
 
   useEffect(() => {
     fetchWeatherBasedOnLocation();
