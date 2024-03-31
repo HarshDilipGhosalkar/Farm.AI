@@ -39,7 +39,7 @@ export default function Home() {
       redirect: "follow",
     };
 
-    fetch("http://localhost:5000/routing", requestOptions)
+    fetch("https://codeshashtra-allstackers.onrender.com/routing", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
