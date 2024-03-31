@@ -19,6 +19,7 @@ from resources.budgeting import Budgeting
 from resources.routing import Routing
 from resources.disease import ImageToItems
 from resources.remedies import Remedies
+from resources.socialMedia import SocialMedia
 
 import os
 
@@ -66,6 +67,7 @@ api.add_resource(Routing, '/routing')
 api.add_resource(ImageToItems, "/diseasePrediction")
 api.add_resource(Remedies, "/remedies")
 
+api.add_resource(SocialMedia, '/socialMedia')
 
 
 # Instagram API endpoints
@@ -76,6 +78,10 @@ api.add_resource(Post, "/post")
 @app.route('/ping', methods=['GET'])
 def ping():
     return jsonify({"message": "Pong!"})
+
+@app.route('/notification', methods=['POST'])
+def notification():
+    return jsonify({"message": "Notification sent!"})
 
 
 if __name__ == "__main__":

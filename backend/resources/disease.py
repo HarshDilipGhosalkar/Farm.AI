@@ -4,6 +4,19 @@ import google.generativeai as genai
 from pathlib import Path
 import json
 from io import BytesIO
+from googletrans import Translator
+from models.user import User as UserModel
+
+langcodes = {
+    "english": "en",
+    "hindi": "hi",
+    "marathi": "mr",
+    "bengali": "bn",
+    "odia": "or",
+    "telgu": "te",
+    "gujrati": "gu",
+    # "rajasthani": "6576a2854e7d42484da63538"
+}
 
 
 genai.configure(api_key="AIzaSyAHdcVytlmDRiSuApXlTkCq3Qwnnn76Cu8")
@@ -75,11 +88,34 @@ class ImageToItems(Resource):
     def post(self):
         image = request.files["image"]
 
+        user = UserModel.get_user("9137357003")
+        if not user:
+            return {"error": True, "message": "User not found"}
+        
+        language = user.language
+
         image_content = BytesIO(image.read())
         response = generate_gemini_response(
             input_prompt, image_content, question_prompt
         )
         parsed_array = json.loads(response)
         print(parsed_array)
+
+        translate = Translator()
+
+        if parsed_array["health_status"] == "no":
+            parsed_array["disease_name"] = translate.translate(
+                parsed_array["disease_name"], src="en", dest=langcodes[language]
+            ).text
+
+        parsed_array["cropName"] = translate.translate(
+            parsed_array["cropName"], src="en", dest=langcodes[language]
+        ).text
+        parsed_array["health_status"] = translate.translate(
+            parsed_array["health_status"], src="en", dest=langcodes[language]
+        ).text
+        parsed_array["plant_description"] = translate.translate(
+            parsed_array["plant_description"], src="en", dest=langcodes[language]
+        ).text
 
         return {"error": False, "data": parsed_array}, 200
