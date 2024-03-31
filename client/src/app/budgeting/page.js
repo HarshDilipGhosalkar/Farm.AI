@@ -84,7 +84,7 @@ const FinanceComponent = () => {
             if (result.data == "hindi") {
               setLang("hi-IN");
             }
-            if (result.data == "gujarati") {
+            if (result.data == "gujrati") {
               setLang("gu-IN");
             }
           })
@@ -123,7 +123,7 @@ const FinanceComponent = () => {
             <>बजट बनाना</>
           ) : selectedLanguage === "marathi" ? (
             <>बजेटिंग</>
-          ) : selectedLanguage === "gujarati" ? (
+          ) : selectedLanguage === "gujrati" ? (
             <>બજેટ બનાવવું</>
           ) : selectedLanguage === "tamil" ? (
             <>பட்ஜெட் தயாரிப்பு</>
@@ -142,7 +142,7 @@ const FinanceComponent = () => {
                 <>बजट</>
               ) : selectedLanguage === "marathi" ? (
                 <>बजेट</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>બજેટ</>
               ) : selectedLanguage === "tamil" ? (
                 <>பட்ஜெட்</>
@@ -159,7 +159,7 @@ const FinanceComponent = () => {
                     <>बीज</>
                   ) : selectedLanguage === "marathi" ? (
                     <>बिया</>
-                  ) : selectedLanguage === "gujarati" ? (
+                  ) : selectedLanguage === "gujrati" ? (
                     <>બીજો</>
                   ) : selectedLanguage === "tamil" ? (
                     <>விதைகள்</>
@@ -174,7 +174,7 @@ const FinanceComponent = () => {
                     <>लागत</>
                   ) : selectedLanguage === "marathi" ? (
                     <>किंमत</>
-                  ) : selectedLanguage === "gujarati" ? (
+                  ) : selectedLanguage === "gujrati" ? (
                     <>કિંમત</>
                   ) : selectedLanguage === "tamil" ? (
                     <>செலவு</>
@@ -192,7 +192,7 @@ const FinanceComponent = () => {
                     <>उर्वरक</>
                   ) : selectedLanguage === "marathi" ? (
                     <>खत</>
-                  ) : selectedLanguage === "gujarati" ? (
+                  ) : selectedLanguage === "gujrati" ? (
                     <>ખતું</>
                   ) : selectedLanguage === "tamil" ? (
                     <>பரமர்ப்பி</>
@@ -207,7 +207,7 @@ const FinanceComponent = () => {
                     <>लागत</>
                   ) : selectedLanguage === "marathi" ? (
                     <>किंमत</>
-                  ) : selectedLanguage === "gujarati" ? (
+                  ) : selectedLanguage === "gujrati" ? (
                     <>કિંમત</>
                   ) : selectedLanguage === "tamil" ? (
                     <>செலவு</>
@@ -225,7 +225,7 @@ const FinanceComponent = () => {
                     <>उपकरण</>
                   ) : selectedLanguage === "marathi" ? (
                     <>उपकरणे</>
-                  ) : selectedLanguage === "gujarati" ? (
+                  ) : selectedLanguage === "gujrati" ? (
                     <>સાધનો</>
                   ) : selectedLanguage === "tamil" ? (
                     <>பொருட்கள்</>
@@ -240,7 +240,7 @@ const FinanceComponent = () => {
                     <>लागत</>
                   ) : selectedLanguage === "marathi" ? (
                     <>किंमत</>
-                  ) : selectedLanguage === "gujarati" ? (
+                  ) : selectedLanguage === "gujrati" ? (
                     <>કિંમત</>
                   ) : selectedLanguage === "tamil" ? (
                     <>செலவு</>
@@ -258,7 +258,7 @@ const FinanceComponent = () => {
                     <>श्रम लागत</>
                   ) : selectedLanguage === "marathi" ? (
                     <>श्रमिक खर्च</>
-                  ) : selectedLanguage === "gujarati" ? (
+                  ) : selectedLanguage === "gujrati" ? (
                     <>શ્રમ ખર્ચ</>
                   ) : selectedLanguage === "tamil" ? (
                     <>தொழில் செலவு</>
@@ -273,7 +273,7 @@ const FinanceComponent = () => {
                     <>लागत</>
                   ) : selectedLanguage === "marathi" ? (
                     <>किंमत</>
-                  ) : selectedLanguage === "gujarati" ? (
+                  ) : selectedLanguage === "gujrati" ? (
                     <>કિંમત</>
                   ) : selectedLanguage === "tamil" ? (
                     <>செலவு</>
@@ -292,7 +292,7 @@ const FinanceComponent = () => {
                   <>कुल लागत</>
                 ) : selectedLanguage === "marathi" ? (
                   <>एकूण खर्च</>
-                ) : selectedLanguage === "gujarati" ? (
+                ) : selectedLanguage === "gujrati" ? (
                   <>કુલ ખર્ચ</>
                 ) : selectedLanguage === "tamil" ? (
                   <>மொத்த செலவு</>
@@ -307,7 +307,7 @@ const FinanceComponent = () => {
                   <>कुल:</>
                 ) : selectedLanguage === "marathi" ? (
                   <>एकूण:</>
-                ) : selectedLanguage === "gujarati" ? (
+                ) : selectedLanguage === "gujrati" ? (
                   <>કુલ:</>
                 ) : selectedLanguage === "tamil" ? (
                   <>மொத்தம்:</>
@@ -355,7 +355,7 @@ const FinanceComponent = () => {
                 <>होम</>
               ) : selectedLanguage === "marathi" ? (
                 <>होम</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>હોમ</>
               ) : selectedLanguage === "tamil" ? (
                 <>ஹோம்</>
@@ -407,7 +407,7 @@ const FinanceComponent = () => {
                 <>प्रोफाइल</>
               ) : selectedLanguage === "marathi" ? (
                 <>प्रोफाईल</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>પ્રોફાઈલ</>
               ) : selectedLanguage === "tamil" ? (
                 <>ப்ரோஃபைல்</>

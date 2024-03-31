@@ -6,7 +6,7 @@ import LanguageSideBar from "@/components/language";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "IPD Project",
+  title: "Farm .AI",
   description: "agriculture project",
   manifest: "/manifest.json",
 };

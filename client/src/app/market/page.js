@@ -109,7 +109,7 @@ const Market = () => {
             <>बाजार कीमत</>
           ) : selectedLanguage === "marathi" ? (
             <>बाजार किंमत</>
-          ) : selectedLanguage === "gujarati" ? (
+          ) : selectedLanguage === "gujrati" ? (
             <>બજાર ભાવ</>
           ) : selectedLanguage === "tamil" ? (
             <>சந்தை விலை </>
@@ -603,7 +603,7 @@ const Market = () => {
                 <>मूल्य प्राप्त करें</>
               ) : selectedLanguage === "marathi" ? (
                 <>दर मिळवा</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>મૂલ્ય મેળવો</>
               ) : selectedLanguage === "tamil" ? (
                 <>விலையை பெறுங்கள்</>
@@ -629,7 +629,7 @@ const Market = () => {
                       <>वस्त्र</>
                     ) : selectedLanguage === "marathi" ? (
                       <>खाद्य पदार्थ</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>ખેતીના આઇટમ્સ</>
                     ) : selectedLanguage === "tamil" ? (
                       <>உணவு பொருட்கள்</>
@@ -649,7 +649,7 @@ const Market = () => {
                       <>राज्य</>
                     ) : selectedLanguage === "marathi" ? (
                       <>राज्य</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>રાજ્ય</>
                     ) : selectedLanguage === "tamil" ? (
                       <>மாநிலம்</>
@@ -664,7 +664,7 @@ const Market = () => {
                       <>महाराष्ट्र</>
                     ) : selectedLanguage === "marathi" ? (
                       <>महाराष्ट्र</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>મહારાષ્ટ્ર</>
                     ) : selectedLanguage === "tamil" ? (
                       <>மஹாராஷ்டிரா</>
@@ -684,7 +684,7 @@ const Market = () => {
                       <>जिला</>
                     ) : selectedLanguage === "marathi" ? (
                       <>जिल्हा</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>જિલ્લો</>
                     ) : selectedLanguage === "tamil" ? (
                       <>மாவட்டம்</>
@@ -699,7 +699,7 @@ const Market = () => {
                       <>मुंबई</>
                     ) : selectedLanguage === "marathi" ? (
                       <>मुंबई</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>મુંબઈ</>
                     ) : selectedLanguage === "tamil" ? (
                       <>மும்பை</>
@@ -718,7 +718,7 @@ const Market = () => {
                       <>बाजार</>
                     ) : selectedLanguage === "marathi" ? (
                       <>बाजार</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>બજાર</>
                     ) : selectedLanguage === "tamil" ? (
                       <>சந்தை</>
@@ -733,7 +733,7 @@ const Market = () => {
                       <>ठाणे</>
                     ) : selectedLanguage === "marathi" ? (
                       <>ठाणे</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>ઠાણે</>
                     ) : selectedLanguage === "tamil" ? (
                       <>தானே</>
@@ -754,7 +754,7 @@ const Market = () => {
                       <>कीमत</>
                     ) : selectedLanguage === "marathi" ? (
                       <>किंमत</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>કિંમત</>
                     ) : selectedLanguage === "tamil" ? (
                       <>விலை</>
@@ -799,7 +799,7 @@ const Market = () => {
                 <>होम</>
               ) : selectedLanguage === "marathi" ? (
                 <>होम</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>હોમ</>
               ) : selectedLanguage === "tamil" ? (
                 <>ஹோம்</>
@@ -851,7 +851,7 @@ const Market = () => {
                 <>प्रोफाइल</>
               ) : selectedLanguage === "marathi" ? (
                 <>प्रोफाईल</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>પ્રોફાઈલ</>
               ) : selectedLanguage === "tamil" ? (
                 <>ப்ரோஃபைல்</>

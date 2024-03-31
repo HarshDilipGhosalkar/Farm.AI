@@ -85,7 +85,7 @@ const timeline = () => {
             if (result.data == "hindi") {
               setLang("hi-IN");
             }
-            if (result.data == "gujarati") {
+            if (result.data == "gujrati") {
               setLang("gu-IN");
             }
           })
@@ -124,7 +124,7 @@ const timeline = () => {
             <>फसल योजना</>
           ) : selectedLanguage === "marathi" ? (
             <>शेतीचे नियोजन</>
-          ) : selectedLanguage === "gujarati" ? (
+          ) : selectedLanguage === "gujrati" ? (
             <>ફસલ નિયોજન</>
           ) : selectedLanguage === "tamil" ? (
             <>பயிர் திட்டமிடுதல்</>
@@ -143,7 +143,7 @@ const timeline = () => {
                 <>फसल योजना</>
               ) : selectedLanguage === "marathi" ? (
                 <>शेतीचे नियोजन</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>ફસલ નિયોજન</>
               ) : selectedLanguage === "tamil" ? (
                 <>பயிர் திட்டமிடுதல்</>
@@ -164,7 +164,7 @@ const timeline = () => {
                       <>दिनों की आवश्यकता</>
                     ) : selectedLanguage === "marathi" ? (
                       <>दिवस आवश्यक</>
-                    ) : selectedLanguage === "gujarati" ? (
+                    ) : selectedLanguage === "gujrati" ? (
                       <>દિવસો જરૂરી</>
                     ) : selectedLanguage === "tamil" ? (
                       <>தினங்கள் தேவை</>
@@ -214,7 +214,7 @@ const timeline = () => {
                 <>होम</>
               ) : selectedLanguage === "marathi" ? (
                 <>होम</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>હોમ</>
               ) : selectedLanguage === "tamil" ? (
                 <>ஹோம்</>
@@ -266,7 +266,7 @@ const timeline = () => {
                 <>प्रोफाइल</>
               ) : selectedLanguage === "marathi" ? (
                 <>प्रोफाईल</>
-              ) : selectedLanguage === "gujarati" ? (
+              ) : selectedLanguage === "gujrati" ? (
                 <>પ્રોફાઈલ</>
               ) : selectedLanguage === "tamil" ? (
                 <>ப்ரோஃபைல்</>
