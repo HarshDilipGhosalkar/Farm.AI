@@ -17,6 +17,30 @@ export default function Home() {
   const [voiceInput, setVoiceInput] = useState("");
   const [listening, setListening] = useState(false);
 
+  const getRoute = (text) => {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({
+      "text": text
+    });
+
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    };
+
+    fetch("http://localhost:5000/routing", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        router.push(result.data.slice(1))
+      })
+      .catch((error) => console.error(error));
+  }
+
   const startListening = (language) => {
 
       const recognition = new window.webkitSpeechRecognition();
@@ -28,14 +52,10 @@ export default function Home() {
           const transcript = event.results[0][0].transcript;
           setVoiceInput(transcript);
           console.log(transcript);
-          const myHeaders = new Headers();
-          myHeaders.append("Content-Type", "application/json");
-
-          
+          getRoute(transcript);
       };
       recognition.onend = () => {
           setListening(false);
-
       };
       recognition.start();
 
@@ -425,7 +445,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div class="col" onClick={() => router.push("/finance")}>
+              <div class="col" onClick={() => router.push("/budgeting")}>
                 <div class="flex flex-col gap-y-[10px] items-center rounded-lg p-[10px] bg-white">
                   <img
                     className="w-[50px] rounded-lg"
@@ -520,7 +540,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div class="col" onClick={() => router.push("/community")}>
+              <div class="col" onClick={() => router.push("/social")}>
                 <div class="flex flex-col gap-y-[10px] items-center rounded-lg p-[10px] bg-white">
                   <img
                     className="w-[50px] rounded-lg"

@@ -3,11 +3,13 @@
 import Navbar from "@/components/learning/Navbar";
 import { useState } from "react";
 import React from "react";
+import { useRouter } from "next/navigation";
 import VideoCard from "@/components/learning/VideoCard"; // Import your VideoCard component
 
 const MyPage = () => {
   const [topic, setTopic] = useState("");
   const [videos, setVideos] = useState([]);
+  const router = useRouter();
 
   const handleSearch = async () => {
     try {
@@ -20,7 +22,7 @@ const MyPage = () => {
       };
 
       const response = await fetch(
-        "http://localhost:5000/search",
+        "https://ipd-670g.onrender.com/search",
         requestOptions
       );
       const result = await response.json();

@@ -45,7 +45,7 @@ const Market = () => {
       redirect: "follow",
     };
 
-    fetch("http://localhost:5000/marketPrice", requestOptions)
+    fetch("https://codeshashtra-allstackers.onrender.com/marketPrice", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setPrice(result.data);

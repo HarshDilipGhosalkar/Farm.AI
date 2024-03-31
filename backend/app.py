@@ -17,6 +17,8 @@ from resources.translate import Translate
 from resources.timeline import Timeline
 from resources.budgeting import Budgeting
 from resources.routing import Routing
+from resources.disease import ImageToItems
+from resources.remedies import Remedies
 
 import os
 
@@ -61,6 +63,9 @@ api.add_resource(Timeline, '/timeline')
 api.add_resource(Translate, "/translate")
 api.add_resource(Budgeting, '/budgeting')
 api.add_resource(Routing, '/routing')
+api.add_resource(ImageToItems, "/diseasePrediction")
+api.add_resource(Remedies, "/remedies")
+
 
 
 # Instagram API endpoints

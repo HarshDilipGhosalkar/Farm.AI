@@ -19,6 +19,7 @@ const Disease = () => {
   const [level, setLevel] = useState("1");
   const [fertilizer, setFertilizer] = useState([]);
   const [treatment, setTreatment] = useState([]);
+  const router = useRouter();
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
