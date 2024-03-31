@@ -6,7 +6,6 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 const Disease = () => {
-  const router = useRouter();
   const selectedLanguage = localStorage.getItem("selectedLanguage");
   const [language, setLanguage] = useState("en");
   const [prevLanguage, setPrevLanguage] = useState("en");
