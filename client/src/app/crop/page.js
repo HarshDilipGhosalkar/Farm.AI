@@ -2,7 +2,7 @@
 
 import { useEffect, useState, React } from "react";
 import { useRouter } from "next/navigation";
-import { Empty } from 'antd';
+import { Empty } from "antd";
 
 const crop = () => {
   const router = useRouter();
@@ -15,8 +15,7 @@ const crop = () => {
   const [audioData, setAudioData] = useState(null);
   const [audioBlob, setAudioBlob] = useState(null);
   const [level, setLevel] = useState(1);
-  const [lang,setLang]=useState("");
-
+  const [lang, setLang] = useState("");
 
   useEffect(() => {
     if (audioData) {
@@ -43,7 +42,6 @@ const crop = () => {
     }
   };
 
-
   const startListening = (language) => {
     if (level == 1) {
       const recognition = new window.webkitSpeechRecognition();
@@ -61,20 +59,22 @@ const crop = () => {
         myHeaders.append("Content-Type", "application/json");
 
         const raw = JSON.stringify({
-          "language": "marathi"
+          language: "marathi",
         });
 
         const requestOptions = {
           method: "POST",
           headers: myHeaders,
           body: raw,
-          redirect: "follow"
+          redirect: "follow",
         };
 
-        fetch("https://codeshashtra-allstackers.onrender.com/previousYearCrop", requestOptions)
+        fetch(
+          "https://codeshashtra-allstackers.onrender.com/previousYearCrop",
+          requestOptions
+        )
           .then((response) => response.json())
           .then((result) => {
-
             const byteString = atob(result.data);
             const mimeType = "audio/mpeg";
             const buffer = new ArrayBuffer(byteString.length);
@@ -85,9 +85,8 @@ const crop = () => {
             const blob = new Blob([buffer], { type: mimeType });
             setLevel(2);
             const audio = new Audio(URL.createObjectURL(blob));
-            audio.play()
+            audio.play();
             // setIsLoading(false);
-
           })
           .catch((error) => console.error(error));
       };
@@ -106,38 +105,37 @@ const crop = () => {
       recognition.onend = () => {
         setListening(false);
 
-
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
         const raw = JSON.stringify({
-          "crop": voiceInput,
-          "language": "marathi"
+          crop: voiceInput,
+          language: "marathi",
         });
 
         const requestOptions = {
           method: "POST",
           headers: myHeaders,
           body: raw,
-          redirect: "follow"
+          redirect: "follow",
         };
 
-        fetch("https://codeshashtra-allstackers.onrender.com/cropRecommendation", requestOptions)
+        fetch(
+          "https://codeshashtra-allstackers.onrender.com/cropRecommendation",
+          requestOptions
+        )
           .then((response) => response.json())
-          .then((result) => {console.log(result)
-          setCropName(result.data.crop_name);
-          setDescription(result.data.description);
-          setPrice(result.data.current_market_price);
-          setReason(result.data.reason);
-          setLevel(1);
-          
+          .then((result) => {
+            console.log(result);
+            setCropName(result.data.crop_name);
+            setDescription(result.data.description);
+            setPrice(result.data.current_market_price);
+            setReason(result.data.reason);
+            setLevel(1);
           })
           .catch((error) => console.error(error));
-
-
       };
       recognition.start();
-
     }
   };
 
@@ -147,26 +145,29 @@ const crop = () => {
       try {
         const requestOptions = {
           method: "GET",
-          redirect: "follow"
+          redirect: "follow",
         };
-        
-        fetch("https://codeshashtra-allstackers.onrender.com/language?mobile=9137357003", requestOptions)
+
+        fetch(
+          "https://codeshashtra-allstackers.onrender.com/language?mobile=9137357003",
+          requestOptions
+        )
           .then((response) => response.json())
-          .then((result) => {console.log(result)
-            if(result.data=="marathi"){
+          .then((result) => {
+            console.log(result);
+            if (result.data == "marathi") {
               setLang("mr-IN");
             }
-            if(result.data=="hindi"){
+            if (result.data == "hindi") {
               setLang("hi-IN");
             }
-            if(result.data=="gujarati"){
+            if (result.data == "gujarati") {
               setLang("gu-IN");
             }
-          
           })
           .catch((error) => console.error(error));
       } catch (error) {
-        console.error('Failed to fetch tasks:', error);
+        console.error("Failed to fetch tasks:", error);
       }
     };
 
@@ -176,28 +177,105 @@ const crop = () => {
   return (
     <>
       <div className="w-[100%] h-full flex flex-col justify-center items-center">
-      {cropName!=""?(<>
-        <div className="bg-green-100 w-[90%] mt-[20px] border border-green-300 rounded-lg p-6 shadow-md hover:shadow-lg transition duration-300 ease-in-out">
-          <h2 className="text-[30px] align-middle font-bold mb-4 text-green-900">Crop Details</h2>
-          <div className="mb-4">
-            <p className="text-lg font-semibold mb-1 text-green-800">Crop Name:</p>
-            <p className="text-lg font-medium text-green-700">{cropName}</p>
+        {cropName != "" ? (
+          <>
+            <div className="bg-gray-100 w-[90%] mt-[20px] border border-gray-300 rounded-lg p-6 shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+              <h2 className="text-[30px] align-middle font-bold mb-4 text-gray-900">
+                {selectedLanguage === "english" ? (
+                  <>Crop Details</>
+                ) : selectedLanguage === "hindi" ? (
+                  <>फसल का विवरण</>
+                ) : selectedLanguage === "marathi" ? (
+                  <>शेतीचा तपशील</>
+                ) : selectedLanguage === "gujarati" ? (
+                  <>ફસલની વિગતો</>
+                ) : selectedLanguage === "tamil" ? (
+                  <>பயிரின் விவரங்கள்</>
+                ) : (
+                  ""
+                )}
+              </h2>
+              <div className="mb-4">
+                <p className="text-lg font-semibold mb-1 text-gray-800">
+                  {selectedLanguage === "english" ? (
+                    <>Crop Name:</>
+                  ) : selectedLanguage === "hindi" ? (
+                    <>फसल का नाम:</>
+                  ) : selectedLanguage === "marathi" ? (
+                    <>शेतीचं नाव:</>
+                  ) : selectedLanguage === "gujarati" ? (
+                    <>ફસલનું નામ:</>
+                  ) : selectedLanguage === "tamil" ? (
+                    <>பயிரின் பெயர்:</>
+                  ) : (
+                    ""
+                  )}
+                </p>
+                <p className="text-lg font-medium text-gray-700">{cropName}</p>
+              </div>
+              <div className="mb-4">
+                <p className="text-lg font-semibold mb-1 text-gray-800">
+                  {selectedLanguage === "english" ? (
+                    <>Description:</>
+                  ) : selectedLanguage === "hindi" ? (
+                    <>विवरण:</>
+                  ) : selectedLanguage === "marathi" ? (
+                    <>वर्णन:</>
+                  ) : selectedLanguage === "gujarati" ? (
+                    <>વર્ણન:</>
+                  ) : selectedLanguage === "tamil" ? (
+                    <>விளக்கம்:</>
+                  ) : (
+                    ""
+                  )}
+                </p>
+                <p className="text-lg font-medium text-gray-700">
+                  {description}
+                </p>
+              </div>
+              <div className="mb-4">
+                <p className="text-lg font-semibold mb-1 text-gray-800">
+                  {selectedLanguage === "english" ? (
+                    <>Price:</>
+                  ) : selectedLanguage === "hindi" ? (
+                    <>मूल्य:</>
+                  ) : selectedLanguage === "marathi" ? (
+                    <>किंमत:</>
+                  ) : selectedLanguage === "gujarati" ? (
+                    <>કિંમત:</>
+                  ) : selectedLanguage === "tamil" ? (
+                    <>விலை:</>
+                  ) : (
+                    ""
+                  )}
+                </p>
+                <p className="text-lg font-medium text-gray-700">{price}</p>
+              </div>
+              <div className="mb-4">
+                <p className="text-lg font-semibold mb-1 text-gray-800">
+                  {selectedLanguage === "english" ? (
+                    <>Reason:</>
+                  ) : selectedLanguage === "hindi" ? (
+                    <>कारण:</>
+                  ) : selectedLanguage === "marathi" ? (
+                    <>कारण:</>
+                  ) : selectedLanguage === "gujarati" ? (
+                    <>કારણ:</>
+                  ) : selectedLanguage === "tamil" ? (
+                    <>காரணம்:</>
+                  ) : (
+                    ""
+                  )}
+                </p>
+                <p className="text-lg font-medium text-gray-700">{reason}</p>
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className="mt-[50%]">
+            <Empty />
           </div>
-          <div className="mb-4">
-            <p className="text-lg font-semibold mb-1 text-green-800">Description:</p>
-            <p className="text-lg font-medium text-green-700">{description}</p>
-          </div>
-          <div className="mb-4">
-            <p className="text-lg font-semibold mb-1 text-green-800">Price:</p>
-            <p className="text-lg font-medium text-green-700">{price}</p>
-          </div>
-          <div className="mb-4">
-            <p className="text-lg font-semibold mb-1 text-green-800">Reason:</p>
-            <p className="text-lg font-medium text-green-700">{reason}</p>
-          </div>
-        </div>
-      </>):(<div className="mt-[50%]"><Empty /></div>)}
-        
+        )}
 
         {voiceInput.length > 3 && (
           <div className="fixed bottom-[80px] w-full px-[20px] py-[10px] pb-[25px]">
