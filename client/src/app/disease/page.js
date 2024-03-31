@@ -120,9 +120,39 @@ const Disease = () => {
                       : "bg-red-100 border-[1px] text-red-800"
                   }`}
                 >
-                  {responseInfo.health_status === "yes"
-                    ? "Healthy"
-                    : "Not Healthy"}
+                  {responseInfo.health_status === "yes" ? (
+                    <>
+                      {selectedLanguage === "english" ? (
+                        <>Healthy</>
+                      ) : selectedLanguage === "hindi" ? (
+                        <>स्वस्थ</>
+                      ) : selectedLanguage === "marathi" ? (
+                        <>आरोग्यदायी</>
+                      ) : selectedLanguage === "gujarati" ? (
+                        <>આરોગ્યકર</>
+                      ) : selectedLanguage === "tamil" ? (
+                        <>ஆரோக்கியமான</>
+                      ) : (
+                        ""
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {selectedLanguage === "english" ? (
+                        <>Not Healthy</>
+                      ) : selectedLanguage === "hindi" ? (
+                        <>अस्वस्थ</>
+                      ) : selectedLanguage === "marathi" ? (
+                        <>आरोग्यकर नाही</>
+                      ) : selectedLanguage === "gujarati" ? (
+                        <>અન્ય નહીં</>
+                      ) : selectedLanguage === "tamil" ? (
+                        <>ஆரோக்கியமான இல்லை</>
+                      ) : (
+                        ""
+                      )}
+                    </>
+                  )}
                 </div>
                 {responseInfo.health_status === "yes" ? (
                   <></>
@@ -130,12 +160,28 @@ const Disease = () => {
                   <>
                     {level == "2" ? (
                       <>
-                        <div
-                          className={` cursor-pointer px-3 text-[15px] font-semibold rounded-md mb-7 w-fit bg-[#e2f5ef] text-[#0d9e6b]`}
-                          onClick={openModal}
-                        >
-                          Get remedies
-                        </div>
+                        {!loading ? (
+                          <div
+                            className={` cursor-pointer px-3 text-[15px] font-semibold rounded-md mb-7 w-fit bg-[#e2f5ef] text-[#0d9e6b]`}
+                            onClick={openModal}
+                          >
+                            {selectedLanguage === "english" ? (
+                              <>Get remedies</>
+                            ) : selectedLanguage === "hindi" ? (
+                              <>उपाय प्राप्त करें</>
+                            ) : selectedLanguage === "marathi" ? (
+                              <>उपचार मिळवा</>
+                            ) : selectedLanguage === "gujarati" ? (
+                              <>ઉપાયો મેળવો</>
+                            ) : selectedLanguage === "tamil" ? (
+                              <>தீர்வுகளைப் பெறவும்</>
+                            ) : (
+                              ""
+                            )}
+                          </div>
+                        ) : (
+                          <ScaleLoader color="#2563eb" />
+                        )}
                       </>
                     ) : (
                       <></>
@@ -143,29 +189,51 @@ const Disease = () => {
                   </>
                 )}
               </div>
-              <div className="text-[#0d9e6b] text-[35px] font-bold mb-6">
+              <div className="text-[35px] font-bold mb-6">
                 {responseInfo.cropName}
               </div>
               {responseInfo.health_status === "yes" ? (
                 <></>
               ) : (
                 <div className="flex flex-col mb-7">
-                  <p className="text-[#0d9e6b] text-[18px] mb-[6px] font-semibold">
-                    DISEASE
+                  <p className="text-[18px] mb-[6px] font-semibold">
+                    {selectedLanguage === "english" ? (
+                      <>Disease</>
+                    ) : selectedLanguage === "hindi" ? (
+                      <>रोग</>
+                    ) : selectedLanguage === "marathi" ? (
+                      <>रोग</>
+                    ) : selectedLanguage === "gujarati" ? (
+                      <>રોગ</>
+                    ) : selectedLanguage === "tamil" ? (
+                      <>நோய்</>
+                    ) : (
+                      ""
+                    )}
                   </p>
-                  <p className="text-[#0d9e6b] bg-[#e2f5ef] px-3 rounded-md w-fit">
+                  <p className="bg-gray-200 px-3 rounded-md w-fit">
                     {responseInfo.disease_name}
                   </p>
                 </div>
               )}
 
               <div className="flex flex-col mb-10">
-                <p className="text-[#0d9e6b] text-[18px] mb-[6px] font-semibold">
-                  Description
+                <p className="text-[18px] mb-[6px] font-semibold">
+                  {selectedLanguage === "english" ? (
+                    <>Description</>
+                  ) : selectedLanguage === "hindi" ? (
+                    <>विवरण</>
+                  ) : selectedLanguage === "marathi" ? (
+                    <>वर्णन</>
+                  ) : selectedLanguage === "gujarati" ? (
+                    <>વર્ણન</>
+                  ) : selectedLanguage === "tamil" ? (
+                    <>விளக்கம்</>
+                  ) : (
+                    ""
+                  )}
                 </p>
-                <p className="text-[#0d9e6b]">
-                  {responseInfo.plant_description}
-                </p>
+                <p className="">{responseInfo.plant_description}</p>
               </div>
             </div>
             <div
@@ -176,7 +244,21 @@ const Disease = () => {
               }px-[5px] py-[10px] bg-[white]`}
             >
               <div className="flex flex-row items-center justify-center">
-                <div className="font-semibold text-[16px]">Level of Damage</div>
+                <div className="font-semibold text-[16px]">
+                  {selectedLanguage === "english" ? (
+                    <>Level of Damage</>
+                  ) : selectedLanguage === "hindi" ? (
+                    <>नुकसान का स्तर</>
+                  ) : selectedLanguage === "marathi" ? (
+                    <>क्षतिप्रमाण</>
+                  ) : selectedLanguage === "gujarati" ? (
+                    <>ક્ષતિનો સ્તર</>
+                  ) : selectedLanguage === "tamil" ? (
+                    <>சேதம் அளவு</>
+                  ) : (
+                    ""
+                  )}
+                </div>
               </div>
 
               <div className="flex flex-col w-[90%] self-center justify-between">
@@ -209,9 +291,51 @@ const Disease = () => {
                 </div>
 
                 <div className="flex flex-row justify-between">
-                  <div>Low</div>
-                  <div>Medium</div>
-                  <div>High</div>
+                  <div>
+                    {selectedLanguage === "english" ? (
+                      <>Low</>
+                    ) : selectedLanguage === "hindi" ? (
+                      <>कम</>
+                    ) : selectedLanguage === "marathi" ? (
+                      <>कमी</>
+                    ) : selectedLanguage === "gujarati" ? (
+                      <>નીચું</>
+                    ) : selectedLanguage === "tamil" ? (
+                      <>குறைந்த</>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div>
+                    {selectedLanguage === "english" ? (
+                      <>Medium</>
+                    ) : selectedLanguage === "hindi" ? (
+                      <>मध्यम</>
+                    ) : selectedLanguage === "marathi" ? (
+                      <>मध्यम</>
+                    ) : selectedLanguage === "gujarati" ? (
+                      <>મધ્યમ</>
+                    ) : selectedLanguage === "tamil" ? (
+                      <>நடுத்தர</>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div>
+                    {selectedLanguage === "english" ? (
+                      <>High</>
+                    ) : selectedLanguage === "hindi" ? (
+                      <>उच्च</>
+                    ) : selectedLanguage === "marathi" ? (
+                      <>उच्च</>
+                    ) : selectedLanguage === "gujarati" ? (
+                      <>ઉચ્ચ</>
+                    ) : selectedLanguage === "tamil" ? (
+                      <>உயர்</>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -363,14 +487,42 @@ const Disease = () => {
         {showModal && (
           <div className="px-[15px] fixed top-0 left-0 w-full h-full  flex justify-center items-center bg-gray-900 bg-opacity-60">
             <div className="bg-white rounded-lg p-6 h-[450px] overflow-y-scroll">
-              <h2 className="text-lg font-semibold mb-4">Fertilizer</h2>
+              <h2 className="text-lg font-semibold mb-4">
+                {selectedLanguage === "english" ? (
+                  <>Fertilizer</>
+                ) : selectedLanguage === "hindi" ? (
+                  <>उर्वरक</>
+                ) : selectedLanguage === "marathi" ? (
+                  <>खत</>
+                ) : selectedLanguage === "gujarati" ? (
+                  <>ખતું</>
+                ) : selectedLanguage === "tamil" ? (
+                  <>உரவகம்</>
+                ) : (
+                  ""
+                )}
+              </h2>
               {fertilizer.map((item, index) => (
                 <div key={index} className="mb-4">
                   <p className="font-semibold">{item.fertilizerName}</p>
                   <p>{item.fertilizer}</p>
                 </div>
               ))}
-              <h2 className="text-lg font-semibold mt-4 mb-2">Treatment</h2>
+              <h2 className="text-lg font-semibold mt-4 mb-2">
+                {selectedLanguage === "english" ? (
+                  <>Treatment</>
+                ) : selectedLanguage === "hindi" ? (
+                  <>उपचार</>
+                ) : selectedLanguage === "marathi" ? (
+                  <>उपचार</>
+                ) : selectedLanguage === "gujarati" ? (
+                  <>ઉપચાર</>
+                ) : selectedLanguage === "tamil" ? (
+                  <>சிகிச்சை</>
+                ) : (
+                  ""
+                )}
+              </h2>
               {treatment.map((item, index) => (
                 <div key={index} className="mb-4">
                   <p className="font-semibold">{item.treatmentName}</p>
@@ -383,7 +535,19 @@ const Disease = () => {
                 className="mt-4 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
                 onClick={closeModal}
               >
-                Close
+                {selectedLanguage === "english" ? (
+                  <>Close</>
+                ) : selectedLanguage === "hindi" ? (
+                  <>बंद करें</>
+                ) : selectedLanguage === "marathi" ? (
+                  <>बंद</>
+                ) : selectedLanguage === "gujarati" ? (
+                  <>બંધ કરો</>
+                ) : selectedLanguage === "tamil" ? (
+                  <>மூடு</>
+                ) : (
+                  ""
+                )}
               </button>
             </div>
           </div>
