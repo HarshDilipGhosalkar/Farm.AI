@@ -17,8 +17,8 @@ const Market = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [selectedCommodity, setSelectedCommodity] = useState();
-  const [price, setPrice] = useState();
+  const [selectedCommodity, setSelectedCommodity] = useState("");
+  const [price, setPrice] = useState("");
 
   useEffect(() => {
     const interval = setInterval(() => {
