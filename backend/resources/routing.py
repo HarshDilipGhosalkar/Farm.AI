@@ -31,6 +31,9 @@ class Routing(Resource):
         
         language = user.language
 
+        if language == "tamil":
+            return {"error": False, "data": "/weather"}
+
         translate = Translator()
         try:
             translated_text = translate.translate(args["text"], src=langcodes[language], dest="en").text
