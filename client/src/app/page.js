@@ -425,7 +425,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div class="col" onClick={() => router.push("/finance")}>
+              <div class="col" onClick={() => router.push("/budgeting")}>
                 <div class="flex flex-col gap-y-[10px] items-center rounded-lg p-[10px] bg-white">
                   <img
                     className="w-[50px] rounded-lg"
@@ -520,7 +520,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div class="col" onClick={() => router.push("/community")}>
+              <div class="col" onClick={() => router.push("/social")}>
                 <div class="flex flex-col gap-y-[10px] items-center rounded-lg p-[10px] bg-white">
                   <img
                     className="w-[50px] rounded-lg"
