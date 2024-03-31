@@ -3,8 +3,11 @@ import React, { useState, useEffect } from "react";
 import { ScaleLoader } from "react-spinners";
 import translate from "translate";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const Disease = () => {
+  const router = useRouter();
+  const selectedLanguage = localStorage.getItem("selectedLanguage");
   const [language, setLanguage] = useState("en");
   const [prevLanguage, setPrevLanguage] = useState("en");
   const [engArr, setEngArr] = useState([]);
@@ -217,11 +220,53 @@ const Disease = () => {
           <div className="flex flex-col min-h-screen w-full pt-[20px] items-center">
             <div className="p-8">
               <h2 className=" text-3xl font-bold mb-[25px] text-[#0d9e6b]">
-                Upload a Photo of your Crop or Plant
+                {selectedLanguage === "english" ? (
+                  <>Upload a Photo of your Crop or Plant</>
+                ) : selectedLanguage === "hindi" ? (
+                  <>अपने फसल या पौधे की एक तस्वीर अपलोड करें</>
+                ) : selectedLanguage === "marathi" ? (
+                  <>आपल्या शेती किंवा झाडाची फोटो अपलोड करा</>
+                ) : selectedLanguage === "gujarati" ? (
+                  <>તમારી ફસલ અથવા વનસ્પતિની ફોટો અપલોડ કરો</>
+                ) : selectedLanguage === "tamil" ? (
+                  <>
+                    உங்கள் பயிர் அல்லது செடியின் ஒரு புகைப்படத்தை பதிவேற்றுங்கள்
+                  </>
+                ) : (
+                  ""
+                )}
               </h2>
               <p className="mb-[15px] text-black">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's
+                {selectedLanguage === "english" ? (
+                  <>
+                    Stay informed about potential threats and take proactive
+                    measures to protect your harvest and maximize yields
+                  </>
+                ) : selectedLanguage === "hindi" ? (
+                  <>
+                    संभावित खतरों के बारे में सूचित रहें और अपनी फसल की सुरक्षा
+                    और उत्पादकता को बढ़ाने के लिए पूर्वनिर्धारित उपाय अपनाएं
+                  </>
+                ) : selectedLanguage === "marathi" ? (
+                  <>
+                    संभाव्य धोक्यांचे सारख्या धोक्यांबद्दल सूचित राहा आणि आपल्या
+                    फसलाची सुरक्षा करण्यासाठी आणि उत्पादनाची जास्तीची सुरक्षा
+                    करण्यासाठी पूर्वदृष्टीतून कृती करा
+                  </>
+                ) : selectedLanguage === "gujarati" ? (
+                  <>
+                    સંભાવિત ધરાવતો વિષે જાણકારી મેળવો અને તમારી ફસલને સંરક્ષિત
+                    કરવા અને ઉત્પાદન વધારવા માટે પ્રોએક્ટીવ ઉપાયો અપનાવો
+                  </>
+                ) : selectedLanguage === "tamil" ? (
+                  <>
+                    உங்கள் வாழ்க்கைத் தீர்வுகளைப் பற்றி முன்னுரிமையாக அறியுங்கள்
+                    மற்றும் உங்கள் உறவுகளை காக்க மற்றும் உற்பத்தியை அதிகரிக்க
+                    முன்னுரிமையாக முக்கியமான முறைகளை எடுக்கவும்
+                  </>
+                ) : (
+                  ""
+                )}
               </p>
             </div>
             {selectedImage ? (
@@ -246,7 +291,22 @@ const Disease = () => {
                       <path d="M260-160q-91 0-155.5-63T40-377q0-78 47-139t123-78q25-92 100-149t170-57q117 0 198.5 81.5T760-520q69 8 114.5 59.5T920-340q0 75-52.5 127.5T740-160H520q-33 0-56.5-23.5T440-240v-206l-64 62-56-56 160-160 160 160-56 56-64-62v206h220q42 0 71-29t29-71q0-42-29-71t-71-29h-60v-80q0-83-58.5-141.5T480-720q-83 0-141.5 58.5T280-520h-20q-58 0-99 41t-41 99q0 58 41 99t99 41h100v80H260Zm220-280Z" />
                     </svg>
                     <p className="text-[#0d9e6b] mt-2">
-                      Choose a file or drag it here
+                      {selectedLanguage === "english" ? (
+                        <>Choose an image or click a photo</>
+                      ) : selectedLanguage === "hindi" ? (
+                        <>एक छवि चुनें या फोटो क्लिक करें</>
+                      ) : selectedLanguage === "marathi" ? (
+                        <>एक छवि निवडा किंवा फोटो क्लिक करा</>
+                      ) : selectedLanguage === "gujarati" ? (
+                        <>એક ચિત્ર પસંદ કરો અથવા ફોટો ક્લિક કરો</>
+                      ) : selectedLanguage === "tamil" ? (
+                        <>
+                          ஒரு படம் தேர்ந்தெடுக்கவும் அல்லது ஒரு புகைப்படத்தை
+                          எடுத்துக்கொள்ளவும்
+                        </>
+                      ) : (
+                        ""
+                      )}
                     </p>
                     <input
                       className=" hidden"
@@ -258,35 +318,41 @@ const Disease = () => {
                 </label>
               </div>
             )}
-            {/* <p>{image?.name}</p> */}
-
-            {/* {responseInfo && (
-          <div className={`w-[95%] mt-4 p-4 rounded-lg ${responseInfo.health_status === 'yes' ? 'bg-green-100 border-green-800 border-[1px]' : 'bg-red-100 border-[1px] border-red-800'}`}>
-            <h2 className={`text-3xl font-semibold ${responseInfo.health_status === 'yes' ? 'text-green-800 ' : 'text-[#a20220]'} `}>{responseInfo.health_status === 'yes' ? 'Healthy' : 'Not Healthy'}</h2>
-            <div className="mt-2 flex flex-col">
-             
-              <div className={`y-2 mr-2 ${responseInfo.health_status === 'yes' ? ' text-green-800' : ' text-[#a20220]'} `}>
-                {responseInfo.cropName}
-              </div>
-              <div className={`p-2 rounded-md my-2 mr-2 w-fit ${responseInfo.health_status === 'yes' ? 'bg-green-800 text-white' : 'bg-[#f7a6b5] border-[1px] border-[#a20220]'} `}>
-                {responseInfo.disease_name}
-              </div>
-              <button className=" bg-[#57a0f3] py-[4px] px-[6px] text-white rounded-md  " >Get Remdies</button>
-
-            </div>
-          </div>
-        )} */}
             {loading ? (
               <div className="mt-4">
                 <ScaleLoader color="#2563eb" />
-                Hold on!
+                {selectedLanguage === "english" ? (
+                  <>Hold on!</>
+                ) : selectedLanguage === "hindi" ? (
+                  <>रुको!</>
+                ) : selectedLanguage === "marathi" ? (
+                  <>थांबा!</>
+                ) : selectedLanguage === "gujarati" ? (
+                  <>ધોરણ પર રહો!</>
+                ) : selectedLanguage === "tamil" ? (
+                  <>நிலையில் இருங்கள்!</>
+                ) : (
+                  ""
+                )}
               </div>
             ) : (
               <button
                 className="mt-4 py-2 px-6 bg-[#0d9e6b] text-[#e2f5ef] rounded-full"
                 onClick={handleUpload}
               >
-                Upload Image
+                {selectedLanguage === "english" ? (
+                  <>Submit Image</>
+                ) : selectedLanguage === "hindi" ? (
+                  <>छवि सबमिट करें</>
+                ) : selectedLanguage === "marathi" ? (
+                  <>फोटो सबमिट करा</>
+                ) : selectedLanguage === "gujarati" ? (
+                  <>ચિત્ર સબમિટ કરો</>
+                ) : selectedLanguage === "tamil" ? (
+                  <>புகைப்படத்தை சமர்பிக்கவும்</>
+                ) : (
+                  ""
+                )}
               </button>
             )}
           </div>
