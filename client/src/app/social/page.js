@@ -5,7 +5,6 @@ import usePosts from './usePosts';
 import Post from './Post';
 import { Button, Modal } from 'antd';
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import getLanguage from "@/utils/language";
 import { ScaleLoader } from "react-spinners";
 
@@ -17,7 +16,7 @@ const PostsPage = () => {
       setSelectedLanguage(language);
     });
   }, []);
-  const { posts, addPost } = usePosts();
+  const [posts, setPosts] = useState([]);
   const [text, setText] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [hashtags, setHashtags] = useState("");
@@ -180,7 +179,7 @@ const PostsPage = () => {
           </div>
           <div
             className="flex items-center justify-center bg-blue-400 mt-[-30px] h-[80px] w-[80px] rounded-[50%] text-white"
-            onClick={() => startListening(lang)}
+            // onClick={() => startListening(lang)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
