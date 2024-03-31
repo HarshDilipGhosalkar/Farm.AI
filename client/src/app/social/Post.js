@@ -7,7 +7,6 @@ const Post = ({ image, text, hashtags }) => {
         )}
         <div className="p-8">
           {text && <p className="block mt-1 text-lg leading-tight font-medium text-black">{text}</p>}
-          {hashtags && <p className="mt-2 text-gray-500">{hashtags.map(tag => `#${tag} `)}</p>}
         </div>
       </div>
     );
