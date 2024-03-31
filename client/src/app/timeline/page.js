@@ -42,6 +42,7 @@ const timeline = () => {
                 .then((result) => {
                     console.log(result)
                     setTasks(result.data);
+                    console.log(result.data);
                 })
                 .catch((error) => console.error(error));
         };

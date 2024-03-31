@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { ScaleLoader } from "react-spinners";
 import translate from "translate";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const Disease = () => {
   const [language, setLanguage] = useState("en");
@@ -16,6 +17,7 @@ const Disease = () => {
   const [level, setLevel] = useState("1");
   const [fertilizer, setFertilizer] = useState([]);
   const [treatment, setTreatment] = useState([]);
+  const router = useRouter();
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
