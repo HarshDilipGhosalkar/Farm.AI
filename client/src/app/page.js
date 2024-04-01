@@ -569,7 +569,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div class="col" onClick={() => router.push("/supply-chain")}>
+              {/* <div class="col" onClick={() => router.push("/supply-chain")}>
                 <div class="flex flex-col gap-y-[10px] items-center rounded-lg p-[10px] bg-white">
                   <img
                     className="w-[50px] rounded-lg"
@@ -591,7 +591,31 @@ export default function Home() {
                     )}
                   </p>
                 </div>
-              </div>
+              </div> */}
+
+              <div class="col" onClick={() => router.push("/stats")}>
+                <div class="flex flex-col gap-y-[10px] items-center rounded-lg p-[10px] bg-white">
+                  <img
+                    className="w-[50px] rounded-lg"
+                    src="/assets/images/statistics.png"
+                  />
+                  <p className="font-semibold text-[#321F03]">
+                    {selectedLanguage === "english" ? (
+                      <>Statistics</>
+                    ) : selectedLanguage === "hindi" ? (
+                      <>आँकड़े</>
+                    ) : selectedLanguage === "marathi" ? (
+                      <>अंकगणित</>
+                    ) : selectedLanguage === "gujrati" ? (
+                      <>આંકડાશાસ્ત્ર</>
+                    ) : selectedLanguage === "tamil" ? (
+                      <>புள்ளிவிவரம்</>
+                    ) : (
+                      ""
+                    )}
+                  </p>
+                </div>
+                </div>
             </div>
           </div>
         </div>
