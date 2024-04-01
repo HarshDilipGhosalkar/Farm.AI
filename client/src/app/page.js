@@ -638,7 +638,7 @@ export default function Home() {
               className={`flex items-center justify-center ${
                 listening ? "bg-green-400" : "bg-blue-400"
               }  mt-[-30px] h-[80px] w-[80px] rounded-[50%] text-white`}
-              onClick={() => startListening("en-US")}
+              onClick={() => startListening(lang)}
             >
               {!listening ? (
                 <svg
