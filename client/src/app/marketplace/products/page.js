@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { ScaleLoader } from "react-spinners";
 import getLanguage from "@/utils/language";
 
-
 const IndexPage = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("");
   useEffect(() => {
@@ -13,9 +12,9 @@ const IndexPage = () => {
       setSelectedLanguage(language);
     });
   }, []);
-    const [voiceInput, setVoiceInput] = useState("");
+  const [voiceInput, setVoiceInput] = useState("");
   const [listening, setListening] = useState(false);
-  
+
   const startListening = (language) => {
     const recognition = new window.webkitSpeechRecognition();
     recognition.lang = language;
@@ -35,40 +34,69 @@ const IndexPage = () => {
   };
   return (
     <div>
-      <Head>
-        <title>Find Seeds, Chemicals, Pesticides, and Equipments</title>
-        <meta
-          name="description"
-          content="Find Seeds, Chemicals, Pesticides, and Equipments"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <header className="text-black py-4 text-center">
-        <h1 className="text-xl font-bold">
-          Find Seeds, Chemicals, Pesticides, and Equipments
+      <div className="flex items-center w-full px-[20px] mt-[20px]">
+        <span onClick={() => router.back()} className="text-gray-600">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+            />
+          </svg>
+        </span>
+        <h1 className="w-full text-center font-bold text-2xl">
+          {selectedLanguage === "english" ? (
+            <>Ecommerce Marketplace</>
+          ) : selectedLanguage === "hindi" ? (
+            <>ई-कॉमर्स बाजार</>
+          ) : selectedLanguage === "marathi" ? (
+            <>ई-कॉमर्स बाजार</>
+          ) : selectedLanguage === "gujarati" ? (
+            <>ઈ-કૉમર્સ બજાર</>
+          ) : selectedLanguage === "tamil" ? (
+            <>மின் வணிக சந்தை</>
+          ) : (
+            ""
+          )}
         </h1>
-      </header>
-
-      <main>
-        <div
-          className="flex justify-center items-center w-screen border border-gray-600 rounded-lg"
-          style={{
-            width: "250px",
-            height: "60px",
-            margin: "auto",
-            position: "relative",
-          }}
-        >
-          <button className="pr-6">Button 1</button>
-
-          <button className="">Button 2</button>
-          <div
-            className="absolute top-0 bottom-0 bg-gray-600 w-px"
-            style={{ left: "50%", transform: "translateX(-50%)" }}
-          ></div>
+      </div>
+      <div className="px-[20px] pt-[30px]">
+        <h2 className="">Find Seeds, Chemicals, Pesticides, and Equipments</h2>
+        <div className="flex gap-x-[20px] my-[15px] items-center px-[25px] text-gray-300 w-full h-[60px] rounded-[15px] mx-auto shadow-md border bg-white">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+            />
+          </svg>
+          <input
+            type="text"
+            placeholder="Search for Product"
+            className="w-full h-full bg-transparent focus:outline-none text-gray-"
+          />
         </div>
-      </main>
+        <div>
+          <div className="w-[200px]">
+            
+          </div>
+        </div>
+      </div>
+
       <>
         {voiceInput.length > 3 && (
           <div className="fixed bottom-[80px] w-full px-[20px] py-[10px] pb-[25px]">
