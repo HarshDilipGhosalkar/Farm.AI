@@ -20,7 +20,7 @@ const timeline = () => {
   const [voiceInput, setVoiceInput] = useState("");
   const [listening, setListening] = useState(false);
   const [lang, setLang] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false);
   const startListening = (language) => {
     const recognition = new window.webkitSpeechRecognition();
     recognition.lang = language;
@@ -33,7 +33,7 @@ const timeline = () => {
 
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-
+      setIsLoading(true);
       const raw = JSON.stringify({
         text: transcript,
       });
@@ -54,8 +54,11 @@ const timeline = () => {
           console.log(result);
           setTasks(result.data);
           console.log(result.data);
+          setIsLoading(false);
         })
-        .catch((error) => console.error(error));
+        .catch((error) => {console.error(error)
+          setIsLoading(false);
+        });
     };
     recognition.onend = () => {
       setListening(false);
@@ -179,7 +182,20 @@ const timeline = () => {
           </>
         ) : (
           <div className="mt-[50%]">
+             <div className="mt-[50%]">
+          <>
+          {isLoading ? (
+             <div className="mt-[50%]">
+             <ScaleLoader color="#1752b3" />
+           </div>
+            
+          ):(
+            <div className="mt-[50%]">
             <Empty />
+          </div>
+          )}
+          </> 
+        </div>
           </div>
         )}
       </div>

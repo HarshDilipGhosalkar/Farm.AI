@@ -25,6 +25,7 @@ const crop = () => {
   const [audioBlob, setAudioBlob] = useState(null);
   const [level, setLevel] = useState(1);
   const [lang, setLang] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (audioData) {
@@ -113,7 +114,7 @@ const crop = () => {
       };
       recognition.onend = () => {
         setListening(false);
-
+        setIsLoading(true)
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
@@ -141,8 +142,11 @@ const crop = () => {
             setPrice(result.data.current_market_price);
             setReason(result.data.reason);
             setLevel(1);
+            setIsLoading(false)
           })
-          .catch((error) => console.error(error));
+          .catch((error) => {console.error(error)
+            setIsLoading(false);
+          });
       };
       recognition.start();
     }
@@ -312,7 +316,20 @@ const crop = () => {
           </>
         ) : (
           <div className="mt-[50%]">
+            <div className="mt-[50%]">
+          <>
+          {isLoading ? (
+             <div className="mt-[50%]">
+             <ScaleLoader color="#1752b3" />
+           </div>
+            
+          ):(
+            <div className="mt-[50%]">
             <Empty />
+          </div>
+          )}
+          </> 
+        </div>
           </div>
         )}
 
